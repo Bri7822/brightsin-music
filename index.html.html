@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BRIGHTSIN</title>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000000'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-weight='900' font-size='21' fill='%23db90ff'%3EB%3C/text%3E%3C/svg%3E"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════════════════ */
+:root {
+  --primary:      #db90ff;
+  --primary-dim:  #b12ef1;
+  --on-primary:   #4d0070;
+  --surface:      #0e0e0e;
+  --surf-low:     #131313;
+  --surf:         #1a1919;
+  --surf-high:    #201f1f;
+  --surf-top:     #262626;
+  --on-s:         #ffffff;
+  --on-sv:        #adaaaa;
+  --outline:      #494847;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;background:var(--surface);color:var(--on-s);min-height:100dvh;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif}
+::selection{background:var(--primary);color:var(--on-primary)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--outline);border-radius:99px}
+
+.ms{font-family:'Material Symbols Outlined';font-style:normal;line-height:1;
+    font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;user-select:none}
+.ms.f{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+
+/* ═══════════════════════════════════════════════════════════
+   HEADER
+═══════════════════════════════════════════════════════════ */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:200;
+  display:flex;align-items:center;gap:10px;
+  padding:12px 20px;
+  background:rgba(14,14,14,.68);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,.04)
+}
+
+.logo{
+  font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:900;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--primary);
+  text-decoration:none;flex-shrink:0
+}
+
+/* Tab pill */
+.tab-nav{
+  display:flex;background:rgba(255,255,255,.05);
+  border-radius:99px;padding:4px;gap:2px;
+  margin-left:auto
+}
+.tab-btn{
+  padding:6px 20px;border-radius:99px;border:none;cursor:pointer;
+  font-family:'Manrope',sans-serif;font-size:11px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--on-sv);background:transparent;transition:all .22s
+}
+.tab-btn.active{background:var(--primary);color:var(--on-primary);box-shadow:0 0 14px rgba(219,144,255,.4)}
+
+.hdr-icon{
+  width:38px;height:38px;border-radius:50%;border:none;
+  background:rgba(255,255,255,.05);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--on-sv);font-size:20px;
+  transition:background .15s,color .15s;flex-shrink:0
+}
+.hdr-icon:hover{background:rgba(219,144,255,.12);color:var(--primary)}
+
+@media(max-width:600px){
+  .logo   { order:0; margin-right:0 }
+  .tab-nav{ order:1; margin-left:0 }
+  .hdr-icon{ order:2; margin-left:0 }
+  header{ gap:8px }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MAIN
+═══════════════════════════════════════════════════════════ */
+main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding-left:18px;padding-right:18px}
+
+/* HERO */
+.hero{padding:14px 0 10px}
+.hero-eye{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.hero-pip{width:3px;height:20px;background:var(--primary);border-radius:99px}
+.hero-lbl{font-size:10px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:rgba(219,144,255,.7)}
+.hero-name{font-size:clamp(40px,11vw,86px);font-weight:900;line-height:.92;letter-spacing:-.03em}
+
+/* SECTION HEADER */
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sec-title{font-size:20px;font-weight:700;letter-spacing:-.01em}
+
+/* TAB CONTENT */
+.tab-content{display:none}
+.tab-content.active{display:block;animation:fup .3s ease}
+@keyframes fup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══════════════════════════════════════════════════════════
+   ARTIST PAGE
+═══════════════════════════════════════════════════════════ */
+.artist-page{ padding-top: 10px }
+
+.artist-banner{
+  position:relative;border-radius:24px;overflow:hidden;
+  margin-bottom:20px;background:var(--surf-low);
+  border:1px solid rgba(255,255,255,.05)
+}
+.artist-banner-bg{
+  height:180px;
+  background: linear-gradient(135deg,
+    rgba(177,46,241,.35) 0%,
+    rgba(14,14,14,1) 70%
+  );
+  position:relative;overflow:hidden
+}
+.artist-banner-bg::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 70% 40%,rgba(219,144,255,.22) 0%,transparent 65%)
+}
+.artist-banner-bg::after{
+  content:'brightsin';
+  position:absolute;right:-8px;bottom:-28px;
+  font-family:'Space Grotesk',sans-serif;font-size:120px;font-weight:900;
+  letter-spacing:-.04em;color:rgba(219,144,255,.055);line-height:1;
+  pointer-events:none;user-select:none;white-space:nowrap
+}
+.artist-banner-meta{
+  padding:16px 22px 14px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap
+}
+.artist-avatar{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary-dim),rgba(219,144,255,.3));
+  border:3px solid rgba(219,144,255,.35);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:900;
+  color:var(--primary);flex-shrink:0;
+  margin-top:-36px;box-shadow:0 4px 20px rgba(0,0,0,.6)
+}
+.artist-id{ flex:1;min-width:0 }
+.artist-id h2{ font-size:24px;font-weight:900;letter-spacing:-.02em }
+.artist-id p{ font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--on-sv);margin-top:3px }
+.artist-stats{
+  display:flex;gap:24px;flex-wrap:wrap;
+  padding:0 22px 18px
+}
+.stat-item{ text-align:center }
+.stat-val{ font-size:20px;font-weight:900;color:var(--primary);font-family:'Space Grotesk',sans-serif }
+.stat-lbl{ font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--on-sv);margin-top:2px }
+
+.bio-card{
+  margin-bottom:20px;padding:20px 22px;border-radius:20px;
+  background:var(--surf);border:1px solid rgba(255,255,255,.05);
+  position:relative;overflow:hidden
+}
+.bio-card::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(219,144,255,.16) 0%,transparent 70%);
+  pointer-events:none
+}
+.bio-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--primary);margin-bottom:12px
+}
+.bio-body{
+  font-size:13.5px;line-height:1.76;color:var(--on-sv)
+}
+.genres{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{
+  padding:4px 14px;border-radius:99px;font-size:10px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(219,144,255,.1);border:1px solid rgba(219,144,255,.2);
+  color:var(--primary)
+}
+
+.timeline{ margin-top:4px }
+.tl-item{
+  display:flex;gap:18px;padding:16px 0;
+  border-bottom:1px solid rgba(255,255,255,.05)
+}
+.tl-item:last-child{ border-bottom:none }
+.tl-year{
+  font-size:11px;font-weight:900;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--primary);
+  width:38px;flex-shrink:0;padding-top:2px
+}
+.tl-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--primary);flex-shrink:0;margin-top:5px;
+  box-shadow:0 0 8px rgba(219,144,255,.5)
+}
+.tl-text{ font-size:13px;line-height:1.6;color:var(--on-sv) }
+.tl-text strong{ color:var(--on-s) }
+
+/* ═══════════════════════════════════════════════════════════
+   TRACK LIST
+═══════════════════════════════════════════════════════════ */
+.track-list{display:flex;flex-direction:column;gap:7px}
+
+.track-row{
+  display:flex;align-items:center;gap:14px;padding:11px 13px;
+  border-radius:18px;background:rgba(26,25,25,.7);
+  border:1px solid rgba(255,255,255,.04);cursor:pointer;
+  transition:background .2s,border-color .2s,transform .15s;user-select:none
+}
+.track-row:hover{background:var(--surf-top);border-color:rgba(219,144,255,.14)}
+.track-row.playing{background:var(--surf-high);border-color:rgba(219,144,255,.3)}
+.track-row:active{transform:scale(.99)}
+.track-row.hidden{display:none}
+
+.t-art{
+  position:relative;flex-shrink:0;width:56px;height:56px;
+  border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.55);
+  background:var(--surf-top)
+}
+.t-art img{width:100%;height:100%;object-fit:cover;transition:transform .32s}
+.track-row:hover .t-art img,
+.track-row.playing .t-art img{transform:scale(1.07)}
+
+.t-overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,.45);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .18s;border-radius:12px
+}
+.track-row:hover .t-overlay,
+.track-row.playing .t-overlay{opacity:1}
+.iplay{font-size:28px;color:#fff}
+
+.eq{display:flex;align-items:flex-end;gap:2px;height:18px}
+.eq b{display:block;width:3px;border-radius:2px;background:var(--primary);animation:eqb .78s ease-in-out infinite alternate}
+.eq b:nth-child(1){height:55%;animation-delay:0s}
+.eq b:nth-child(2){height:100%;animation-delay:.14s}
+.eq b:nth-child(3){height:40%;animation-delay:.28s}
+.eq b:nth-child(4){height:80%;animation-delay:.08s}
+@keyframes eqb{from{transform:scaleY(.3)}to{transform:scaleY(1)}}
+
+.t-info{flex:1;min-width:0}
+.t-name{font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;transition:color .18s}
+.track-row:hover .t-name,.track-row.playing .t-name{color:var(--primary)}
+.t-meta{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--on-sv)}
+
+.t-acts{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.ib{
+  width:34px;height:34px;border-radius:50%;border:none;background:transparent;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--on-sv);font-size:19px;transition:background .14s,color .14s,transform .14s
+}
+.ib:hover{background:rgba(219,144,255,.1);color:var(--primary)}
+/* Heart — filled by default when liked */
+.ib.liked{color:var(--primary)}
+.ib.liked .ms{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+
+/* Download tooltip hint */
+.ib.dl:hover::after{
+  content:'Download';position:absolute;bottom:calc(100% + 6px);right:0;
+  background:rgba(30,29,29,.95);border:1px solid rgba(255,255,255,.07);
+  padding:4px 10px;border-radius:8px;font-family:'Manrope',sans-serif;
+  font-size:10px;font-weight:700;color:var(--on-s);white-space:nowrap;pointer-events:none
+}
+.t-acts{position:relative}
+
+/* ═══════════════════════════════════════════════════════════
+   SEARCH
+═══════════════════════════════════════════════════════════ */
+.search-wrap{position:relative;margin-bottom:22px}
+.search-wrap .ms{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--on-sv);pointer-events:none}
+#srch{
+  width:100%;padding:14px 16px 14px 48px;border-radius:99px;
+  background:var(--surf-high);border:1px solid rgba(255,255,255,.07);
+  color:var(--on-s);font-family:'Manrope',sans-serif;font-size:14px;font-weight:600;
+  outline:none;transition:border-color .2s,box-shadow .2s
+}
+#srch:focus{border-color:rgba(219,144,255,.4);box-shadow:0 0 0 3px rgba(219,144,255,.08)}
+#srch::placeholder{color:var(--on-sv)}
+.srch-lbl{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--on-sv);margin-bottom:12px;display:none}
+.no-res{text-align:center;padding:48px 0;color:var(--on-sv);font-size:14px;display:none}
+.no-res .ms{font-size:48px;display:block;margin-bottom:10px;opacity:.3}
+
+/* ═══════════════════════════════════════════════════════════
+   VIDEOS
+═══════════════════════════════════════════════════════════ */
+.vid-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.vid-card{border-radius:16px;overflow:hidden;background:var(--surf-low);border:1px solid rgba(255,255,255,.04);cursor:pointer;transition:transform .2s,box-shadow .2s}
+.vid-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.6),0 0 0 1px rgba(219,144,255,.14)}
+.vid-thumb{position:relative;aspect-ratio:16/9;overflow:hidden}
+.vid-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .32s}
+.vid-card:hover .vid-thumb img{transform:scale(1.05)}
+.vid-ov{position:absolute;inset:0;background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.vid-card:hover .vid-ov{opacity:1}
+.vid-btn{width:46px;height:46px;border-radius:50%;background:rgba(219,144,255,.9);display:flex;align-items:center;justify-content:center;box-shadow:0 0 22px rgba(219,144,255,.55)}
+.vid-btn .ms{font-size:24px;color:var(--on-primary);margin-left:3px}
+.vid-dur{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.72);padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700;font-family:'Manrope',sans-serif}
+.vid-info{padding:12px 13px}
+.vid-title{font-size:13px;font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vid-sub{font-size:10px;font-weight:600;color:var(--on-sv);letter-spacing:.07em;text-transform:uppercase}
+
+/* YouTube modal overlay */
+.yt-modal{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.82);backdrop-filter:blur(12px);
+  align-items:center;justify-content:center;padding:20px
+}
+.yt-modal.open{display:flex}
+.yt-inner{
+  position:relative;width:100%;max-width:820px;
+  aspect-ratio:16/9;border-radius:16px;overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,.8),0 0 0 1px rgba(219,144,255,.15)
+}
+.yt-inner iframe{width:100%;height:100%;border:none;display:block}
+.yt-close{
+  position:absolute;top:-44px;right:0;
+  background:rgba(255,255,255,.08);border:none;cursor:pointer;
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:20px;transition:background .15s
+}
+.yt-close:hover{background:rgba(219,144,255,.25)}
+
+/* ═══════════════════════════════════════════════════════════
+   PLAYER
+═══════════════════════════════════════════════════════════ */
+.player-wrap{position:fixed;bottom:0;left:0;width:100%;z-index:300;pointer-events:none;padding:0 14px 10px}
+.player{max-width:760px;margin:0 auto;pointer-events:auto;background:rgba(12,12,12,.78);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,.07);border-radius:22px;box-shadow:0 -4px 40px rgba(0,0,0,.65),0 0 60px rgba(219,144,255,.04);overflow:hidden}
+.prog{height:3px;background:rgba(255,255,255,.06);cursor:pointer;position:relative}
+.prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--primary-dim),var(--primary));box-shadow:0 0 8px rgba(219,144,255,.6);border-radius:0 2px 2px 0;position:relative}
+.prog-fill::after{content:'';position:absolute;right:-4px;top:50%;transform:translateY(-50%);width:10px;height:10px;background:#fff;border-radius:50%;box-shadow:0 0 6px rgba(219,144,255,.8);opacity:0;transition:opacity .15s}
+.prog:hover .prog-fill::after{opacity:1}
+.p-body{display:flex;align-items:center;gap:12px;padding:10px 16px}
+.p-art{width:42px;height:42px;border-radius:10px;overflow:hidden;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,.5);background:var(--surf-top)}
+.p-art img{width:100%;height:100%;object-fit:cover}
+.p-info{flex:1;min-width:0}
+.p-track{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-artist{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--on-sv)}
+.p-ctrls{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.ctrl{width:34px;height:34px;border-radius:50%;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--on-sv);font-size:21px;transition:color .15s}
+.ctrl:hover{color:var(--on-s)}
+.ctrl.main{width:44px;height:44px;background:var(--primary);color:var(--on-primary);font-size:24px;box-shadow:0 0 18px rgba(219,144,255,.38);transition:transform .15s,box-shadow .15s}
+.ctrl.main:hover{transform:scale(1.06);box-shadow:0 0 26px rgba(219,144,255,.58)}
+.ctrl.main:active{transform:scale(.95)}
+.ctrl.main .ms{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+.ctrl.tog.on{color:var(--primary)}
+.p-time{font-size:10px;font-weight:600;color:var(--on-sv);font-family:'Manrope',sans-serif;letter-spacing:.04em;flex-shrink:0}
+
+/* ── loading / error state on player bar ── */
+.p-track.loading::after{
+  content:' ···';opacity:.5;animation:ldot 1s steps(3,end) infinite
+}
+@keyframes ldot{0%{content:' ·'}33%{content:' ··'}66%{content:' ···'}}
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE NAV
+═══════════════════════════════════════════════════════════ */
+.mob-nav{display:none;position:fixed;bottom:0;left:0;width:100%;z-index:400;background:rgba(8,8,8,.9);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.05);justify-content:space-around;align-items:center;padding:6px 0 14px}
+.mob-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:4px 10px;color:var(--on-sv);transition:color .15s}
+.mob-btn.active{color:var(--primary)}
+.mob-btn .ms{font-size:22px}
+.mob-btn.active .ms{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+.mob-lbl{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+@media(max-width:600px){
+  .mob-nav{display:flex}
+  .player-wrap{padding-bottom:68px}
+  main{
+    padding-top:70px;
+    padding-bottom:148px  /* player (~60px) + player-wrap padding (68px) + safe buffer (20px) */
+  }
+  .hero{padding:6px 0 8px}
+  .hero-name{font-size:clamp(32px,9vw,52px)}
+  .p-body{padding:8px 12px;gap:8px}
+  .p-time{display:none}
+  .ctrl.tog{display:none}
+  .vid-grid{grid-template-columns:1fr 1fr;gap:10px}
+  #hdr-srch{display:none}
+  .tab-nav{display:none}
+  .artist-banner-bg{height:140px}
+  .bio-card{padding:16px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════════════════════════════ -->
+<header>
+  <a class="logo" href="#">Brightsin</a>
+
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="music">Music</button>
+    <button class="tab-btn"        data-tab="videos">Videos</button>
+  </nav>
+
+  <button class="hdr-icon" id="hdr-srch" title="Search">
+    <span class="ms">search</span>
+  </button>
+</header>
+
+<!-- ═══════════ MAIN ════════════════════════════════════ -->
+<main>
+
+  <!-- MUSIC TAB -->
+  <div class="tab-content active" id="tab-music">
+    <div class="hero">
+      <div class="hero-eye">
+        <div class="hero-pip"></div>
+        <span class="hero-lbl">Artist Profile</span>
+      </div>
+      <h1 class="hero-name">Brightsin</h1>
+    </div>
+
+    <div class="sec-hdr">
+      <h2 class="sec-title">Popular Tracks</h2>
+    </div>
+    <div class="track-list" id="tlist"></div>
+  </div>
+
+  <!-- VIDEOS TAB -->
+  <div class="tab-content" id="tab-videos">
+    <div class="hero">
+      <div class="hero-eye">
+        <div class="hero-pip"></div>
+        <span class="hero-lbl">Watch</span>
+      </div>
+      <h1 class="hero-name" style="font-size:clamp(36px,9vw,60px)">Music Videos</h1>
+    </div>
+    <div class="sec-hdr" style="margin-bottom:18px">
+      <h2 class="sec-title">All Videos</h2>
+    </div>
+    <div class="vid-grid" id="vgrid"></div>
+  </div>
+
+  <!-- ARTIST TAB -->
+  <div class="tab-content" id="tab-artist">
+    <div class="artist-page">
+
+      <div class="artist-banner">
+        <div class="artist-banner-bg"></div>
+        <div class="artist-banner-meta">
+          <div class="artist-avatar">B</div>
+          <div class="artist-id">
+            <h2>Brightsin</h2>
+            <p>Rap · Hip-Hop · Mpumalanga, SA</p>
+          </div>
+        </div>
+        <div class="artist-stats">
+          <div class="stat-item">
+            <div class="stat-val">2016</div>
+            <div class="stat-lbl">Started</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">1 EP</div>
+            <div class="stat-lbl">Releases</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">Nkomazi</div>
+            <div class="stat-lbl">Origin</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bio-card">
+        <div class="bio-tag">
+          <span class="ms" style="font-size:14px">info</span>
+          About the Artist
+        </div>
+        <p class="bio-body">
+          Brightsin is a rapper and music artist from <strong style="color:#fff">Nkomazi, Mpumalanga</strong> — a small town that shaped his voice before the world had a chance to hear it. After completing his matric in <strong style="color:#fff">2016</strong>, he channelled his energy into music, finding in it both a creative outlet and a form of self-expression rooted in where he came from.
+          <br><br>
+          Driven by a hunger to grow beyond his craft, Brightsin enrolled at the <strong style="color:#fff">Tshwane University of Technology (TUT)</strong> in <strong style="color:#fff">2019</strong>, pursuing a qualification in <strong style="color:#fff">Information Technology</strong>. He balanced studio sessions with lectures, refusing to let either pursuit slip. In <strong style="color:#fff">October 2024</strong> he graduated — walking off the stage with a degree in one hand and a debut EP in the works with the other.
+          <br><br>
+          His debut EP <em>Out of My Shell</em> (2025) marks the formal introduction of Brightsin to the world — a project built over years of lived experience, self-discovery, and grind.
+        </p>
+        <div class="genres">
+          <span class="chip">Rap</span>
+          <span class="chip">Hip-Hop</span>
+          <span class="chip">Mpumalanga</span>
+          <span class="chip">South Africa</span>
+        </div>
+      </div>
+
+      <div class="sec-hdr" style="margin-bottom:10px">
+        <h2 class="sec-title">Projects</h2>
+      </div>
+      <div class="bio-card">
+        <div class="timeline">
+          <div class="tl-item">
+            <span class="tl-year">2016</span>
+            <div class="tl-dot"></div>
+            <p class="tl-text"><strong>Started Making Music</strong><br>After completing matric, Brightsin began writing and recording — using music as his primary mode of expression from Nkomazi.</p>
+          </div>
+          <div class="tl-item">
+            <span class="tl-year">2019</span>
+            <div class="tl-dot"></div>
+            <p class="tl-text"><strong>Enrolled at TUT</strong><br>Began studying Information Technology at the Tshwane University of Technology, balancing academics with his continued growth as an artist.</p>
+          </div>
+          <div class="tl-item">
+            <span class="tl-year">2024</span>
+            <div class="tl-dot"></div>
+            <p class="tl-text"><strong>Graduated from TUT — October</strong><br>Completed his IT degree, proving that education and artistry can coexist. A milestone that set the stage for what was next.</p>
+          </div>
+          <div class="tl-item">
+            <span class="tl-year">2025</span>
+            <div class="tl-dot"></div>
+            <p class="tl-text"><strong>Debut EP — Out of My Shell</strong><br>Brightsin's first official body of work. 11 tracks that trace the journey from Nkomazi to the mic — raw, honest, and entirely self-made.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SEARCH TAB -->
+  <div class="tab-content" id="tab-search">
+    <div class="hero" style="padding-bottom:10px">
+      <div class="hero-eye">
+        <div class="hero-pip"></div>
+        <span class="hero-lbl">Find</span>
+      </div>
+      <h1 class="hero-name" style="font-size:clamp(36px,9vw,60px)">Search</h1>
+    </div>
+    <div class="search-wrap">
+      <span class="ms">search</span>
+      <input type="search" id="srch" placeholder="Search tracks, videos…" autocomplete="off"/>
+    </div>
+    <div class="srch-lbl" id="srch-lbl"></div>
+    <div class="track-list" id="slist"></div>
+    <div class="no-res" id="no-res">
+      <span class="ms f">music_off</span>
+      No results for "<span id="no-q"></span>"
+    </div>
+  </div>
+
+</main>
+
+<!-- ═══════════ PLAYER ═══════════════════════════════════ -->
+<div class="player-wrap">
+  <div class="player">
+    <div class="prog" id="prog"><div class="prog-fill" id="pfill"></div></div>
+    <div class="p-body">
+      <div class="p-art"><img id="part" src="" alt=""/></div>
+      <div class="p-info">
+        <div class="p-track"  id="ptitle">Select a track</div>
+        <div class="p-artist">Brightsin</div>
+      </div>
+      <span class="p-time" id="tel">0:00</span>
+      <div class="p-ctrls">
+        <button class="ctrl tog" id="c-shuf"><span class="ms">shuffle</span></button>
+        <button class="ctrl"     id="c-prev"><span class="ms">skip_previous</span></button>
+        <button class="ctrl main"id="c-play"><span class="ms" id="picon">play_arrow</span></button>
+        <button class="ctrl"     id="c-next"><span class="ms">skip_next</span></button>
+        <button class="ctrl tog" id="c-rep" ><span class="ms">repeat</span></button>
+      </div>
+      <span class="p-time" id="ttot">0:00</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ YOUTUBE MODAL ════════════════════════════ -->
+<div class="yt-modal" id="yt-modal">
+  <div class="yt-inner">
+    <button class="yt-close" id="yt-close"><span class="ms">close</span></button>
+    <iframe id="yt-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+  </div>
+</div>
+
+<!-- ═══════════ MOBILE NAV ═══════════════════════════════ -->
+<nav class="mob-nav">
+  <button class="mob-btn active" data-tab="music">
+    <span class="ms">music_note</span><span class="mob-lbl">Music</span>
+  </button>
+  <button class="mob-btn" data-tab="videos">
+    <span class="ms">play_circle</span><span class="mob-lbl">Videos</span>
+  </button>
+  <button class="mob-btn" data-tab="search">
+    <span class="ms">search</span><span class="mob-lbl">Search</span>
+  </button>
+  <button class="mob-btn" data-tab="artist">
+    <span class="ms">person</span><span class="mob-lbl">Artist</span>
+  </button>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   DATA
+════════════════════════════════════════════════════════ */
+const TRACKS = [
+  { id:0,  title:'intro',            dur:'1:27', audioSrc:'assets/audio/out of my shell/1. Brightsin - Intro.mp3',                                                                                    img:'assets/images/1.png' },
+  { id:1,  title:'One of em shot',   dur:'3:05', audioSrc:'assets/audio/out of my shell/2. Brightsin - One of em shot(Prod trabbey & malloy.mp3',                                                     img:'assets/images/2.png' },
+  { id:2,  title:'Guess is goodbye', dur:'1:53', audioSrc:'assets/audio/out of my shell/3. Brightsin - Guess is Goodbye(Prod. Larkin Noir).mp3',                                                      img:'assets/images/3.png' },
+  { id:3,  title:'Nothing still',    dur:'1:46', audioSrc:'assets/audio/out of my shell/4. Brightsin - Nothing still(VintageMan Beats).mp3',                                                          img:'assets/images/4.png' },
+  { id:4,  title:'Rebirth',          dur:'2:39', audioSrc:'assets/audio/out of my shell/5. Brightsin ft Trigga Rebirth.mp3',                                                                          img:'assets/images/5.png' },
+  { id:5,  title:'Love is gone',     dur:'3:44', audioSrc:'assets/audio/out of my shell/6. Brightsin - love is gone(ProdCrive Adison Orge).mp3',                                                     img:'assets/images/6.png' },
+  { id:6,  title:'To the top',       dur:'2:37', audioSrc:'assets/audio/out of my shell/7. Brightsin - To the top(Prod Young 808).mp3',                                                              img:'assets/images/7.png' },
+  { id:7,  title:'Borborygmi',       dur:'2:09', audioSrc:'assets/audio/out of my shell/8. Brightsin - borborygmi.mp3',                                                                              img:'assets/images/8.png' },
+  { id:8,  title:'Future dreams',    dur:'4:14', audioSrc:'assets/audio/out of my shell/9. Brightsin ft Tlotliso Mpeoa ft Bruce ft King Composure - Future Dreams.mp3',                              img:'assets/images/9.png' },
+  { id:9,  title:'Uncovered',        dur:'3:14', audioSrc:'assets/audio/out of my shell/10. Brightsin - uncovered.mp3',                                                                               img:'assets/images/10.png' },
+  { id:10, title:'How many nights',  dur:'3:18', audioSrc:'assets/audio/out of my shell/11-Brightsin-How many nights.mp3',                                                                            img:'assets/images/11.png' },
+];
+
+const VIDEOS = [
+  { title:'Shadow Frequency (Official Video)', sub:'2.4M views', dur:'4:22', youtubeId:'', img: TRACKS[0].img },
+  { title:'Digital Pulse (Live at the Void)',  sub:'1.8M views', dur:'8:15', youtubeId:'', img: TRACKS[1].img },
+  { title:'Violet Horizon (Visualizer)',       sub:'3.1M views', dur:'5:12', youtubeId:'', img: TRACKS[2].img },
+  { title:'Midnight Synthesis (Short Film)',   sub:'980K views', dur:'12:44',youtubeId:'', img: TRACKS[3].img },
+  { title:'Storm Rider (Behind the Scenes)',   sub:'654K views', dur:'6:30', youtubeId:'', img: TRACKS[4].img },
+  { title:'Echo Chamber (Official MV)',        sub:'4.7M views', dur:'6:04', youtubeId:'', img: TRACKS[5].img },
+];
+
+/* ════════════════════════════════════════════════════════
+   HTML5 AUDIO ENGINE
+════════════════════════════════════════════════════════ */
+const audio = new Audio();
+audio.preload = 'metadata';
+
+audio.addEventListener('timeupdate', () => {
+  if (!audio.duration) return;
+  const pct = (audio.currentTime / audio.duration) * 100;
+  document.getElementById('pfill').style.width = pct + '%';
+  document.getElementById('tel').textContent   = fmt(Math.floor(audio.currentTime));
+});
+
+audio.addEventListener('loadedmetadata', () => {
+  document.getElementById('ttot').textContent = fmt(Math.floor(audio.duration));
+  document.getElementById('ptitle').classList.remove('loading');
+});
+
+audio.addEventListener('ended', () => {
+  if (S.repeat) {
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+  } else {
+    nextTrack(true);
+  }
+});
+
+audio.addEventListener('error', () => {
+  document.getElementById('ptitle').classList.remove('loading');
+  console.warn('Audio failed to load:', audio.src);
+});
+
+/* ════════════════════════════════════════════════════════
+   ID3 COVER ART EXTRACTION
+════════════════════════════════════════════════════════ */
+const coverCache = {};
+
+function extractCover(audioUrl, tid) {
+  if (!audioUrl) return;
+  if (coverCache[tid]) { applyCover(tid, coverCache[tid]); return; }
+  try {
+    window.jsmediatags.read(audioUrl, {
+      onSuccess(tag) {
+        const pic = tag.tags.picture;
+        if (!pic) { applyCover(tid, placeholder(tid)); return; }
+        const blob = new Blob([new Uint8Array(pic.data)], { type: pic.format });
+        const url  = URL.createObjectURL(blob);
+        coverCache[tid] = url;
+        TRACKS[tid].img = url;
+        applyCover(tid, url);
+      },
+      onError() { applyCover(tid, placeholder(tid)); }
+    });
+  } catch(e) { applyCover(tid, placeholder(tid)); }
+}
+
+function placeholder(id) {
+  const h = [270,290,260,280,265,275][id % 6];
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='hsl(${h},55%,18%)'/><stop offset='100%' stop-color='hsl(${h+20},35%,7%)'/></linearGradient></defs><rect width='100' height='100' fill='url(%23g)'/><text x='50' y='62' text-anchor='middle' font-size='36' font-family='sans-serif' fill='rgba(219,144,255,.5)'>♪</text></svg>`;
+  return 'data:image/svg+xml,' + encodeURIComponent(svg);
+}
+
+function applyCover(tid, url) {
+  document.querySelectorAll(`.t-art img[data-tid="${tid}"]`).forEach(i => i.src = url);
+  if (tid === S.cur) document.getElementById('part').src = url;
+}
+
+/* ════════════════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════════════════ */
+const S = { cur:0, playing:false, shuffle:false, repeat:false, liked:new Set() };
+
+/* ════════════════════════════════════════════════════════
+   DOWNLOAD
+════════════════════════════════════════════════════════ */
+function downloadTrack(id) {
+  const t = TRACKS[id];
+  if (!t.audioSrc) return;
+  const a = document.createElement('a');
+  a.href = t.audioSrc;
+  a.download = `Brightsin - ${t.title}.mp3`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+/* ════════════════════════════════════════════════════════
+   BUILD ROWS
+════════════════════════════════════════════════════════ */
+function mkRow(t, container, pfx) {
+  const el = document.createElement('div');
+  el.className = 'track-row';
+  el.id = pfx + t.id;
+  el.dataset.id = t.id;
+  const art = t.img || placeholder(t.id);
+  const isLiked = S.liked.has(t.id);
+  el.innerHTML = `
+    <div class="t-art">
+      <img src="${art}" data-tid="${t.id}" alt="${t.title}" loading="lazy"/>
+      <div class="t-overlay">
+        <span class="ms f iplay" id="${pfx}ico-${t.id}">play_arrow</span>
+      </div>
+    </div>
+    <div class="t-info">
+      <div class="t-name">${t.title}</div>
+      <div class="t-meta">Brightsin • ${t.dur}</div>
+    </div>
+    <div class="t-acts" onclick="event.stopPropagation()">
+      <button class="ib${isLiked?' liked':''}" data-like="${t.id}" title="Like"
+        onclick="toggleLike(${t.id})">
+        <span class="ms f">favorite</span>
+      </button>
+      <button class="ib dl" title="Download" onclick="downloadTrack(${t.id})">
+        <span class="ms">more_vert</span>
+      </button>
+    </div>`;
+  el.addEventListener('click', () => selectTrack(t.id));
+  container.appendChild(el);
+  if (t.audioSrc) extractCover(t.audioSrc, t.id);
+}
+
+function buildTracks() {
+  const l = document.getElementById('tlist');
+  l.innerHTML = '';
+  TRACKS.forEach(t => mkRow(t, l, 'tr-'));
+  l.querySelectorAll('.track-row').forEach((el,i) => {
+    el.style.cssText='opacity:0;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease';
+    setTimeout(() => el.style.cssText='', 60 + i*52);
+  });
+}
+
+function buildVideos() {
+  document.getElementById('vgrid').innerHTML = VIDEOS.map((v,i) => {
+    const thumb = v.youtubeId
+      ? `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`
+      : v.img;
+    return `
+    <div class="vid-card" data-vidx="${i}">
+      <div class="vid-thumb">
+        <img src="${thumb}" alt="${v.title}" loading="lazy"/>
+        <div class="vid-ov"><div class="vid-btn"><span class="ms f">play_arrow</span></div></div>
+        <span class="vid-dur">${v.dur}</span>
+      </div>
+      <div class="vid-info">
+        <div class="vid-title">${v.title}</div>
+        <div class="vid-sub">${v.sub}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.querySelectorAll('.vid-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const v = VIDEOS[+card.dataset.vidx];
+      openVideoModal(v);
+    });
+  });
+}
+
+/* ════════════════════════════════════════════════════════
+   YOUTUBE MODAL
+════════════════════════════════════════════════════════ */
+function openVideoModal(v) {
+  if (!v.youtubeId) {
+    alert(`No YouTube ID set for "${v.title}".\nAdd the 11-character video ID to VIDEOS[].youtubeId.`);
+    return;
+  }
+  document.getElementById('yt-iframe').src =
+    `https://www.youtube.com/embed/${v.youtubeId}?autoplay=1&rel=0`;
+  document.getElementById('yt-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+  document.getElementById('yt-iframe').src = '';
+  document.getElementById('yt-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('yt-close').addEventListener('click', closeVideoModal);
+document.getElementById('yt-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('yt-modal')) closeVideoModal();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeVideoModal();
+});
+
+/* ════════════════════════════════════════════════════════
+   PLAYER LOGIC
+════════════════════════════════════════════════════════ */
+function loadTrack(id, play = false) {
+  const t = TRACKS[id];
+  audio.src = t.audioSrc || '';
+  audio.load();
+  const titleEl = document.getElementById('ptitle');
+  titleEl.textContent = t.title;
+  if (play) titleEl.classList.add('loading');
+  document.getElementById('pfill').style.width = '0%';
+  document.getElementById('tel').textContent  = '0:00';
+  document.getElementById('ttot').textContent = t.dur;
+  document.getElementById('part').src = t.img || placeholder(id);
+  if (play) {
+    audio.play().catch(err => {
+      console.warn('Playback blocked:', err);
+      titleEl.classList.remove('loading');
+      S.playing = false;
+      updatePlayBtn();
+    });
+  }
+}
+
+function selectTrack(id) {
+  const same = S.cur === id;
+  deactivateRow(S.cur);
+  S.cur = id;
+  if (!same) {
+    S.playing = true;
+    loadTrack(id, true);
+  } else {
+    togglePlay();
+    return;
+  }
+  updatePlayBtn();
+  activateRow(id);
+}
+
+function activateRow(id) {
+  ['tr-','sr-'].forEach(p => {
+    const row = document.getElementById(p+id);
+    if (!row) return;
+    row.classList.add('playing');
+  });
+  if (S.playing) showEQ(id); else showPauseIcon(id);
+}
+
+function deactivateRow(id) {
+  ['tr-','sr-'].forEach(p => {
+    const row = document.getElementById(p+id);
+    if (!row) return;
+    row.classList.remove('playing');
+  });
+  showPlayIcon(id);
+}
+
+function showEQ(id) {
+  ['tr-','sr-'].forEach(p => {
+    const ov = document.querySelector(`#${p}${id} .t-overlay`);
+    if (ov) ov.innerHTML='<div class="eq"><b></b><b></b><b></b><b></b></div>';
+  });
+}
+function showPlayIcon(id) {
+  ['tr-','sr-'].forEach(p => {
+    const ov = document.querySelector(`#${p}${id} .t-overlay`);
+    if (ov) ov.innerHTML=`<span class="ms f iplay" id="${p}ico-${id}">play_arrow</span>`;
+  });
+}
+function showPauseIcon(id) {
+  ['tr-','sr-'].forEach(p => {
+    const ov = document.querySelector(`#${p}${id} .t-overlay`);
+    if (ov) ov.innerHTML=`<span class="ms f iplay" id="${p}ico-${id}">pause</span>`;
+  });
+}
+
+function togglePlay() {
+  if (audio.src) {
+    if (S.playing) {
+      audio.pause();
+      S.playing = false;
+      showPauseIcon(S.cur);
+    } else {
+      audio.play().catch(() => {});
+      S.playing = true;
+      showEQ(S.cur);
+    }
+  } else {
+    S.playing = true;
+    loadTrack(S.cur, true);
+    activateRow(S.cur);
+  }
+  updatePlayBtn();
+}
+
+function updatePlayBtn() {
+  document.getElementById('picon').textContent = S.playing ? 'pause' : 'play_arrow';
+}
+
+audio.addEventListener('play',  () => { S.playing = true;  updatePlayBtn(); showEQ(S.cur); });
+audio.addEventListener('pause', () => { S.playing = false; updatePlayBtn(); showPauseIcon(S.cur); });
+
+function prevTrack() {
+  if (audio.currentTime > 3) { audio.currentTime = 0; return; }
+  deactivateRow(S.cur);
+  S.cur = (S.cur - 1 + TRACKS.length) % TRACKS.length;
+  S.playing = true;
+  loadTrack(S.cur, true);
+  updatePlayBtn();
+  activateRow(S.cur);
+}
+
+function nextTrack(forcePlay = false) {
+  deactivateRow(S.cur);
+  S.cur = S.shuffle
+    ? Math.floor(Math.random() * TRACKS.length)
+    : (S.cur + 1) % TRACKS.length;
+  const shouldPlay = S.playing || forcePlay;
+  if (shouldPlay) S.playing = true;
+  loadTrack(S.cur, shouldPlay);
+  updatePlayBtn();
+  activateRow(S.cur);
+}
+
+document.getElementById('prog').addEventListener('click', e => {
+  if (!audio.duration) return;
+  const r = e.currentTarget.getBoundingClientRect();
+  const pct = (e.clientX - r.left) / r.width;
+  audio.currentTime = pct * audio.duration;
+});
+
+document.getElementById('c-play').addEventListener('click', togglePlay);
+document.getElementById('c-prev').addEventListener('click', prevTrack);
+document.getElementById('c-next').addEventListener('click', () => nextTrack());
+document.getElementById('c-shuf').addEventListener('click', function(){
+  S.shuffle = !S.shuffle;
+  this.classList.toggle('on', S.shuffle);
+});
+document.getElementById('c-rep').addEventListener('click', function(){
+  S.repeat = !S.repeat;
+  this.classList.toggle('on', S.repeat);
+});
+
+/* ════════════════════════════════════════════════════════
+   HELPERS
+════════════════════════════════════════════════════════ */
+const fmt = s => {
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return m + ':' + String(sec).padStart(2,'0');
+};
+
+/* ════════════════════════════════════════════════════════
+   LIKE — always shows filled heart when active
+════════════════════════════════════════════════════════ */
+function toggleLike(id) {
+  if (S.liked.has(id)) {
+    S.liked.delete(id);
+    document.querySelectorAll(`[data-like="${id}"]`).forEach(b => {
+      b.classList.remove('liked');
+      // heart stays as ms f (outlined look via color only)
+    });
+  } else {
+    S.liked.add(id);
+    document.querySelectorAll(`[data-like="${id}"]`).forEach(b => {
+      b.classList.add('liked');
+      b.style.transform = 'scale(1.4)';
+      setTimeout(() => b.style.transform = '', 200);
+    });
+  }
+
+  // Re-sync color: liked = purple, not liked = muted
+  document.querySelectorAll(`[data-like="${id}"]`).forEach(b => {
+    b.style.color = S.liked.has(id) ? 'var(--primary)' : '';
+  });
+}
+
+/* ════════════════════════════════════════════════════════
+   SEARCH
+════════════════════════════════════════════════════════ */
+document.getElementById('srch').addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  const slist = document.getElementById('slist');
+  const lbl   = document.getElementById('srch-lbl');
+  const noRes = document.getElementById('no-res');
+  slist.innerHTML=''; noRes.style.display='none'; lbl.style.display='none';
+  if (!q) return;
+  const hits = TRACKS.filter(t=>t.title.toLowerCase().includes(q));
+  lbl.style.display='block';
+  lbl.textContent = hits.length ? `${hits.length} result${hits.length!==1?'s':''} for "${q}"` : '';
+  if (!hits.length) {
+    document.getElementById('no-q').textContent=q; noRes.style.display='block'; return;
+  }
+  hits.forEach(t=>mkRow(t,slist,'sr-'));
+});
+
+/* ════════════════════════════════════════════════════════
+   TABS
+════════════════════════════════════════════════════════ */
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+tab)?.classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  document.querySelectorAll('.mob-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  if (tab==='search') setTimeout(()=>document.getElementById('srch').focus(),120);
+}
+
+document.querySelectorAll('.tab-btn, .mob-btn').forEach(b=>{
+  b.addEventListener('click',()=>switchTab(b.dataset.tab));
+});
+document.getElementById('hdr-srch').addEventListener('click',()=>switchTab('search'));
+
+/* ════════════════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════════════════ */
+buildTracks();
+buildVideos();
+document.getElementById('ptitle').textContent = TRACKS[S.cur].title;
+document.getElementById('part').src = TRACKS[S.cur].img || placeholder(S.cur);
+document.getElementById('ttot').textContent = TRACKS[S.cur].dur;
+</script>
+</body>
+</html>

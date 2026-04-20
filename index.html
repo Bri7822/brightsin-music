@@ -37,9 +37,13 @@ h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--outline);border-radius:99px}
 
-.ms{font-family:'Material Symbols Outlined';font-style:normal;line-height:1;
-    font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;user-select:none}
-.ms.f{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+/* Material Symbols */
+.ms{
+  font-family:'Material Symbols Outlined';font-style:normal;line-height:1;
+  font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+  user-select:none;vertical-align:middle
+}
+.ms.filled{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
 
 /* ═══════════════════════════════════════════════════════════
    HEADER
@@ -48,7 +52,7 @@ header{
   position:fixed;top:0;left:0;width:100%;z-index:200;
   display:flex;align-items:center;gap:10px;
   padding:12px 20px;
-  background:rgba(14,14,14,.68);
+  background:rgba(14,14,14,.72);
   backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
   border-bottom:1px solid rgba(255,255,255,.04)
 }
@@ -59,11 +63,9 @@ header{
   text-decoration:none;flex-shrink:0
 }
 
-/* Tab pill */
 .tab-nav{
   display:flex;background:rgba(255,255,255,.05);
-  border-radius:99px;padding:4px;gap:2px;
-  margin-left:auto
+  border-radius:99px;padding:4px;gap:2px;margin-left:auto
 }
 .tab-btn{
   padding:6px 20px;border-radius:99px;border:none;cursor:pointer;
@@ -83,27 +85,22 @@ header{
 .hdr-icon:hover{background:rgba(219,144,255,.12);color:var(--primary)}
 
 @media(max-width:600px){
-  .logo   { order:0; margin-right:0 }
-  .tab-nav{ order:1; margin-left:0 }
-  .hdr-icon{ order:2; margin-left:0 }
-  header{ gap:8px }
+  .logo{order:0}
+  .tab-nav{order:1;margin-left:0}
+  .hdr-icon{order:2;margin-left:0}
+  header{gap:8px}
 }
 
 /* ═══════════════════════════════════════════════════════════
    MAIN
 ═══════════════════════════════════════════════════════════ */
-main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding-left:18px;padding-right:18px}
-
-/* HERO */
-.hero{padding:14px 0 10px}
-.hero-eye{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.hero-pip{width:3px;height:20px;background:var(--primary);border-radius:99px}
-.hero-lbl{font-size:10px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:rgba(219,144,255,.7)}
-.hero-name{font-size:clamp(40px,11vw,86px);font-weight:900;line-height:.92;letter-spacing:-.03em}
+main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding-left:18px;padding-right:18px}
 
 /* SECTION HEADER */
 .sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .sec-title{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.sec-link{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--on-sv);cursor:pointer;transition:color .15s;text-decoration:none}
+.sec-link:hover{color:var(--primary)}
 
 /* TAB CONTENT */
 .tab-content{display:none}
@@ -111,103 +108,9 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 @keyframes fup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 /* ═══════════════════════════════════════════════════════════
-   ARTIST PAGE
+   MUSIC TAB TOP SPACE
 ═══════════════════════════════════════════════════════════ */
-.artist-page{ padding-top: 10px }
-
-.artist-banner{
-  position:relative;border-radius:24px;overflow:hidden;
-  margin-bottom:20px;background:var(--surf-low);
-  border:1px solid rgba(255,255,255,.05)
-}
-.artist-banner-bg{
-  height:180px;
-  background: linear-gradient(135deg,
-    rgba(177,46,241,.35) 0%,
-    rgba(14,14,14,1) 70%
-  );
-  position:relative;overflow:hidden
-}
-.artist-banner-bg::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 70% 40%,rgba(219,144,255,.22) 0%,transparent 65%)
-}
-.artist-banner-bg::after{
-  content:'brightsin';
-  position:absolute;right:-8px;bottom:-28px;
-  font-family:'Space Grotesk',sans-serif;font-size:120px;font-weight:900;
-  letter-spacing:-.04em;color:rgba(219,144,255,.055);line-height:1;
-  pointer-events:none;user-select:none;white-space:nowrap
-}
-.artist-banner-meta{
-  padding:16px 22px 14px;
-  display:flex;align-items:center;gap:16px;flex-wrap:wrap
-}
-.artist-avatar{
-  width:72px;height:72px;border-radius:50%;
-  background:linear-gradient(135deg,var(--primary-dim),rgba(219,144,255,.3));
-  border:3px solid rgba(219,144,255,.35);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:900;
-  color:var(--primary);flex-shrink:0;
-  margin-top:-36px;box-shadow:0 4px 20px rgba(0,0,0,.6)
-}
-.artist-id{ flex:1;min-width:0 }
-.artist-id h2{ font-size:24px;font-weight:900;letter-spacing:-.02em }
-.artist-id p{ font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--on-sv);margin-top:3px }
-.artist-stats{
-  display:flex;gap:24px;flex-wrap:wrap;
-  padding:0 22px 18px
-}
-.stat-item{ text-align:center }
-.stat-val{ font-size:20px;font-weight:900;color:var(--primary);font-family:'Space Grotesk',sans-serif }
-.stat-lbl{ font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--on-sv);margin-top:2px }
-
-.bio-card{
-  margin-bottom:20px;padding:20px 22px;border-radius:20px;
-  background:var(--surf);border:1px solid rgba(255,255,255,.05);
-  position:relative;overflow:hidden
-}
-.bio-card::before{
-  content:'';position:absolute;top:-60px;right:-60px;
-  width:180px;height:180px;border-radius:50%;
-  background:radial-gradient(circle,rgba(219,144,255,.16) 0%,transparent 70%);
-  pointer-events:none
-}
-.bio-tag{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--primary);margin-bottom:12px
-}
-.bio-body{
-  font-size:13.5px;line-height:1.76;color:var(--on-sv)
-}
-.genres{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.chip{
-  padding:4px 14px;border-radius:99px;font-size:10px;font-weight:800;
-  letter-spacing:.1em;text-transform:uppercase;
-  background:rgba(219,144,255,.1);border:1px solid rgba(219,144,255,.2);
-  color:var(--primary)
-}
-
-.timeline{ margin-top:4px }
-.tl-item{
-  display:flex;gap:18px;padding:16px 0;
-  border-bottom:1px solid rgba(255,255,255,.05)
-}
-.tl-item:last-child{ border-bottom:none }
-.tl-year{
-  font-size:11px;font-weight:900;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--primary);
-  width:38px;flex-shrink:0;padding-top:2px
-}
-.tl-dot{
-  width:10px;height:10px;border-radius:50%;
-  background:var(--primary);flex-shrink:0;margin-top:5px;
-  box-shadow:0 0 8px rgba(219,144,255,.5)
-}
-.tl-text{ font-size:13px;line-height:1.6;color:var(--on-sv) }
-.tl-text strong{ color:var(--on-s) }
+.music-top-pad{height:18px}
 
 /* ═══════════════════════════════════════════════════════════
    TRACK LIST
@@ -225,8 +128,16 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 .track-row:active{transform:scale(.99)}
 .track-row.hidden{display:none}
 
+/* Track number */
+.t-num{
+  width:22px;flex-shrink:0;text-align:center;
+  font-size:13px;font-weight:700;color:var(--on-sv);
+  font-family:'Space Grotesk',sans-serif
+}
+.track-row.playing .t-num{color:var(--primary)}
+
 .t-art{
-  position:relative;flex-shrink:0;width:56px;height:56px;
+  position:relative;flex-shrink:0;width:52px;height:52px;
   border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.55);
   background:var(--surf-top)
 }
@@ -256,29 +167,229 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 .track-row:hover .t-name,.track-row.playing .t-name{color:var(--primary)}
 .t-meta{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--on-sv)}
 
-.t-acts{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.t-acts{display:flex;align-items:center;gap:2px;flex-shrink:0;position:relative}
 .ib{
   width:34px;height:34px;border-radius:50%;border:none;background:transparent;
   cursor:pointer;display:flex;align-items:center;justify-content:center;
-  color:var(--on-sv);font-size:19px;transition:background .14s,color .14s,transform .14s
+  color:var(--on-sv);font-size:20px;transition:background .14s,color .14s,transform .14s
 }
 .ib:hover{background:rgba(219,144,255,.1);color:var(--primary)}
-/* Heart — filled by default when liked */
-.ib.liked{color:var(--primary)}
-.ib.liked .ms{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
 
-/* Download tooltip hint */
-.ib.dl:hover::after{
-  content:'Download';position:absolute;bottom:calc(100% + 6px);right:0;
-  background:rgba(30,29,29,.95);border:1px solid rgba(255,255,255,.07);
-  padding:4px 10px;border-radius:8px;font-family:'Manrope',sans-serif;
-  font-size:10px;font-weight:700;color:var(--on-s);white-space:nowrap;pointer-events:none
+/* ── HEART: outline by default, fully filled when liked ── */
+.ib.heart .ms{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+.ib.heart.liked{color:var(--primary)}
+.ib.heart.liked .ms{font-variation-settings:'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 24}
+
+/* ── DOWNLOAD BUTTON ── */
+.ib.dl .ms{font-size:18px}
+
+/* ═══════════════════════════════════════════════════════════
+   PROJECTS SECTION (Music tab)
+═══════════════════════════════════════════════════════════ */
+.projects-section{margin-top:32px}
+.project-cards{display:flex;flex-direction:column;gap:12px}
+
+.project-card{
+  display:flex;align-items:center;gap:16px;
+  padding:14px 16px;border-radius:20px;
+  background:rgba(26,25,25,.8);border:1px solid rgba(255,255,255,.05);
+  cursor:pointer;transition:background .2s,border-color .2s,transform .15s
 }
-.t-acts{position:relative}
+.project-card:hover{background:var(--surf-top);border-color:rgba(219,144,255,.2);transform:translateY(-1px)}
+.project-card:active{transform:scale(.99)}
+
+.proj-cover{
+  width:72px;height:72px;border-radius:14px;
+  overflow:hidden;flex-shrink:0;
+  background:var(--surf-top);box-shadow:0 6px 20px rgba(0,0,0,.55);
+  position:relative
+}
+.proj-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.proj-cover-placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:900;
+  letter-spacing:-.04em
+}
+
+.proj-info{flex:1;min-width:0}
+.proj-name{font-size:16px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proj-meta{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--on-sv)}
+.proj-type{
+  display:inline-block;margin-top:6px;
+  padding:3px 10px;border-radius:99px;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  background:rgba(219,144,255,.1);border:1px solid rgba(219,144,255,.2);color:var(--primary)
+}
+
+.proj-arrow{color:var(--on-sv);font-size:22px;flex-shrink:0;transition:color .15s,transform .15s}
+.project-card:hover .proj-arrow{color:var(--primary);transform:translateX(3px)}
+
+/* ═══════════════════════════════════════════════════════════
+   ALBUM VIEW (slides in over music tab)
+═══════════════════════════════════════════════════════════ */
+.album-view{display:none}
+.album-view.active{display:block;animation:fup .3s ease}
+
+.album-back{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px 8px 10px;border-radius:99px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.07);
+  color:var(--on-sv);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:background .15s,color .15s;margin-bottom:22px;
+  margin-top:6px
+}
+.album-back:hover{background:rgba(219,144,255,.12);color:var(--primary)}
+.album-back .ms{font-size:18px}
+
+.album-header{
+  display:flex;align-items:flex-end;gap:22px;
+  margin-bottom:28px;padding:22px;
+  background:var(--surf-low);border-radius:24px;
+  border:1px solid rgba(255,255,255,.05);
+  position:relative;overflow:hidden
+}
+.album-header::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(177,46,241,.22) 0%,rgba(14,14,14,.9) 60%);
+  pointer-events:none
+}
+.album-header::after{
+  content:attr(data-title);
+  position:absolute;right:-10px;bottom:-30px;
+  font-family:'Space Grotesk',sans-serif;font-size:90px;font-weight:900;
+  letter-spacing:-.04em;color:rgba(219,144,255,.04);line-height:1;
+  pointer-events:none;user-select:none;white-space:nowrap
+}
+
+.album-cover{
+  width:120px;height:120px;border-radius:16px;overflow:hidden;
+  flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.7);
+  background:var(--surf-top);position:relative;z-index:1
+}
+.album-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.album-cover-placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-size:42px;font-weight:900
+}
+
+.album-meta{position:relative;z-index:1;min-width:0}
+.album-type-tag{
+  font-size:9px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;
+  color:rgba(219,144,255,.7);margin-bottom:8px
+}
+.album-title{font-size:28px;font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-bottom:8px}
+.album-sub{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--on-sv)}
+.album-play-btn{
+  margin-top:14px;padding:10px 24px;border-radius:99px;border:none;cursor:pointer;
+  background:var(--primary);color:var(--on-primary);
+  font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:6px;
+  box-shadow:0 0 20px rgba(219,144,255,.35);transition:transform .15s,box-shadow .15s
+}
+.album-play-btn:hover{transform:scale(1.04);box-shadow:0 0 30px rgba(219,144,255,.5)}
+.album-play-btn .ms{font-size:18px;font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+
+/* ═══════════════════════════════════════════════════════════
+   ARTIST PAGE
+═══════════════════════════════════════════════════════════ */
+.artist-page{padding-top:10px}
+
+.artist-banner{
+  position:relative;border-radius:24px;overflow:hidden;
+  margin-bottom:20px;background:var(--surf-low);
+  border:1px solid rgba(255,255,255,.05)
+}
+.artist-banner-bg{
+  height:180px;
+  background:linear-gradient(135deg,rgba(177,46,241,.35) 0%,rgba(14,14,14,1) 70%);
+  position:relative;overflow:hidden
+}
+.artist-banner-bg::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 70% 40%,rgba(219,144,255,.22) 0%,transparent 65%)
+}
+.artist-banner-bg::after{
+  content:'brightsin';
+  position:absolute;right:-8px;bottom:-28px;
+  font-family:'Space Grotesk',sans-serif;font-size:120px;font-weight:900;
+  letter-spacing:-.04em;color:rgba(219,144,255,.055);line-height:1;
+  pointer-events:none;user-select:none;white-space:nowrap
+}
+.artist-banner-meta{
+  padding:16px 22px 14px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap
+}
+.artist-avatar{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary-dim),rgba(219,144,255,.3));
+  border:3px solid rgba(219,144,255,.35);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:900;
+  color:var(--primary);flex-shrink:0;
+  margin-top:-36px;box-shadow:0 4px 20px rgba(0,0,0,.6)
+}
+.artist-id{flex:1;min-width:0}
+.artist-id h2{font-size:24px;font-weight:900;letter-spacing:-.02em}
+.artist-id p{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--on-sv);margin-top:3px}
+.artist-stats{display:flex;gap:24px;flex-wrap:wrap;padding:0 22px 18px}
+.stat-item{text-align:center}
+.stat-val{font-size:20px;font-weight:900;color:var(--primary);font-family:'Space Grotesk',sans-serif}
+.stat-lbl{font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--on-sv);margin-top:2px}
+
+.bio-card{
+  margin-bottom:20px;padding:20px 22px;border-radius:20px;
+  background:var(--surf);border:1px solid rgba(255,255,255,.05);
+  position:relative;overflow:hidden
+}
+.bio-card::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(219,144,255,.16) 0%,transparent 70%);
+  pointer-events:none
+}
+.bio-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--primary);margin-bottom:12px
+}
+.bio-body{font-size:13.5px;line-height:1.76;color:var(--on-sv)}
+.genres{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{
+  padding:4px 14px;border-radius:99px;font-size:10px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(219,144,255,.1);border:1px solid rgba(219,144,255,.2);
+  color:var(--primary)
+}
+
+/* Timeline */
+.timeline{margin-top:4px}
+.tl-item{display:flex;gap:18px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.tl-item:last-child{border-bottom:none}
+.tl-year{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);width:38px;flex-shrink:0;padding-top:2px}
+.tl-dot{width:10px;height:10px;border-radius:50%;background:var(--primary);flex-shrink:0;margin-top:5px;box-shadow:0 0 8px rgba(219,144,255,.5)}
+.tl-text{font-size:13px;line-height:1.6;color:var(--on-sv)}
+.tl-text strong{color:var(--on-s)}
+
+/* Artist page project card — clickable */
+.artist-proj-card{
+  cursor:pointer;transition:transform .18s,border-color .18s;
+}
+.artist-proj-card:hover{transform:translateY(-2px);border-color:rgba(219,144,255,.25) !important}
+.artist-proj-card .proj-go{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:14px;padding:10px 0;border-radius:12px;
+  background:rgba(219,144,255,.08);border:1px solid rgba(219,144,255,.15);
+  font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--primary);transition:background .15s
+}
+.artist-proj-card:hover .proj-go{background:rgba(219,144,255,.15)}
 
 /* ═══════════════════════════════════════════════════════════
    SEARCH
 ═══════════════════════════════════════════════════════════ */
+.search-top{height:14px}
 .search-wrap{position:relative;margin-bottom:22px}
 .search-wrap .ms{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--on-sv);pointer-events:none}
 #srch{
@@ -296,6 +407,7 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 /* ═══════════════════════════════════════════════════════════
    VIDEOS
 ═══════════════════════════════════════════════════════════ */
+.vid-top{height:14px}
 .vid-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
 .vid-card{border-radius:16px;overflow:hidden;background:var(--surf-low);border:1px solid rgba(255,255,255,.04);cursor:pointer;transition:transform .2s,box-shadow .2s}
 .vid-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.6),0 0 0 1px rgba(219,144,255,.14)}
@@ -305,39 +417,25 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 .vid-ov{position:absolute;inset:0;background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
 .vid-card:hover .vid-ov{opacity:1}
 .vid-btn{width:46px;height:46px;border-radius:50%;background:rgba(219,144,255,.9);display:flex;align-items:center;justify-content:center;box-shadow:0 0 22px rgba(219,144,255,.55)}
-.vid-btn .ms{font-size:24px;color:var(--on-primary);margin-left:3px}
+.vid-btn .ms{font-size:24px;color:var(--on-primary);font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;margin-left:3px}
 .vid-dur{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.72);padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700;font-family:'Manrope',sans-serif}
 .vid-info{padding:12px 13px}
 .vid-title{font-size:13px;font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vid-sub{font-size:10px;font-weight:600;color:var(--on-sv);letter-spacing:.07em;text-transform:uppercase}
 
-/* YouTube modal overlay */
-.yt-modal{
-  display:none;position:fixed;inset:0;z-index:500;
-  background:rgba(0,0,0,.82);backdrop-filter:blur(12px);
-  align-items:center;justify-content:center;padding:20px
-}
+/* YouTube modal */
+.yt-modal{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
 .yt-modal.open{display:flex}
-.yt-inner{
-  position:relative;width:100%;max-width:820px;
-  aspect-ratio:16/9;border-radius:16px;overflow:hidden;
-  box-shadow:0 24px 80px rgba(0,0,0,.8),0 0 0 1px rgba(219,144,255,.15)
-}
+.yt-inner{position:relative;width:100%;max-width:820px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.8),0 0 0 1px rgba(219,144,255,.15)}
 .yt-inner iframe{width:100%;height:100%;border:none;display:block}
-.yt-close{
-  position:absolute;top:-44px;right:0;
-  background:rgba(255,255,255,.08);border:none;cursor:pointer;
-  width:36px;height:36px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-size:20px;transition:background .15s
-}
+.yt-close{position:absolute;top:-44px;right:0;background:rgba(255,255,255,.08);border:none;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;transition:background .15s}
 .yt-close:hover{background:rgba(219,144,255,.25)}
 
 /* ═══════════════════════════════════════════════════════════
    PLAYER
 ═══════════════════════════════════════════════════════════ */
 .player-wrap{position:fixed;bottom:0;left:0;width:100%;z-index:300;pointer-events:none;padding:0 14px 10px}
-.player{max-width:760px;margin:0 auto;pointer-events:auto;background:rgba(12,12,12,.78);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,.07);border-radius:22px;box-shadow:0 -4px 40px rgba(0,0,0,.65),0 0 60px rgba(219,144,255,.04);overflow:hidden}
+.player{max-width:760px;margin:0 auto;pointer-events:auto;background:rgba(12,12,12,.82);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,.07);border-radius:22px;box-shadow:0 -4px 40px rgba(0,0,0,.65),0 0 60px rgba(219,144,255,.04);overflow:hidden}
 .prog{height:3px;background:rgba(255,255,255,.06);cursor:pointer;position:relative}
 .prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--primary-dim),var(--primary));box-shadow:0 0 8px rgba(219,144,255,.6);border-radius:0 2px 2px 0;position:relative}
 .prog-fill::after{content:'';position:absolute;right:-4px;top:50%;transform:translateY(-50%);width:10px;height:10px;background:#fff;border-radius:50%;box-shadow:0 0 6px rgba(219,144,255,.8);opacity:0;transition:opacity .15s}
@@ -358,16 +456,13 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 .ctrl.tog.on{color:var(--primary)}
 .p-time{font-size:10px;font-weight:600;color:var(--on-sv);font-family:'Manrope',sans-serif;letter-spacing:.04em;flex-shrink:0}
 
-/* ── loading / error state on player bar ── */
-.p-track.loading::after{
-  content:' ···';opacity:.5;animation:ldot 1s steps(3,end) infinite
-}
+.p-track.loading::after{content:' ···';opacity:.5;animation:ldot 1s steps(3,end) infinite}
 @keyframes ldot{0%{content:' ·'}33%{content:' ··'}66%{content:' ···'}}
 
 /* ═══════════════════════════════════════════════════════════
    MOBILE NAV
 ═══════════════════════════════════════════════════════════ */
-.mob-nav{display:none;position:fixed;bottom:0;left:0;width:100%;z-index:400;background:rgba(8,8,8,.9);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.05);justify-content:space-around;align-items:center;padding:6px 0 14px}
+.mob-nav{display:none;position:fixed;bottom:0;left:0;width:100%;z-index:400;background:rgba(8,8,8,.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.05);justify-content:space-around;align-items:center;padding:6px 0 14px}
 .mob-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:4px 10px;color:var(--on-sv);transition:color .15s}
 .mob-btn.active{color:var(--primary)}
 .mob-btn .ms{font-size:22px}
@@ -380,12 +475,7 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 @media(max-width:600px){
   .mob-nav{display:flex}
   .player-wrap{padding-bottom:68px}
-  main{
-    padding-top:70px;
-    padding-bottom:148px  /* player (~60px) + player-wrap padding (68px) + safe buffer (20px) */
-  }
-  .hero{padding:6px 0 8px}
-  .hero-name{font-size:clamp(32px,9vw,52px)}
+  main{padding-top:66px;padding-bottom:148px}
   .p-body{padding:8px 12px;gap:8px}
   .p-time{display:none}
   .ctrl.tog{display:none}
@@ -394,6 +484,11 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
   .tab-nav{display:none}
   .artist-banner-bg{height:140px}
   .bio-card{padding:16px 16px}
+  .album-header{flex-direction:column;align-items:flex-start;gap:16px}
+  .album-cover{width:100%;height:0;padding-bottom:60%;border-radius:14px;position:relative}
+  .album-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:14px}
+  .album-cover-placeholder{position:absolute;inset:0}
+  .album-title{font-size:22px}
 }
 </style>
 </head>
@@ -402,12 +497,10 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 <!-- ═══════════ HEADER ═══════════════════════════════════ -->
 <header>
   <a class="logo" href="#">Brightsin</a>
-
   <nav class="tab-nav">
     <button class="tab-btn active" data-tab="music">Music</button>
     <button class="tab-btn"        data-tab="videos">Videos</button>
   </nav>
-
   <button class="hdr-icon" id="hdr-srch" title="Search">
     <span class="ms">search</span>
   </button>
@@ -416,38 +509,52 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 <!-- ═══════════ MAIN ════════════════════════════════════ -->
 <main>
 
-  <!-- MUSIC TAB -->
+  <!-- ══ MUSIC TAB ══ -->
   <div class="tab-content active" id="tab-music">
-    <div class="hero">
-      <div class="hero-eye">
-        <div class="hero-pip"></div>
-        <span class="hero-lbl">Artist Profile</span>
+    <div class="music-top-pad"></div>
+
+    <!-- Popular Tracks (5 shown) -->
+    <div id="music-home">
+      <div class="sec-hdr">
+        <h2 class="sec-title">Popular</h2>
+        <span class="sec-link" id="show-all-link">See all</span>
       </div>
-      <h1 class="hero-name">Brightsin</h1>
+      <div class="track-list" id="tlist"></div>
+
+      <!-- Projects -->
+      <div class="projects-section">
+        <div class="sec-hdr" style="margin-bottom:16px">
+          <h2 class="sec-title">Projects</h2>
+        </div>
+        <div class="project-cards" id="proj-cards"></div>
+      </div>
     </div>
 
-    <div class="sec-hdr">
-      <h2 class="sec-title">Popular Tracks</h2>
+    <!-- Album View (hidden initially) -->
+    <div class="album-view" id="album-view">
+      <button class="album-back" id="album-back-btn">
+        <span class="ms">arrow_back</span>
+        Back
+      </button>
+      <div class="album-header" id="album-header" data-title=""></div>
+      <div class="sec-hdr" style="margin-top:4px;margin-bottom:12px">
+        <h2 class="sec-title">Tracklist</h2>
+        <span style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--on-sv)" id="album-count"></span>
+      </div>
+      <div class="track-list" id="alist"></div>
     </div>
-    <div class="track-list" id="tlist"></div>
   </div>
 
-  <!-- VIDEOS TAB -->
+  <!-- ══ VIDEOS TAB ══ -->
   <div class="tab-content" id="tab-videos">
-    <div class="hero">
-      <div class="hero-eye">
-        <div class="hero-pip"></div>
-        <span class="hero-lbl">Watch</span>
-      </div>
-      <h1 class="hero-name" style="font-size:clamp(36px,9vw,60px)">Music Videos</h1>
-    </div>
+    <div class="vid-top"></div>
     <div class="sec-hdr" style="margin-bottom:18px">
       <h2 class="sec-title">All Videos</h2>
     </div>
     <div class="vid-grid" id="vgrid"></div>
   </div>
 
-  <!-- ARTIST TAB -->
+  <!-- ══ ARTIST TAB ══ -->
   <div class="tab-content" id="tab-artist">
     <div class="artist-page">
 
@@ -496,8 +603,41 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
         </div>
       </div>
 
-      <div class="sec-hdr" style="margin-bottom:10px">
+      <div class="sec-hdr" style="margin-bottom:14px">
         <h2 class="sec-title">Projects</h2>
+      </div>
+
+      <!-- Out of My Shell card on Artist page -->
+      <div class="bio-card artist-proj-card" id="artist-ep-card">
+        <div class="bio-tag">
+          <span class="ms" style="font-size:14px">album</span>
+          Debut EP · 2025
+        </div>
+        <div style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:14px;overflow:hidden;flex-shrink:0;background:var(--surf-top);box-shadow:0 6px 20px rgba(0,0,0,.55)" id="artist-ep-cover-wrap">
+            <img src="assets/images/1.png" id="artist-ep-cover" alt="Out of My Shell"
+              style="width:100%;height:100%;object-fit:cover;display:block"
+              onerror="this.parentNode.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:Space Grotesk,sans-serif;font-size:26px;font-weight:900;background:linear-gradient(135deg,rgba(177,46,241,.4),rgba(14,14,14,.9))\'>✦</div>'"
+            />
+          </div>
+          <div>
+            <div style="font-size:18px;font-weight:900;letter-spacing:-.02em;margin-bottom:4px">Out of My Shell</div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--on-sv)">11 Tracks · 2025</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+              <span class="chip" style="font-size:9px">EP</span>
+              <span class="chip" style="font-size:9px">Rap</span>
+              <span class="chip" style="font-size:9px">Hip-Hop</span>
+            </div>
+          </div>
+        </div>
+        <div class="proj-go">
+          <span class="ms filled" style="font-size:16px">play_circle</span>
+          View All Songs
+        </div>
+      </div>
+
+      <div class="sec-hdr" style="margin-bottom:10px;margin-top:28px">
+        <h2 class="sec-title">Timeline</h2>
       </div>
       <div class="bio-card">
         <div class="timeline">
@@ -527,15 +667,9 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
     </div>
   </div>
 
-  <!-- SEARCH TAB -->
+  <!-- ══ SEARCH TAB ══ -->
   <div class="tab-content" id="tab-search">
-    <div class="hero" style="padding-bottom:10px">
-      <div class="hero-eye">
-        <div class="hero-pip"></div>
-        <span class="hero-lbl">Find</span>
-      </div>
-      <h1 class="hero-name" style="font-size:clamp(36px,9vw,60px)">Search</h1>
-    </div>
+    <div class="search-top"></div>
     <div class="search-wrap">
       <span class="ms">search</span>
       <input type="search" id="srch" placeholder="Search tracks, videos…" autocomplete="off"/>
@@ -543,7 +677,7 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
     <div class="srch-lbl" id="srch-lbl"></div>
     <div class="track-list" id="slist"></div>
     <div class="no-res" id="no-res">
-      <span class="ms f">music_off</span>
+      <span class="ms filled">music_off</span>
       No results for "<span id="no-q"></span>"
     </div>
   </div>
@@ -604,17 +738,33 @@ main{padding-top:82px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
    DATA
 ════════════════════════════════════════════════════════ */
 const TRACKS = [
-  { id:0,  title:'intro',            dur:'1:27', audioSrc:'assets/audio/out of my shell/1. Brightsin - Intro.mp3',                                                                                    img:'assets/images/1.png' },
-  { id:1,  title:'One of em shot',   dur:'3:05', audioSrc:'assets/audio/out of my shell/2. Brightsin - One of em shot(Prod trabbey & malloy.mp3',                                                     img:'assets/images/2.png' },
-  { id:2,  title:'Guess is goodbye', dur:'1:53', audioSrc:'assets/audio/out of my shell/3. Brightsin - Guess is Goodbye(Prod. Larkin Noir).mp3',                                                      img:'assets/images/3.png' },
-  { id:3,  title:'Nothing still',    dur:'1:46', audioSrc:'assets/audio/out of my shell/4. Brightsin - Nothing still(VintageMan Beats).mp3',                                                          img:'assets/images/4.png' },
-  { id:4,  title:'Rebirth',          dur:'2:39', audioSrc:'assets/audio/out of my shell/5. Brightsin ft Trigga Rebirth.mp3',                                                                          img:'assets/images/5.png' },
-  { id:5,  title:'Love is gone',     dur:'3:44', audioSrc:'assets/audio/out of my shell/6. Brightsin - love is gone(ProdCrive Adison Orge).mp3',                                                     img:'assets/images/6.png' },
-  { id:6,  title:'To the top',       dur:'2:37', audioSrc:'assets/audio/out of my shell/7. Brightsin - To the top(Prod Young 808).mp3',                                                              img:'assets/images/7.png' },
-  { id:7,  title:'Borborygmi',       dur:'2:09', audioSrc:'assets/audio/out of my shell/8. Brightsin - borborygmi.mp3',                                                                              img:'assets/images/8.png' },
-  { id:8,  title:'Future dreams',    dur:'4:14', audioSrc:'assets/audio/out of my shell/9. Brightsin ft Tlotliso Mpeoa ft Bruce ft King Composure - Future Dreams.mp3',                              img:'assets/images/9.png' },
-  { id:9,  title:'Uncovered',        dur:'3:14', audioSrc:'assets/audio/out of my shell/10. Brightsin - uncovered.mp3',                                                                               img:'assets/images/10.png' },
-  { id:10, title:'How many nights',  dur:'3:18', audioSrc:'assets/audio/out of my shell/11-Brightsin-How many nights.mp3',                                                                            img:'assets/images/11.png' },
+  { id:0,  title:'Intro',            dur:'1:27', audioSrc:'assets/audio/out of my shell/1. Brightsin - Intro.mp3',                                                                               img:'assets/images/1.png' },
+  { id:1,  title:'One of em Shot',   dur:'3:05', audioSrc:'assets/audio/out of my shell/2. Brightsin - One of em shot(Prod trabbey & malloy.mp3',                                                img:'assets/images/2.png' },
+  { id:2,  title:'Guess is Goodbye', dur:'1:53', audioSrc:'assets/audio/out of my shell/3. Brightsin - Guess is Goodbye(Prod. Larkin Noir).mp3',                                                 img:'assets/images/3.png' },
+  { id:3,  title:'Nothing Still',    dur:'1:46', audioSrc:'assets/audio/out of my shell/4. Brightsin - Nothing still(VintageMan Beats).mp3',                                                     img:'assets/images/4.png' },
+  { id:4,  title:'Rebirth',          dur:'2:39', audioSrc:'assets/audio/out of my shell/5. Brightsin ft Trigga Rebirth.mp3',                                                                     img:'assets/images/5.png' },
+  { id:5,  title:'Love is Gone',     dur:'3:44', audioSrc:'assets/audio/out of my shell/6. Brightsin - love is gone(ProdCrive Adison Orge).mp3',                                                img:'assets/images/6.png' },
+  { id:6,  title:'To the Top',       dur:'2:37', audioSrc:'assets/audio/out of my shell/7. Brightsin - To the top(Prod Young 808).mp3',                                                         img:'assets/images/7.png' },
+  { id:7,  title:'Borborygmi',       dur:'2:09', audioSrc:'assets/audio/out of my shell/8. Brightsin - borborygmi.mp3',                                                                         img:'assets/images/8.png' },
+  { id:8,  title:'Future Dreams',    dur:'4:14', audioSrc:'assets/audio/out of my shell/9. Brightsin ft Tlotliso Mpeoa ft Bruce ft King Composure - Future Dreams.mp3',                         img:'assets/images/9.png' },
+  { id:9,  title:'Uncovered',        dur:'3:14', audioSrc:'assets/audio/out of my shell/10. Brightsin - uncovered.mp3',                                                                          img:'assets/images/10.png' },
+  { id:10, title:'How Many Nights',  dur:'3:18', audioSrc:'assets/audio/out of my shell/11-Brightsin-How many nights.mp3',                                                                       img:'assets/images/11.png' },
+];
+
+// 5 "popular" track IDs shown on home
+const POPULAR_IDS = [5, 4, 8, 6, 10];
+
+const PROJECTS = [
+  {
+    id: 'oms',
+    name: 'Out of My Shell',
+    year: 2025,
+    type: 'EP',
+    tracks: TRACKS.map(t => t.id), // all 11, in order
+    coverImg: 'assets/images/1.png',
+    gradient: 'linear-gradient(135deg,rgba(177,46,241,.45) 0%,rgba(14,14,14,1) 70%)',
+    accent: '#db90ff'
+  }
 ];
 
 const VIDEOS = [
@@ -627,7 +777,7 @@ const VIDEOS = [
 ];
 
 /* ════════════════════════════════════════════════════════
-   HTML5 AUDIO ENGINE
+   AUDIO ENGINE
 ════════════════════════════════════════════════════════ */
 const audio = new Audio();
 audio.preload = 'metadata';
@@ -645,21 +795,16 @@ audio.addEventListener('loadedmetadata', () => {
 });
 
 audio.addEventListener('ended', () => {
-  if (S.repeat) {
-    audio.currentTime = 0;
-    audio.play().catch(() => {});
-  } else {
-    nextTrack(true);
-  }
+  if (S.repeat) { audio.currentTime = 0; audio.play().catch(() => {}); }
+  else nextTrack(true);
 });
 
 audio.addEventListener('error', () => {
   document.getElementById('ptitle').classList.remove('loading');
-  console.warn('Audio failed to load:', audio.src);
 });
 
 /* ════════════════════════════════════════════════════════
-   ID3 COVER ART EXTRACTION
+   ID3 COVER ART
 ════════════════════════════════════════════════════════ */
 const coverCache = {};
 
@@ -696,7 +841,7 @@ function applyCover(tid, url) {
 /* ════════════════════════════════════════════════════════
    STATE
 ════════════════════════════════════════════════════════ */
-const S = { cur:0, playing:false, shuffle:false, repeat:false, liked:new Set() };
+const S = { cur:0, playing:false, shuffle:false, repeat:false, liked:new Set(), albumOpen:false };
 
 /* ════════════════════════════════════════════════════════
    DOWNLOAD
@@ -713,20 +858,25 @@ function downloadTrack(id) {
 }
 
 /* ════════════════════════════════════════════════════════
-   BUILD ROWS
+   BUILD TRACK ROW
 ════════════════════════════════════════════════════════ */
-function mkRow(t, container, pfx) {
+function mkRow(t, container, pfx, showNum = false) {
   const el = document.createElement('div');
   el.className = 'track-row';
   el.id = pfx + t.id;
   el.dataset.id = t.id;
   const art = t.img || placeholder(t.id);
   const isLiked = S.liked.has(t.id);
+  const numHtml = showNum
+    ? `<span class="t-num">${TRACKS.indexOf(t) + 1}</span>`
+    : '';
+
   el.innerHTML = `
+    ${numHtml}
     <div class="t-art">
       <img src="${art}" data-tid="${t.id}" alt="${t.title}" loading="lazy"/>
       <div class="t-overlay">
-        <span class="ms f iplay" id="${pfx}ico-${t.id}">play_arrow</span>
+        <span class="ms filled iplay" id="${pfx}ico-${t.id}">play_arrow</span>
       </div>
     </div>
     <div class="t-info">
@@ -734,12 +884,12 @@ function mkRow(t, container, pfx) {
       <div class="t-meta">Brightsin • ${t.dur}</div>
     </div>
     <div class="t-acts" onclick="event.stopPropagation()">
-      <button class="ib${isLiked?' liked':''}" data-like="${t.id}" title="Like"
+      <button class="ib heart${isLiked ? ' liked' : ''}" data-like="${t.id}" title="Like"
         onclick="toggleLike(${t.id})">
-        <span class="ms f">favorite</span>
+        <span class="ms">${isLiked ? 'favorite' : 'favorite_border'}</span>
       </button>
       <button class="ib dl" title="Download" onclick="downloadTrack(${t.id})">
-        <span class="ms">more_vert</span>
+        <span class="ms">download</span>
       </button>
     </div>`;
   el.addEventListener('click', () => selectTrack(t.id));
@@ -747,16 +897,133 @@ function mkRow(t, container, pfx) {
   if (t.audioSrc) extractCover(t.audioSrc, t.id);
 }
 
-function buildTracks() {
-  const l = document.getElementById('tlist');
-  l.innerHTML = '';
-  TRACKS.forEach(t => mkRow(t, l, 'tr-'));
-  l.querySelectorAll('.track-row').forEach((el,i) => {
-    el.style.cssText='opacity:0;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease';
-    setTimeout(() => el.style.cssText='', 60 + i*52);
+/* ════════════════════════════════════════════════════════
+   BUILD MUSIC HOME
+════════════════════════════════════════════════════════ */
+let showingAll = false;
+
+function buildPopular() {
+  const list = document.getElementById('tlist');
+  list.innerHTML = '';
+  const ids = showingAll ? TRACKS.map(t => t.id) : POPULAR_IDS;
+  ids.forEach((id, i) => {
+    mkRow(TRACKS[id], list, 'tr-', false);
+    const row = list.lastElementChild;
+    row.style.cssText = 'opacity:0;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease';
+    setTimeout(() => row.style.cssText = '', 60 + i * 50);
   });
 }
 
+document.getElementById('show-all-link').addEventListener('click', () => {
+  showingAll = !showingAll;
+  document.getElementById('show-all-link').textContent = showingAll ? 'Show less' : 'See all';
+  buildPopular();
+});
+
+/* ════════════════════════════════════════════════════════
+   BUILD PROJECT CARDS (home)
+════════════════════════════════════════════════════════ */
+function buildProjectCards() {
+  const container = document.getElementById('proj-cards');
+  container.innerHTML = '';
+  PROJECTS.forEach((proj, idx) => {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.innerHTML = `
+      <div class="proj-cover">
+        <img src="${proj.coverImg}" alt="${proj.name}"
+          onerror="this.parentNode.innerHTML='<div class=proj-cover-placeholder style=background:${encodeURIComponent(proj.gradient)}>✦</div>'"
+        />
+      </div>
+      <div class="proj-info">
+        <div class="proj-name">${proj.name}</div>
+        <div class="proj-meta">${proj.year} · ${proj.tracks.length} Tracks</div>
+        <span class="proj-type">${proj.type}</span>
+      </div>
+      <span class="ms proj-arrow">arrow_forward_ios</span>
+    `;
+    card.addEventListener('click', () => openAlbumView(idx));
+    container.appendChild(card);
+  });
+}
+
+/* ════════════════════════════════════════════════════════
+   ALBUM VIEW
+════════════════════════════════════════════════════════ */
+function openAlbumView(projIdx) {
+  const proj = PROJECTS[projIdx];
+  S.albumOpen = true;
+
+  // Hide home, show album
+  document.getElementById('music-home').style.display = 'none';
+  const av = document.getElementById('album-view');
+  av.classList.add('active');
+
+  // Build header
+  const hdr = document.getElementById('album-header');
+  hdr.setAttribute('data-title', proj.name.toUpperCase());
+  hdr.innerHTML = `
+    <div class="album-cover">
+      <img src="${proj.coverImg}" alt="${proj.name}"
+        onerror="this.parentNode.innerHTML='<div class=album-cover-placeholder style=background:${encodeURIComponent(proj.gradient)}>✦</div>'"
+      />
+    </div>
+    <div class="album-meta">
+      <div class="album-type-tag">${proj.type} · ${proj.year}</div>
+      <div class="album-title">${proj.name}</div>
+      <div class="album-sub">Brightsin · ${proj.tracks.length} tracks</div>
+      <button class="album-play-btn" id="album-play-all">
+        <span class="ms">play_arrow</span>
+        Play All
+      </button>
+    </div>
+  `;
+
+  // Play all button
+  document.getElementById('album-play-all').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const firstId = proj.tracks[0];
+    deactivateRow(S.cur);
+    S.cur = firstId;
+    S.playing = true;
+    loadTrack(firstId, true);
+    updatePlayBtn();
+    activateRow(firstId);
+  });
+
+  // Build tracklist
+  const alist = document.getElementById('alist');
+  alist.innerHTML = '';
+  document.getElementById('album-count').textContent = proj.tracks.length + ' tracks';
+  proj.tracks.forEach((id, i) => {
+    mkRow(TRACKS[id], alist, 'al-', true);
+    const row = alist.lastElementChild;
+    row.style.cssText = 'opacity:0;transform:translateY(8px);transition:opacity .28s ease,transform .28s ease';
+    setTimeout(() => row.style.cssText = '', 40 + i * 40);
+  });
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function closeAlbumView() {
+  S.albumOpen = false;
+  document.getElementById('music-home').style.display = '';
+  const av = document.getElementById('album-view');
+  av.classList.remove('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.getElementById('album-back-btn').addEventListener('click', closeAlbumView);
+
+// Artist page EP card → opens album view
+document.getElementById('artist-ep-card').addEventListener('click', () => {
+  switchTab('music');
+  setTimeout(() => openAlbumView(0), 120);
+});
+
+/* ════════════════════════════════════════════════════════
+   VIDEOS
+════════════════════════════════════════════════════════ */
 function buildVideos() {
   document.getElementById('vgrid').innerHTML = VIDEOS.map((v,i) => {
     const thumb = v.youtubeId
@@ -766,7 +1033,7 @@ function buildVideos() {
     <div class="vid-card" data-vidx="${i}">
       <div class="vid-thumb">
         <img src="${thumb}" alt="${v.title}" loading="lazy"/>
-        <div class="vid-ov"><div class="vid-btn"><span class="ms f">play_arrow</span></div></div>
+        <div class="vid-ov"><div class="vid-btn"><span class="ms filled">play_arrow</span></div></div>
         <span class="vid-dur">${v.dur}</span>
       </div>
       <div class="vid-info">
@@ -777,10 +1044,7 @@ function buildVideos() {
   }).join('');
 
   document.querySelectorAll('.vid-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const v = VIDEOS[+card.dataset.vidx];
-      openVideoModal(v);
-    });
+    card.addEventListener('click', () => openVideoModal(VIDEOS[+card.dataset.vidx]));
   });
 }
 
@@ -792,25 +1056,20 @@ function openVideoModal(v) {
     alert(`No YouTube ID set for "${v.title}".\nAdd the 11-character video ID to VIDEOS[].youtubeId.`);
     return;
   }
-  document.getElementById('yt-iframe').src =
-    `https://www.youtube.com/embed/${v.youtubeId}?autoplay=1&rel=0`;
+  document.getElementById('yt-iframe').src = `https://www.youtube.com/embed/${v.youtubeId}?autoplay=1&rel=0`;
   document.getElementById('yt-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeVideoModal() {
   document.getElementById('yt-iframe').src = '';
   document.getElementById('yt-modal').classList.remove('open');
   document.body.style.overflow = '';
 }
-
 document.getElementById('yt-close').addEventListener('click', closeVideoModal);
 document.getElementById('yt-modal').addEventListener('click', e => {
   if (e.target === document.getElementById('yt-modal')) closeVideoModal();
 });
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeVideoModal();
-});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideoModal(); });
 
 /* ════════════════════════════════════════════════════════
    PLAYER LOGIC
@@ -828,7 +1087,6 @@ function loadTrack(id, play = false) {
   document.getElementById('part').src = t.img || placeholder(id);
   if (play) {
     audio.play().catch(err => {
-      console.warn('Playback blocked:', err);
       titleEl.classList.remove('loading');
       S.playing = false;
       updatePlayBtn();
@@ -851,8 +1109,11 @@ function selectTrack(id) {
   activateRow(id);
 }
 
+// Row prefixes used across all lists
+const ALL_PREFIXES = ['tr-', 'sr-', 'al-'];
+
 function activateRow(id) {
-  ['tr-','sr-'].forEach(p => {
+  ALL_PREFIXES.forEach(p => {
     const row = document.getElementById(p+id);
     if (!row) return;
     row.classList.add('playing');
@@ -861,7 +1122,7 @@ function activateRow(id) {
 }
 
 function deactivateRow(id) {
-  ['tr-','sr-'].forEach(p => {
+  ALL_PREFIXES.forEach(p => {
     const row = document.getElementById(p+id);
     if (!row) return;
     row.classList.remove('playing');
@@ -870,21 +1131,21 @@ function deactivateRow(id) {
 }
 
 function showEQ(id) {
-  ['tr-','sr-'].forEach(p => {
+  ALL_PREFIXES.forEach(p => {
     const ov = document.querySelector(`#${p}${id} .t-overlay`);
-    if (ov) ov.innerHTML='<div class="eq"><b></b><b></b><b></b><b></b></div>';
+    if (ov) ov.innerHTML = '<div class="eq"><b></b><b></b><b></b><b></b></div>';
   });
 }
 function showPlayIcon(id) {
-  ['tr-','sr-'].forEach(p => {
+  ALL_PREFIXES.forEach(p => {
     const ov = document.querySelector(`#${p}${id} .t-overlay`);
-    if (ov) ov.innerHTML=`<span class="ms f iplay" id="${p}ico-${id}">play_arrow</span>`;
+    if (ov) ov.innerHTML = `<span class="ms filled iplay" id="${p}ico-${id}">play_arrow</span>`;
   });
 }
 function showPauseIcon(id) {
-  ['tr-','sr-'].forEach(p => {
+  ALL_PREFIXES.forEach(p => {
     const ov = document.querySelector(`#${p}${id} .t-overlay`);
-    if (ov) ov.innerHTML=`<span class="ms f iplay" id="${p}ico-${id}">pause</span>`;
+    if (ov) ov.innerHTML = `<span class="ms filled iplay" id="${p}ico-${id}">pause</span>`;
   });
 }
 
@@ -939,8 +1200,7 @@ function nextTrack(forcePlay = false) {
 document.getElementById('prog').addEventListener('click', e => {
   if (!audio.duration) return;
   const r = e.currentTarget.getBoundingClientRect();
-  const pct = (e.clientX - r.left) / r.width;
-  audio.currentTime = pct * audio.duration;
+  audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
 });
 
 document.getElementById('c-play').addEventListener('click', togglePlay);
@@ -956,36 +1216,27 @@ document.getElementById('c-rep').addEventListener('click', function(){
 });
 
 /* ════════════════════════════════════════════════════════
-   HELPERS
-════════════════════════════════════════════════════════ */
-const fmt = s => {
-  const m = Math.floor(s / 60);
-  const sec = Math.floor(s % 60);
-  return m + ':' + String(sec).padStart(2,'0');
-};
-
-/* ════════════════════════════════════════════════════════
-   LIKE — always shows filled heart when active
+   LIKE — outline → solid fill on click
 ════════════════════════════════════════════════════════ */
 function toggleLike(id) {
-  if (S.liked.has(id)) {
+  const wasLiked = S.liked.has(id);
+  if (wasLiked) {
     S.liked.delete(id);
-    document.querySelectorAll(`[data-like="${id}"]`).forEach(b => {
-      b.classList.remove('liked');
-      // heart stays as ms f (outlined look via color only)
-    });
   } else {
     S.liked.add(id);
-    document.querySelectorAll(`[data-like="${id}"]`).forEach(b => {
-      b.classList.add('liked');
-      b.style.transform = 'scale(1.4)';
-      setTimeout(() => b.style.transform = '', 200);
-    });
   }
+  const nowLiked = S.liked.has(id);
 
-  // Re-sync color: liked = purple, not liked = muted
-  document.querySelectorAll(`[data-like="${id}"]`).forEach(b => {
-    b.style.color = S.liked.has(id) ? 'var(--primary)' : '';
+  document.querySelectorAll(`[data-like="${id}"]`).forEach(btn => {
+    if (nowLiked) {
+      btn.classList.add('liked');
+      btn.querySelector('.ms').textContent = 'favorite';
+      btn.style.transform = 'scale(1.45)';
+      setTimeout(() => btn.style.transform = '', 220);
+    } else {
+      btn.classList.remove('liked');
+      btn.querySelector('.ms').textContent = 'favorite_border';
+    }
   });
 }
 
@@ -997,37 +1248,49 @@ document.getElementById('srch').addEventListener('input', function() {
   const slist = document.getElementById('slist');
   const lbl   = document.getElementById('srch-lbl');
   const noRes = document.getElementById('no-res');
-  slist.innerHTML=''; noRes.style.display='none'; lbl.style.display='none';
+  slist.innerHTML = ''; noRes.style.display = 'none'; lbl.style.display = 'none';
   if (!q) return;
-  const hits = TRACKS.filter(t=>t.title.toLowerCase().includes(q));
-  lbl.style.display='block';
-  lbl.textContent = hits.length ? `${hits.length} result${hits.length!==1?'s':''} for "${q}"` : '';
+  const hits = TRACKS.filter(t => t.title.toLowerCase().includes(q));
+  lbl.style.display = 'block';
+  lbl.textContent = hits.length ? `${hits.length} result${hits.length !== 1 ? 's' : ''} for "${q}"` : '';
   if (!hits.length) {
-    document.getElementById('no-q').textContent=q; noRes.style.display='block'; return;
+    document.getElementById('no-q').textContent = q;
+    noRes.style.display = 'block';
+    return;
   }
-  hits.forEach(t=>mkRow(t,slist,'sr-'));
+  hits.forEach(t => mkRow(t, slist, 'sr-', false));
 });
 
 /* ════════════════════════════════════════════════════════
    TABS
 ════════════════════════════════════════════════════════ */
 function switchTab(tab) {
-  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
-  document.getElementById('tab-'+tab)?.classList.add('active');
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
-  document.querySelectorAll('.mob-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
-  if (tab==='search') setTimeout(()=>document.getElementById('srch').focus(),120);
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab)?.classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.mob-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  if (tab === 'search') setTimeout(() => document.getElementById('srch').focus(), 120);
 }
 
-document.querySelectorAll('.tab-btn, .mob-btn').forEach(b=>{
-  b.addEventListener('click',()=>switchTab(b.dataset.tab));
+document.querySelectorAll('.tab-btn, .mob-btn').forEach(b => {
+  b.addEventListener('click', () => switchTab(b.dataset.tab));
 });
-document.getElementById('hdr-srch').addEventListener('click',()=>switchTab('search'));
+document.getElementById('hdr-srch').addEventListener('click', () => switchTab('search'));
+
+/* ════════════════════════════════════════════════════════
+   HELPERS
+════════════════════════════════════════════════════════ */
+const fmt = s => {
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return m + ':' + String(sec).padStart(2, '0');
+};
 
 /* ════════════════════════════════════════════════════════
    INIT
 ════════════════════════════════════════════════════════ */
-buildTracks();
+buildPopular();
+buildProjectCards();
 buildVideos();
 document.getElementById('ptitle').textContent = TRACKS[S.cur].title;
 document.getElementById('part').src = TRACKS[S.cur].img || placeholder(S.cur);

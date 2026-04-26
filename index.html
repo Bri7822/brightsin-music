@@ -204,7 +204,7 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 .project-card:active{transform:scale(.99)}
 
 .proj-cover{
-  width:72px;height:72px;border-radius:14px;
+  width:64px;height:64px;border-radius:14px;
   overflow:hidden;flex-shrink:0;
   background:var(--surf-top);box-shadow:0 6px 20px rgba(0,0,0,.55);
   position:relative
@@ -218,12 +218,12 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 }
 
 .proj-info{flex:1;min-width:0}
-.proj-name{font-size:16px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px;
+.proj-name{font-size:15px;font-weight:800;letter-spacing:-.01em;margin-bottom:3px;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .proj-meta{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--on-sv)}
 .proj-type{
-  display:inline-block;margin-top:6px;
-  padding:3px 10px;border-radius:99px;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  display:inline-block;margin-top:5px;
+  padding:2px 9px;border-radius:99px;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
   background:rgba(219,144,255,.1);border:1px solid rgba(219,144,255,.2);color:var(--primary)
 }
 
@@ -241,117 +241,116 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
   padding:8px 16px 8px 10px;border-radius:99px;
   background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.07);
   color:var(--on-sv);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-  cursor:pointer;transition:background .15s,color .15s;margin-bottom:22px;
+  cursor:pointer;transition:background .15s,color .15s;margin-bottom:18px;
   margin-top:6px
 }
 .album-back:hover{background:rgba(219,144,255,.12);color:var(--primary)}
 .album-back .ms{font-size:18px}
 
+/* ── ALBUM HEADER — compact row layout ── */
 .album-header{
-  display:flex;align-items:flex-end;gap:22px;
-  margin-bottom:28px;padding:22px;
-  background:var(--surf-low);border-radius:24px;
+  display:flex;align-items:center;gap:18px;
+  padding:18px;
+  background:var(--surf-low);border-radius:20px;
   border:1px solid rgba(255,255,255,.05);
-  position:relative;overflow:hidden
+  position:relative;overflow:hidden;
+  margin-bottom:20px
 }
 .album-header::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(177,46,241,.22) 0%,rgba(14,14,14,.9) 60%);
+  background:linear-gradient(135deg,rgba(177,46,241,.18) 0%,rgba(14,14,14,.9) 60%);
   pointer-events:none
 }
-.album-header::after{
-  content:attr(data-title);
-  position:absolute;right:-10px;bottom:-30px;
-  font-family:'Space Grotesk',sans-serif;font-size:90px;font-weight:900;
-  letter-spacing:-.04em;color:rgba(219,144,255,.04);line-height:1;
-  pointer-events:none;user-select:none;white-space:nowrap
-}
 
+/* Fixed small cover — works on all screen sizes */
 .album-cover{
-  width:120px;height:120px;border-radius:16px;overflow:hidden;
-  flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.7);
+  width:90px;height:90px;border-radius:14px;overflow:hidden;
+  flex-shrink:0;box-shadow:0 6px 24px rgba(0,0,0,.65);
   background:var(--surf-top);position:relative;z-index:1
 }
 .album-cover img{width:100%;height:100%;object-fit:cover;display:block}
 .album-cover-placeholder{
   width:100%;height:100%;
   display:flex;align-items:center;justify-content:center;
-  font-family:'Space Grotesk',sans-serif;font-size:42px;font-weight:900
+  font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:900
 }
 
-.album-meta{position:relative;z-index:1;min-width:0}
+.album-meta{position:relative;z-index:1;min-width:0;flex:1}
 .album-type-tag{
   font-size:9px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;
-  color:rgba(219,144,255,.7);margin-bottom:8px
+  color:rgba(219,144,255,.7);margin-bottom:6px
 }
-.album-title{font-size:28px;font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-bottom:8px}
-.album-sub{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--on-sv)}
+/* Title + play button on same row */
+.album-title-row{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:5px
+}
+.album-title{font-size:20px;font-weight:900;letter-spacing:-.03em;line-height:1.1}
+.album-sub{font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--on-sv)}
 .album-play-btn{
-  margin-top:14px;padding:10px 24px;border-radius:99px;border:none;cursor:pointer;
+  padding:7px 16px;border-radius:99px;border:none;cursor:pointer;
   background:var(--primary);color:var(--on-primary);
-  font-family:'Manrope',sans-serif;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-  display:inline-flex;align-items:center;gap:6px;
-  box-shadow:0 0 20px rgba(219,144,255,.35);transition:transform .15s,box-shadow .15s
+  font-family:'Manrope',sans-serif;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:5px;flex-shrink:0;
+  box-shadow:0 0 16px rgba(219,144,255,.35);transition:transform .15s,box-shadow .15s
 }
-.album-play-btn:hover{transform:scale(1.04);box-shadow:0 0 30px rgba(219,144,255,.5)}
-.album-play-btn .ms{font-size:18px;font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+.album-play-btn:hover{transform:scale(1.04);box-shadow:0 0 26px rgba(219,144,255,.5)}
+.album-play-btn .ms{font-size:16px;font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
 
 /* ═══════════════════════════════════════════════════════════
-   ARTIST PAGE
+   ARTIST PAGE — simplified banner (no tall bg)
 ═══════════════════════════════════════════════════════════ */
 .artist-page{padding-top:10px}
 
-.artist-banner{
-  position:relative;border-radius:24px;overflow:hidden;
-  margin-bottom:20px;background:var(--surf-low);
-  border:1px solid rgba(255,255,255,.05)
+.artist-banner-simple{
+  display:flex;align-items:center;gap:18px;
+  padding:18px 20px;border-radius:20px;
+  background:var(--surf-low);border:1px solid rgba(255,255,255,.06);
+  margin-bottom:18px;position:relative;overflow:hidden
 }
-.artist-banner-bg{
-  height:180px;
-  background:linear-gradient(135deg,rgba(177,46,241,.35) 0%,rgba(14,14,14,1) 70%);
-  position:relative;overflow:hidden
-}
-.artist-banner-bg::before{
+.artist-banner-simple::before{
   content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 70% 40%,rgba(219,144,255,.22) 0%,transparent 65%)
+  background:linear-gradient(135deg,rgba(177,46,241,.14) 0%,transparent 70%);
+  pointer-events:none
 }
-.artist-banner-bg::after{
-  content:'brightsin';
-  position:absolute;right:-8px;bottom:-28px;
-  font-family:'Space Grotesk',sans-serif;font-size:120px;font-weight:900;
-  letter-spacing:-.04em;color:rgba(219,144,255,.055);line-height:1;
-  pointer-events:none;user-select:none;white-space:nowrap
-}
-.artist-banner-meta{
-  padding:16px 22px 14px;
-  display:flex;align-items:center;gap:16px;flex-wrap:wrap
-}
+
 .artist-avatar{
-  width:72px;height:72px;border-radius:50%;
+  width:62px;height:62px;border-radius:50%;
   background:linear-gradient(135deg,var(--primary-dim),rgba(219,144,255,.3));
-  border:3px solid rgba(219,144,255,.35);
+  border:2px solid rgba(219,144,255,.4);
   display:flex;align-items:center;justify-content:center;
-  font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:900;
+  font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:900;
   color:var(--primary);flex-shrink:0;
-  margin-top:-36px;box-shadow:0 4px 20px rgba(0,0,0,.6)
+  box-shadow:0 4px 16px rgba(0,0,0,.5);
+  overflow:hidden;cursor:pointer;position:relative;z-index:1;
+  transition:border-color .2s
 }
-.artist-id{flex:1;min-width:0}
-.artist-id h2{font-size:24px;font-weight:900;letter-spacing:-.02em}
-.artist-id p{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--on-sv);margin-top:3px}
-.artist-stats{display:flex;gap:24px;flex-wrap:wrap;padding:0 22px 18px}
-.stat-item{text-align:center}
-.stat-val{font-size:20px;font-weight:900;color:var(--primary);font-family:'Space Grotesk',sans-serif}
+.artist-avatar:hover{border-color:rgba(219,144,255,.7)}
+.artist-avatar img{width:100%;height:100%;object-fit:cover;display:none}
+.avatar-letter{position:relative;z-index:1}
+
+.artist-id{flex:1;min-width:0;position:relative;z-index:1}
+.artist-id h2{font-size:22px;font-weight:900;letter-spacing:-.02em}
+.artist-id p{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--on-sv);margin-top:3px}
+
+.artist-stats{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;
+  padding:14px 20px;border-radius:16px;background:var(--surf);border:1px solid rgba(255,255,255,.05);
+  margin-bottom:18px}
+.stat-item{text-align:center;flex:1;min-width:60px}
+.stat-val{font-size:18px;font-weight:900;color:var(--primary);font-family:'Space Grotesk',sans-serif}
 .stat-lbl{font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--on-sv);margin-top:2px}
 
+/* Hidden file input for avatar upload */
+#avatar-upload{display:none}
+
 .bio-card{
-  margin-bottom:20px;padding:20px 22px;border-radius:20px;
+  margin-bottom:18px;padding:18px 20px;border-radius:20px;
   background:var(--surf);border:1px solid rgba(255,255,255,.05);
   position:relative;overflow:hidden
 }
 .bio-card::before{
   content:'';position:absolute;top:-60px;right:-60px;
   width:180px;height:180px;border-radius:50%;
-  background:radial-gradient(circle,rgba(219,144,255,.16) 0%,transparent 70%);
+  background:radial-gradient(circle,rgba(219,144,255,.12) 0%,transparent 70%);
   pointer-events:none
 }
 .bio-tag{
@@ -370,9 +369,9 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 
 /* Timeline */
 .timeline{margin-top:4px}
-.tl-item{display:flex;gap:18px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.tl-item{display:flex;gap:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .tl-item:last-child{border-bottom:none}
-.tl-year{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);width:38px;flex-shrink:0;padding-top:2px}
+.tl-year{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);width:46px;flex-shrink:0;padding-top:2px}
 .tl-dot{width:10px;height:10px;border-radius:50%;background:var(--primary);flex-shrink:0;margin-top:5px;box-shadow:0 0 8px rgba(219,144,255,.5)}
 .tl-text{font-size:13px;line-height:1.6;color:var(--on-sv)}
 .tl-text strong{color:var(--on-s)}
@@ -483,12 +482,54 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 /* ═══════════════════════════════════════════════════════════
    MOBILE NAV
 ═══════════════════════════════════════════════════════════ */
-.mob-nav{display:none;position:fixed;bottom:0;left:0;width:100%;z-index:400;background:rgba(8,8,8,.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.05);justify-content:space-around;align-items:center;padding:6px 0 14px}
+.mob-nav{
+  display:none;position:fixed;bottom:0;left:0;width:100%;z-index:400;
+  background:rgba(8,8,8,.92);backdrop-filter:blur(20px);
+  border-top:1px solid rgba(255,255,255,.05);
+  justify-content:space-around;align-items:center;
+  padding:6px 0 14px
+}
 .mob-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:4px 10px;color:var(--on-sv);transition:color .15s}
 .mob-btn.active{color:var(--primary)}
 .mob-btn .ms{font-size:22px}
 .mob-btn.active .ms{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
 .mob-lbl{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+
+/* ── Mobile back button (hidden until album-mode) ── */
+.mob-back-nav{display:none !important}
+body.album-mode .mob-back-nav{display:flex !important}
+/* Hide one of the standard buttons when back is shown to avoid overflow */
+body.album-mode .mob-search-btn{display:none !important}
+
+/* ── Profile circle in mobile nav ── */
+.mob-profile-btn{padding:2px 10px 4px;gap:3px}
+.mob-avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary-dim),rgba(219,144,255,.4));
+  border:2px solid rgba(219,144,255,.5);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:900;
+  color:var(--primary);overflow:hidden;flex-shrink:0;
+  transition:border-color .2s,box-shadow .2s
+}
+.mob-btn.active .mob-avatar{
+  border-color:var(--primary);
+  box-shadow:0 0 10px rgba(219,144,255,.4)
+}
+.mob-avatar img{width:100%;height:100%;object-fit:cover;display:none}
+
+/* ═══════════════════════════════════════════════════════════
+   DOWNLOAD TOAST
+═══════════════════════════════════════════════════════════ */
+.dl-toast{
+  position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(10px);
+  background:rgba(30,28,28,.95);border:1px solid rgba(219,144,255,.25);
+  color:var(--on-s);padding:10px 20px;border-radius:99px;
+  font-size:12px;font-weight:700;letter-spacing:.06em;
+  opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:600;
+  white-space:nowrap;backdrop-filter:blur(12px)
+}
+.dl-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ═══════════════════════════════════════════════════════════
    RESPONSIVE
@@ -503,13 +544,11 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
   .vid-grid{grid-template-columns:1fr 1fr;gap:10px}
   #hdr-srch{display:none}
   .tab-nav{display:none}
-  .artist-banner-bg{height:140px}
   .bio-card{padding:16px 16px}
-  .album-header{flex-direction:column;align-items:flex-start;gap:16px}
-  .album-cover{width:100%;height:0;padding-bottom:60%;border-radius:14px;position:relative}
-  .album-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:14px}
-  .album-cover-placeholder{position:absolute;inset:0}
-  .album-title{font-size:22px}
+  /* Album header stays row on mobile too — cover is small fixed size */
+  .album-title{font-size:17px}
+  .album-cover{width:80px;height:80px}
+  .album-play-btn{font-size:10px;padding:6px 12px}
 }
 </style>
 </head>
@@ -534,7 +573,7 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
   <div class="tab-content active" id="tab-music">
     <div class="music-top-pad"></div>
 
-    <!-- Popular Tracks (5 shown) -->
+    <!-- Popular Tracks -->
     <div id="music-home">
       <div class="sec-hdr">
         <h2 class="sec-title">Popular</h2>
@@ -551,13 +590,13 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
       </div>
     </div>
 
-    <!-- Album View (hidden initially) -->
+    <!-- Album View -->
     <div class="album-view" id="album-view">
       <button class="album-back" id="album-back-btn">
         <span class="ms">arrow_back</span>
         Back
       </button>
-      <div class="album-header" id="album-header" data-title=""></div>
+      <div class="album-header" id="album-header"></div>
       <div class="sec-hdr" style="margin-top:4px;margin-bottom:12px">
         <h2 class="sec-title">Tracklist</h2>
         <span style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--on-sv)" id="album-count"></span>
@@ -579,31 +618,36 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
   <div class="tab-content" id="tab-artist">
     <div class="artist-page">
 
-      <div class="artist-banner">
-        <div class="artist-banner-bg"></div>
-        <div class="artist-banner-meta">
-          <div class="artist-avatar">B</div>
-          <div class="artist-id">
-            <h2>Brightsin</h2>
-            <p>Rap · Hip-Hop · Mpumalanga, SA</p>
-          </div>
+      <!-- Simplified banner — just avatar + info, no tall bg -->
+      <div class="artist-banner-simple">
+        <div class="artist-avatar" id="artist-avatar-btn" title="Tap to change photo">
+          <img id="artist-avatar-img" alt="Brightsin"/>
+          <span class="avatar-letter">B</span>
         </div>
-        <div class="artist-stats">
-          <div class="stat-item">
-            <div class="stat-val">2016</div>
-            <div class="stat-lbl">Started</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-val">1 EP</div>
-            <div class="stat-lbl">Releases</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-val">Nkomazi</div>
-            <div class="stat-lbl">Origin</div>
-          </div>
+        <input type="file" id="avatar-upload" accept="image/*"/>
+        <div class="artist-id">
+          <h2>Brightsin</h2>
+          <p>Rap · Hip-Hop · Mpumalanga, SA</p>
         </div>
       </div>
 
+      <!-- Stats -->
+      <div class="artist-stats">
+        <div class="stat-item">
+          <div class="stat-val">2016</div>
+          <div class="stat-lbl">Started</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">4</div>
+          <div class="stat-lbl">Releases</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">Nkomazi</div>
+          <div class="stat-lbl">Origin</div>
+        </div>
+      </div>
+
+      <!-- Bio -->
       <div class="bio-card">
         <div class="bio-tag">
           <span class="ms" style="font-size:14px">info</span>
@@ -624,63 +668,37 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
         </div>
       </div>
 
+      <!-- Projects on artist page -->
       <div class="sec-hdr" style="margin-bottom:14px">
         <h2 class="sec-title">Projects</h2>
       </div>
+      <div id="artist-projects-list"></div>
 
-      <!-- Out of My Shell card on Artist page -->
-      <div class="bio-card artist-proj-card" id="artist-ep-card">
-        <div class="bio-tag">
-          <span class="ms" style="font-size:14px">album</span>
-          Debut EP · 2025
-        </div>
-        <div style="display:flex;gap:16px;align-items:center">
-          <div style="width:80px;height:80px;border-radius:14px;overflow:hidden;flex-shrink:0;background:var(--surf-top);box-shadow:0 6px 20px rgba(0,0,0,.55)" id="artist-ep-cover-wrap">
-            <img src="assets/images/1.png" id="artist-ep-cover" alt="Out of My Shell"
-              style="width:100%;height:100%;object-fit:cover;display:block"
-              onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,rgba(177,46,241,.4),rgba(14,14,14,.9))';this.parentNode.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:Space Grotesk,sans-serif;font-size:26px;font-weight:900;color:rgba(219,144,255,.7)\'>✦</div>'"
-            />
-          </div>
-          <div>
-            <div style="font-size:18px;font-weight:900;letter-spacing:-.02em;margin-bottom:4px">Out of My Shell</div>
-            <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--on-sv)">11 Tracks · 2025</div>
-            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
-              <span class="chip" style="font-size:9px">EP</span>
-              <span class="chip" style="font-size:9px">Rap</span>
-              <span class="chip" style="font-size:9px">Hip-Hop</span>
-            </div>
-          </div>
-        </div>
-        <div class="proj-go">
-          <span class="ms filled" style="font-size:16px">play_circle</span>
-          View All Songs
-        </div>
-      </div>
-
-      <div class="sec-hdr" style="margin-bottom:10px;margin-top:28px">
+      <!-- Timeline — projects only -->
+      <div class="sec-hdr" style="margin-bottom:10px;margin-top:24px">
         <h2 class="sec-title">Timeline</h2>
       </div>
       <div class="bio-card">
         <div class="timeline">
           <div class="tl-item">
-            <span class="tl-year">2016</span>
-            <div class="tl-dot"></div>
-            <p class="tl-text"><strong>Started Making Music</strong><br>After completing matric, Brightsin began writing and recording — using music as his primary mode of expression from Nkomazi.</p>
-          </div>
-          <div class="tl-item">
-            <span class="tl-year">2019</span>
-            <div class="tl-dot"></div>
-            <p class="tl-text"><strong>Enrolled at TUT</strong><br>Began studying Information Technology at the Tshwane University of Technology, balancing academics with his continued growth as an artist.</p>
-          </div>
-          <div class="tl-item">
-            <span class="tl-year">2024</span>
-            <div class="tl-dot"></div>
-            <p class="tl-text"><strong>Graduated from TUT — October</strong><br>Completed his IT degree, proving that education and artistry can coexist. A milestone that set the stage for what was next.</p>
-          </div>
-          <div class="tl-item">
             <span class="tl-year">2025</span>
             <div class="tl-dot"></div>
-            <p class="tl-text"><strong>Debut EP — Out of My Shell</strong><br>Brightsin's first official body of work. 11 tracks that trace the journey from Nkomazi to the mic — raw, honest, and entirely self-made.</p>
+            <p class="tl-text"><strong>Out of My Shell</strong> — Debut EP<br>11-track project marking Brightsin's official introduction. Raw, honest, and entirely self-made.</p>
+          </div>
+          <div class="tl-item">
+            <span class="tl-year">Jan '26</span>
+            <div class="tl-dot"></div>
+            <p class="tl-text"><strong>How Many Nights</strong> — Single<br>First standalone release of 2026, dropped 19 January. The crowd's favourite from the EP goes solo.</p>
+          </div>
+          <div class="tl-item">
+            <span class="tl-year">Feb '26</span>
+            <div class="tl-dot"></div>
+            <p class="tl-text"><strong>One of em Shot</strong> — Single<br>Second single released 1 February 2026, keeping momentum rolling into the new year.</p>
+          </div>
+          <div class="tl-item">
+            <span class="tl-year">Apr '26</span>
+            <div class="tl-dot"></div>
+            <p class="tl-text"><strong>Rebirth</strong> — Single<br>Third single, dropped 16 April 2026. A statement of evolution and forward motion.</p>
           </div>
         </div>
       </div>
@@ -736,6 +754,9 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
   </div>
 </div>
 
+<!-- ═══════════ DOWNLOAD TOAST ════════════════════════════ -->
+<div class="dl-toast" id="dl-toast">⬇ Downloading…</div>
+
 <!-- ═══════════ MOBILE NAV ═══════════════════════════════ -->
 <nav class="mob-nav">
   <button class="mob-btn active" data-tab="music">
@@ -744,11 +765,21 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
   <button class="mob-btn" data-tab="videos">
     <span class="ms">play_circle</span><span class="mob-lbl">Videos</span>
   </button>
-  <button class="mob-btn" data-tab="search">
+  <!-- Search (hidden when album-mode) -->
+  <button class="mob-btn mob-search-btn" data-tab="search">
     <span class="ms">search</span><span class="mob-lbl">Search</span>
   </button>
-  <button class="mob-btn" data-tab="artist">
-    <span class="ms">person</span><span class="mob-lbl">Artist</span>
+  <!-- Back button: visible only in album-mode -->
+  <button class="mob-btn mob-back-nav" id="mob-back-nav">
+    <span class="ms">arrow_back</span><span class="mob-lbl">Back</span>
+  </button>
+  <!-- Profile circle (navigates to artist) -->
+  <button class="mob-btn mob-profile-btn" id="mob-profile-nav">
+    <div class="mob-avatar" id="mob-avatar">
+      <img id="mob-avatar-img" alt=""/>
+      B
+    </div>
+    <span class="mob-lbl">Artist</span>
   </button>
 </nav>
 
@@ -770,29 +801,64 @@ const TRACKS = [
   { id:10, title:'Uncovered',        dur:'3:14', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157887/11._Brightsin_-_uncovered_zvl7ie.mp3',                                                                          img:'assets/images/10.png' },
 ];
 
-// 5 "popular" track IDs shown on home
-const POPULAR_IDS = [8, 2, 4, 1, 6];
+// 7 popular track IDs
+const POPULAR_IDS = [8, 2, 4, 1, 6, 5, 7];
 
 const PROJECTS = [
   {
     id: 'oms',
     name: 'Out of My Shell',
     year: 2025,
+    releaseLabel: '2025',
     type: 'EP',
     tracks: TRACKS.map(t => t.id),
     coverImg: 'assets/images/Out.png',
     gradient: 'linear-gradient(135deg,rgba(177,46,241,.45) 0%,rgba(14,14,14,1) 70%)',
     accent: '#db90ff'
+  },
+  // Singles — newest first
+  {
+    id: 's3',
+    name: 'Rebirth',
+    year: '16 Apr 2026',
+    releaseLabel: '16 Apr 2026',
+    type: 'Single',
+    tracks: [4],
+    coverImg: 'assets/images/5.png',
+    gradient: 'linear-gradient(135deg,rgba(140,30,230,.45) 0%,rgba(14,14,14,1) 70%)',
+    accent: '#db90ff'
+  },
+  {
+    id: 's2',
+    name: 'One of em Shot',
+    year: '1 Feb 2026',
+    releaseLabel: '1 Feb 2026',
+    type: 'Single',
+    tracks: [1],
+    coverImg: 'assets/images/2.png',
+    gradient: 'linear-gradient(135deg,rgba(140,30,230,.45) 0%,rgba(14,14,14,1) 70%)',
+    accent: '#db90ff'
+  },
+  {
+    id: 's1',
+    name: 'How Many Nights',
+    year: '19 Jan 2026',
+    releaseLabel: '19 Jan 2026',
+    type: 'Single',
+    tracks: [8],
+    coverImg: 'assets/images/11.png',
+    gradient: 'linear-gradient(135deg,rgba(140,30,230,.45) 0%,rgba(14,14,14,1) 70%)',
+    accent: '#db90ff'
   }
 ];
 
-// Cloudinary MP4 videos — img used as thumbnail
+// Cloudinary MP4 videos
 const VIDEOS = [
-  { title:'How many nights', dur:'03:19', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159691/How_many_nights_dybrsv.mp4',      img:'assets/images/11.png' },
-  { title:'One of em shots', dur:'03:05', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159639/02-One_of_em_shots_ohrgpd.mp4',  img:'assets/images/2.png'  },
-  { title:'Nothing still', dur:'01:50', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159619/04-Nothing_still_suiwzz.mp4',     img:'assets/images/4.png'  },
-  { title:'Guess is goodbye', dur:'01:50', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159597/03-Guess_is_goodbye_fkykjl.mp4',  img:'assets/images/3.png'  },
-  { title:'Intro', dur:'01:30', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159586/01-intro_vylrkz.mp4', img:'assets/images/1.png'  },
+  { title:'How many nights', dur:'03:19', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159691/How_many_nights_dybrsv.mp4',     img:'assets/images/11.png' },
+  { title:'One of em shots', dur:'03:05', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159639/02-One_of_em_shots_ohrgpd.mp4', img:'assets/images/2.png'  },
+  { title:'Nothing still',   dur:'01:50', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159619/04-Nothing_still_suiwzz.mp4',    img:'assets/images/4.png'  },
+  { title:'Guess is goodbye',dur:'01:50', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159597/03-Guess_is_goodbye_fkykjl.mp4', img:'assets/images/3.png'  },
+  { title:'Intro',           dur:'01:30', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159586/01-intro_vylrkz.mp4',            img:'assets/images/1.png'  },
 ];
 
 /* ════════════════════════════════════════════════════════
@@ -808,17 +874,14 @@ audio.addEventListener('timeupdate', () => {
   document.getElementById('pfill').style.width = pct + '%';
   document.getElementById('tel').textContent   = fmt(Math.floor(audio.currentTime));
 });
-
 audio.addEventListener('loadedmetadata', () => {
   document.getElementById('ttot').textContent = fmt(Math.floor(audio.duration));
   document.getElementById('ptitle').classList.remove('loading');
 });
-
 audio.addEventListener('ended', () => {
   if (S.repeat) { audio.currentTime = 0; audio.play().catch(() => {}); }
   else nextTrack(true);
 });
-
 audio.addEventListener('error', () => {
   document.getElementById('ptitle').classList.remove('loading');
 });
@@ -833,40 +896,86 @@ function placeholder(id) {
   return 'data:image/svg+xml,' + encodeURIComponent(svg);
 }
 
-/* Set a placeholder immediately, then replace if the real image loads */
 function setCoverWithFallback(imgEl, src, id) {
   if (!src) { imgEl.src = placeholder(id); return; }
+  imgEl.src = placeholder(id); // show placeholder first
   const probe = new Image();
   probe.onload  = () => { imgEl.src = src; };
   probe.onerror = () => { imgEl.src = placeholder(id); };
   probe.src = src;
-  // Show placeholder in the meantime
-  imgEl.src = placeholder(id);
 }
 
 /* ════════════════════════════════════════════════════════
    STATE
 ════════════════════════════════════════════════════════ */
-const S = { cur:0, playing:false, shuffle:false, repeat:false, liked:new Set(), albumOpen:false };
+const S = {
+  cur: 0,
+  playing: false,
+  shuffle: false,
+  repeat: false,
+  liked: new Set(),
+  albumOpen: false,
+  queue: [],       // ordered track IDs to play through
+  queuePos: -1,    // current position in queue
+  currentAlbumTracks: null
+};
 
 /* ════════════════════════════════════════════════════════
-   DOWNLOAD
+   QUEUE MANAGEMENT
+════════════════════════════════════════════════════════ */
+// When playing from popular: cycle through popular tracks, then remaining EP tracks
+function setPopularQueue(startId) {
+  const idx = POPULAR_IDS.indexOf(startId);
+  const ordered = idx >= 0
+    ? [...POPULAR_IDS.slice(idx), ...POPULAR_IDS.slice(0, idx)]
+    : [...POPULAR_IDS];
+  // After popular, play EP tracks not already in popular
+  const epIds = PROJECTS[0].tracks.filter(id => !POPULAR_IDS.includes(id));
+  S.queue = [...ordered, ...epIds];
+  S.queuePos = 0;
+}
+
+// When playing from an album/single view: cycle through that project's tracks
+function setAlbumQueue(trackIds, startId) {
+  const idx = Math.max(0, trackIds.indexOf(startId));
+  S.queue = [...trackIds.slice(idx), ...trackIds.slice(0, idx)];
+  S.queuePos = 0;
+}
+
+// Default: all tracks from start
+function setDefaultQueue(startId) {
+  const allIds = TRACKS.map(t => t.id);
+  const idx = Math.max(0, allIds.indexOf(startId));
+  S.queue = [...allIds.slice(idx), ...allIds.slice(0, idx)];
+  S.queuePos = 0;
+}
+
+/* ════════════════════════════════════════════════════════
+   DOWNLOAD — force download via Cloudinary fl_attachment
 ════════════════════════════════════════════════════════ */
 function downloadTrack(id) {
   const t = TRACKS[id];
   if (!t.audioSrc) return;
+  // Insert fl_attachment into Cloudinary URL to force browser download
+  const dlUrl = t.audioSrc.replace('/video/upload/', '/video/upload/fl_attachment/');
   const a = document.createElement('a');
-  a.href = t.audioSrc;
+  a.href = dlUrl;
   a.download = `Brightsin - ${t.title}.mp3`;
+  a.style.display = 'none';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+  // Show toast
+  const toast = document.getElementById('dl-toast');
+  toast.textContent = `⬇ Downloading: ${t.title}`;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2600);
 }
 
 /* ════════════════════════════════════════════════════════
    BUILD TRACK ROW
 ════════════════════════════════════════════════════════ */
-function mkRow(t, container, pfx, showNum = false) {
+function mkRow(t, container, pfx, showNum = false, source = 'default') {
   const el = document.createElement('div');
   el.className = 'track-row';
   el.id = pfx + t.id;
@@ -896,11 +1005,9 @@ function mkRow(t, container, pfx, showNum = false) {
       </button>
     </div>`;
 
-  // Set cover with proper fallback
   const imgEl = el.querySelector(`img[data-tid="${t.id}"]`);
   setCoverWithFallback(imgEl, t.img, t.id);
-
-  el.addEventListener('click', () => selectTrack(t.id));
+  el.addEventListener('click', () => selectTrack(t.id, source));
   container.appendChild(el);
 }
 
@@ -914,11 +1021,13 @@ function buildPopular() {
   list.innerHTML = '';
   const ids = showingAll ? TRACKS.map(t => t.id) : POPULAR_IDS;
   ids.forEach((id, i) => {
-    mkRow(TRACKS[id], list, 'tr-', false);
+    mkRow(TRACKS[id], list, 'tr-', false, 'popular');
     const row = list.lastElementChild;
     row.style.cssText = 'opacity:0;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease';
     setTimeout(() => row.style.cssText = '', 60 + i * 50);
   });
+  // Re-mark currently playing row
+  if (S.playing) activateRow(S.cur); else if (audio.src) { activateRow(S.cur); }
 }
 
 document.getElementById('show-all-link').addEventListener('click', () => {
@@ -928,7 +1037,7 @@ document.getElementById('show-all-link').addEventListener('click', () => {
 });
 
 /* ════════════════════════════════════════════════════════
-   BUILD PROJECT CARDS (home)
+   BUILD PROJECT CARDS (home music tab)
 ════════════════════════════════════════════════════════ */
 function buildProjectCards() {
   const container = document.getElementById('proj-cards');
@@ -937,30 +1046,85 @@ function buildProjectCards() {
     const card = document.createElement('div');
     card.className = 'project-card';
 
-    const coverImg = document.createElement('img');
-    coverImg.alt = proj.name;
-    coverImg.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block';
+    // Build cover
     const coverWrap = document.createElement('div');
     coverWrap.className = 'proj-cover';
-    coverWrap.appendChild(coverImg);
-
-    // Fallback if image fails
+    const coverImg = document.createElement('img');
+    coverImg.alt   = proj.name;
+    coverImg.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block';
     coverImg.onerror = () => {
       coverWrap.innerHTML = `<div class="proj-cover-placeholder" style="background:${proj.gradient}">✦</div>`;
     };
-    if (proj.coverImg) { coverImg.src = proj.coverImg; }
-    else { coverImg.onerror(); }
-
+    coverImg.src = proj.coverImg || '';
+    if (!proj.coverImg) coverImg.onerror();
+    coverWrap.appendChild(coverImg);
     card.appendChild(coverWrap);
-    card.innerHTML += `
-      <div class="proj-info">
-        <div class="proj-name">${proj.name}</div>
-        <div class="proj-meta">${proj.year} · ${proj.tracks.length} Tracks</div>
-        <span class="proj-type">${proj.type}</span>
-      </div>
-      <span class="ms proj-arrow">arrow_forward_ios</span>
+
+    const info = document.createElement('div');
+    info.className = 'proj-info';
+    info.innerHTML = `
+      <div class="proj-name">${proj.name}</div>
+      <div class="proj-meta">${proj.releaseLabel} · ${proj.tracks.length} ${proj.tracks.length === 1 ? 'Track' : 'Tracks'}</div>
+      <span class="proj-type">${proj.type}</span>
     `;
+    card.appendChild(info);
+
+    const arrow = document.createElement('span');
+    arrow.className = 'ms proj-arrow';
+    arrow.textContent = 'arrow_forward_ios';
+    card.appendChild(arrow);
+
     card.addEventListener('click', () => openAlbumView(idx));
+    container.appendChild(card);
+  });
+}
+
+/* ════════════════════════════════════════════════════════
+   BUILD ARTIST PAGE PROJECTS
+════════════════════════════════════════════════════════ */
+function buildArtistProjects() {
+  const container = document.getElementById('artist-projects-list');
+  container.innerHTML = '';
+
+  PROJECTS.forEach((proj, idx) => {
+    const card = document.createElement('div');
+    card.className = 'bio-card artist-proj-card';
+    card.style.marginBottom = '12px';
+
+    // Cover image
+    const coverHtml = `
+      <div style="width:72px;height:72px;border-radius:14px;overflow:hidden;flex-shrink:0;background:var(--surf-top);box-shadow:0 6px 20px rgba(0,0,0,.55)">
+        <img src="${proj.coverImg}" alt="${proj.name}"
+          style="width:100%;height:100%;object-fit:cover;display:block"
+          onerror="this.style.display='none';this.parentNode.style.background='${proj.gradient}'"/>
+      </div>
+    `;
+
+    card.innerHTML = `
+      <div class="bio-tag">
+        <span class="ms" style="font-size:14px">album</span>
+        ${proj.type} · ${proj.releaseLabel}
+      </div>
+      <div style="display:flex;gap:16px;align-items:center">
+        ${coverHtml}
+        <div>
+          <div style="font-size:17px;font-weight:900;letter-spacing:-.02em;margin-bottom:4px">${proj.name}</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--on-sv)">${proj.tracks.length} ${proj.tracks.length === 1 ? 'Track' : 'Tracks'} · ${proj.releaseLabel}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+            <span class="chip" style="font-size:9px">${proj.type}</span>
+            <span class="chip" style="font-size:9px">Rap</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-go">
+        <span class="ms filled" style="font-size:16px">play_circle</span>
+        View ${proj.tracks.length === 1 ? 'Track' : 'All Songs'}
+      </div>
+    `;
+    card.addEventListener('click', () => {
+      switchTab('music');
+      setTimeout(() => openAlbumView(idx), 120);
+    });
     container.appendChild(card);
   });
 }
@@ -968,28 +1132,36 @@ function buildProjectCards() {
 /* ════════════════════════════════════════════════════════
    ALBUM VIEW
 ════════════════════════════════════════════════════════ */
+let currentAlbumProjIdx = 0;
+
 function openAlbumView(projIdx) {
+  currentAlbumProjIdx = projIdx;
   const proj = PROJECTS[projIdx];
   S.albumOpen = true;
+  S.currentAlbumTracks = proj.tracks;
 
   document.getElementById('music-home').style.display = 'none';
-  const av = document.getElementById('album-view');
-  av.classList.add('active');
+  document.getElementById('album-view').classList.add('active');
+  document.body.classList.add('album-mode');
 
+  // Build header — compact row: small cover | type tag, [title + play btn], sub
   const hdr = document.getElementById('album-header');
-  hdr.setAttribute('data-title', proj.name.toUpperCase());
-
-  const coverImgHtml = `<img src="${proj.coverImg}" alt="${proj.name}" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.parentNode.innerHTML='<div class=album-cover-placeholder style=background:${encodeURIComponent(proj.gradient)}>✦</div>'"/>`;
+  const coverSrc = proj.coverImg || '';
   hdr.innerHTML = `
-    <div class="album-cover">${coverImgHtml}</div>
+    <div class="album-cover">
+      <img src="${coverSrc}" alt="${proj.name}"
+        style="width:100%;height:100%;object-fit:cover;display:block"
+        onerror="this.outerHTML='<div class=album-cover-placeholder style=background:${encodeURIComponent(proj.gradient)}>✦</div>'"/>
+    </div>
     <div class="album-meta">
-      <div class="album-type-tag">${proj.type} · ${proj.year}</div>
-      <div class="album-title">${proj.name}</div>
-      <div class="album-sub">Brightsin · ${proj.tracks.length} tracks</div>
-      <button class="album-play-btn" id="album-play-all">
-        <span class="ms">play_arrow</span>
-        Play All
-      </button>
+      <div class="album-type-tag">${proj.type} · ${proj.releaseLabel}</div>
+      <div class="album-title-row">
+        <div class="album-title">${proj.name}</div>
+        <button class="album-play-btn" id="album-play-all">
+          <span class="ms">play_arrow</span>Play All
+        </button>
+      </div>
+      <div class="album-sub">Brightsin · ${proj.tracks.length} ${proj.tracks.length === 1 ? 'track' : 'tracks'}</div>
     </div>
   `;
 
@@ -999,6 +1171,7 @@ function openAlbumView(projIdx) {
     deactivateRow(S.cur);
     S.cur = firstId;
     S.playing = true;
+    setAlbumQueue(proj.tracks, firstId);
     loadTrack(firstId, true);
     updatePlayBtn();
     activateRow(firstId);
@@ -1006,33 +1179,33 @@ function openAlbumView(projIdx) {
 
   const alist = document.getElementById('alist');
   alist.innerHTML = '';
-  document.getElementById('album-count').textContent = proj.tracks.length + ' tracks';
+  document.getElementById('album-count').textContent = proj.tracks.length + (proj.tracks.length === 1 ? ' track' : ' tracks');
+
   proj.tracks.forEach((id, i) => {
-    mkRow(TRACKS[id], alist, 'al-', true);
+    mkRow(TRACKS[id], alist, 'al-', true, 'album');
     const row = alist.lastElementChild;
     row.style.cssText = 'opacity:0;transform:translateY(8px);transition:opacity .28s ease,transform .28s ease';
     setTimeout(() => row.style.cssText = '', 40 + i * 40);
   });
 
+  if (S.playing || audio.src) activateRow(S.cur);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function closeAlbumView() {
   S.albumOpen = false;
+  S.currentAlbumTracks = null;
   document.getElementById('music-home').style.display = '';
   document.getElementById('album-view').classList.remove('active');
+  document.body.classList.remove('album-mode');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 document.getElementById('album-back-btn').addEventListener('click', closeAlbumView);
-
-document.getElementById('artist-ep-card').addEventListener('click', () => {
-  switchTab('music');
-  setTimeout(() => openAlbumView(0), 120);
-});
+document.getElementById('mob-back-nav').addEventListener('click', closeAlbumView);
 
 /* ════════════════════════════════════════════════════════
-   VIDEOS — Cloudinary MP4
+   VIDEOS — fix: build thumbnail BEFORE injecting overlay HTML
 ════════════════════════════════════════════════════════ */
 function buildVideos() {
   const grid = document.getElementById('vgrid');
@@ -1041,23 +1214,20 @@ function buildVideos() {
   VIDEOS.forEach((v, i) => {
     const card = document.createElement('div');
     card.className = 'vid-card';
-    card.dataset.vidx = i;
-
-    // Thumbnail img — use v.img directly (local asset)
-    const img = document.createElement('img');
-    img.alt   = v.title;
-    img.loading = 'lazy';
-    setCoverWithFallback(img, v.img, i);
 
     const thumb = document.createElement('div');
     thumb.className = 'vid-thumb';
-    thumb.appendChild(img);
-    thumb.innerHTML += `
+
+    // Build img element first, set src via fallback helper
+    thumb.innerHTML = `
+      <img alt="${v.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/>
       <div class="vid-ov">
         <div class="vid-btn"><span class="ms filled">play_arrow</span></div>
       </div>
       <span class="vid-dur">${v.dur}</span>
     `;
+    const imgEl = thumb.querySelector('img');
+    setCoverWithFallback(imgEl, v.img, i);
 
     const info = document.createElement('div');
     info.className = 'vid-info';
@@ -1109,11 +1279,9 @@ function loadTrack(id, play = false) {
   document.getElementById('pfill').style.width = '0%';
   document.getElementById('tel').textContent  = '0:00';
   document.getElementById('ttot').textContent = t.dur;
-  // Update player art
-  const partEl = document.getElementById('part');
-  setCoverWithFallback(partEl, t.img, id);
+  setCoverWithFallback(document.getElementById('part'), t.img, id);
   if (play) {
-    audio.play().catch(err => {
+    audio.play().catch(() => {
       titleEl.classList.remove('loading');
       S.playing = false;
       updatePlayBtn();
@@ -1121,11 +1289,20 @@ function loadTrack(id, play = false) {
   }
 }
 
-function selectTrack(id) {
+function selectTrack(id, source) {
   const same = S.cur === id;
   deactivateRow(S.cur);
   S.cur = id;
   if (!same) {
+    // Set queue based on where the user clicked
+    if (source === 'popular') {
+      setPopularQueue(id);
+    } else if (source === 'album') {
+      const tracks = S.currentAlbumTracks || TRACKS.map(t => t.id);
+      setAlbumQueue(tracks, id);
+    } else {
+      setDefaultQueue(id);
+    }
     S.playing = true;
     loadTrack(id, true);
   } else {
@@ -1140,7 +1317,7 @@ const ALL_PREFIXES = ['tr-', 'sr-', 'al-'];
 
 function activateRow(id) {
   ALL_PREFIXES.forEach(p => {
-    const row = document.getElementById(p+id);
+    const row = document.getElementById(p + id);
     if (!row) return;
     row.classList.add('playing');
   });
@@ -1149,7 +1326,7 @@ function activateRow(id) {
 
 function deactivateRow(id) {
   ALL_PREFIXES.forEach(p => {
-    const row = document.getElementById(p+id);
+    const row = document.getElementById(p + id);
     if (!row) return;
     row.classList.remove('playing');
   });
@@ -1165,13 +1342,13 @@ function showEQ(id) {
 function showPlayIcon(id) {
   ALL_PREFIXES.forEach(p => {
     const ov = document.querySelector(`#${p}${id} .t-overlay`);
-    if (ov) ov.innerHTML = `<span class="ms filled iplay" id="${p}ico-${id}">play_arrow</span>`;
+    if (ov) ov.innerHTML = `<span class="ms filled iplay">play_arrow</span>`;
   });
 }
 function showPauseIcon(id) {
   ALL_PREFIXES.forEach(p => {
     const ov = document.querySelector(`#${p}${id} .t-overlay`);
-    if (ov) ov.innerHTML = `<span class="ms filled iplay" id="${p}ico-${id}">pause</span>`;
+    if (ov) ov.innerHTML = `<span class="ms filled iplay">pause</span>`;
   });
 }
 
@@ -1188,6 +1365,7 @@ function togglePlay() {
     }
   } else {
     S.playing = true;
+    setDefaultQueue(S.cur);
     loadTrack(S.cur, true);
     activateRow(S.cur);
   }
@@ -1204,7 +1382,12 @@ audio.addEventListener('pause', () => { S.playing = false; updatePlayBtn(); show
 function prevTrack() {
   if (audio.currentTime > 3) { audio.currentTime = 0; return; }
   deactivateRow(S.cur);
-  S.cur = (S.cur - 1 + TRACKS.length) % TRACKS.length;
+  if (S.queue.length > 0) {
+    S.queuePos = (S.queuePos - 1 + S.queue.length) % S.queue.length;
+    S.cur = S.queue[S.queuePos];
+  } else {
+    S.cur = (S.cur - 1 + TRACKS.length) % TRACKS.length;
+  }
   S.playing = true;
   loadTrack(S.cur, true);
   updatePlayBtn();
@@ -1213,9 +1396,18 @@ function prevTrack() {
 
 function nextTrack(forcePlay = false) {
   deactivateRow(S.cur);
-  S.cur = S.shuffle
-    ? Math.floor(Math.random() * TRACKS.length)
-    : (S.cur + 1) % TRACKS.length;
+  if (S.queue.length > 0) {
+    if (S.shuffle) {
+      S.queuePos = Math.floor(Math.random() * S.queue.length);
+    } else {
+      S.queuePos = (S.queuePos + 1) % S.queue.length;
+    }
+    S.cur = S.queue[S.queuePos];
+  } else if (S.shuffle) {
+    S.cur = Math.floor(Math.random() * TRACKS.length);
+  } else {
+    S.cur = (S.cur + 1) % TRACKS.length;
+  }
   const shouldPlay = S.playing || forcePlay;
   if (shouldPlay) S.playing = true;
   loadTrack(S.cur, shouldPlay);
@@ -1242,13 +1434,12 @@ document.getElementById('c-rep').addEventListener('click', function(){
 });
 
 /* ════════════════════════════════════════════════════════
-   LIKE — solid filled heart on click
+   LIKE
 ════════════════════════════════════════════════════════ */
 function toggleLike(id) {
-  if (S.liked.has(id)) { S.liked.delete(id); }
-  else { S.liked.add(id); }
+  if (S.liked.has(id)) S.liked.delete(id);
+  else S.liked.add(id);
   const nowLiked = S.liked.has(id);
-
   document.querySelectorAll(`[data-like="${id}"]`).forEach(btn => {
     btn.classList.toggle('liked', nowLiked);
     if (nowLiked) {
@@ -1276,7 +1467,7 @@ document.getElementById('srch').addEventListener('input', function() {
     noRes.style.display = 'block';
     return;
   }
-  hits.forEach(t => mkRow(t, slist, 'sr-', false));
+  hits.forEach(t => mkRow(t, slist, 'sr-', false, 'default'));
 });
 
 /* ════════════════════════════════════════════════════════
@@ -1286,14 +1477,50 @@ function switchTab(tab) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-' + tab)?.classList.add('active');
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-  document.querySelectorAll('.mob-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.mob-btn[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
   if (tab === 'search') setTimeout(() => document.getElementById('srch').focus(), 120);
 }
 
-document.querySelectorAll('.tab-btn, .mob-btn').forEach(b => {
+document.querySelectorAll('.tab-btn').forEach(b => {
+  b.addEventListener('click', () => switchTab(b.dataset.tab));
+});
+document.querySelectorAll('.mob-btn[data-tab]').forEach(b => {
   b.addEventListener('click', () => switchTab(b.dataset.tab));
 });
 document.getElementById('hdr-srch').addEventListener('click', () => switchTab('search'));
+
+/* ════════════════════════════════════════════════════════
+   PROFILE CIRCLE — artist tab + photo upload
+════════════════════════════════════════════════════════ */
+// Mobile nav profile circle — click = artist tab
+document.getElementById('mob-profile-nav').addEventListener('click', () => {
+  switchTab('artist');
+});
+
+// Artist page avatar — click = trigger photo upload
+const artistAvatarBtn = document.getElementById('artist-avatar-btn');
+const avatarUpload    = document.getElementById('avatar-upload');
+const artistAvatarImg = document.getElementById('artist-avatar-img');
+const mobAvatarImg    = document.getElementById('mob-avatar-img');
+const mobAvatar       = document.getElementById('mob-avatar');
+
+artistAvatarBtn.addEventListener('click', () => {
+  avatarUpload.click();
+});
+
+avatarUpload.addEventListener('change', function() {
+  if (!this.files[0]) return;
+  const url = URL.createObjectURL(this.files[0]);
+  // Update artist page avatar
+  artistAvatarImg.src = url;
+  artistAvatarImg.style.display = 'block';
+  artistAvatarBtn.querySelector('.avatar-letter').style.display = 'none';
+  // Update mobile nav avatar circle
+  mobAvatarImg.src = url;
+  mobAvatarImg.style.display = 'block';
+  // Hide the letter 'B' text in mob avatar
+  mobAvatar.childNodes.forEach(n => { if (n.nodeType === 3) n.textContent = ''; });
+});
 
 /* ════════════════════════════════════════════════════════
    HELPERS
@@ -1310,6 +1537,7 @@ const fmt = s => {
 buildPopular();
 buildProjectCards();
 buildVideos();
+buildArtistProjects();
 document.getElementById('ptitle').textContent = TRACKS[S.cur].title;
 setCoverWithFallback(document.getElementById('part'), TRACKS[S.cur].img, S.cur);
 document.getElementById('ttot').textContent = TRACKS[S.cur].dur;

@@ -141,7 +141,7 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
   border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.55);
   background:var(--surf-top)
 }
-.t-art img{width:100%;height:100%;object-fit:cover;transition:transform .32s}
+.t-art img{width:100%;height:100%;object-fit:cover;transition:transform .32s;display:block}
 .track-row:hover .t-art img,
 .track-row.playing .t-art img{transform:scale(1.07)}
 
@@ -175,10 +175,15 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 }
 .ib:hover{background:rgba(219,144,255,.1);color:var(--primary)}
 
-/* ── HEART: outline by default, fully filled when liked ── */
-.ib.heart .ms{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+/* ── HEART: FILL 0 by default, FILL 1 when liked ── */
+.ib.heart .ms{
+  font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+  transition:font-variation-settings .15s
+}
 .ib.heart.liked{color:var(--primary)}
-.ib.heart.liked .ms{font-variation-settings:'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 24}
+.ib.heart.liked .ms{
+  font-variation-settings:'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 24
+}
 
 /* ── DOWNLOAD BUTTON ── */
 .ib.dl .ms{font-size:18px}
@@ -411,8 +416,8 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 .vid-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
 .vid-card{border-radius:16px;overflow:hidden;background:var(--surf-low);border:1px solid rgba(255,255,255,.04);cursor:pointer;transition:transform .2s,box-shadow .2s}
 .vid-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.6),0 0 0 1px rgba(219,144,255,.14)}
-.vid-thumb{position:relative;aspect-ratio:16/9;overflow:hidden}
-.vid-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .32s}
+.vid-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surf-top)}
+.vid-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .32s;display:block}
 .vid-card:hover .vid-thumb img{transform:scale(1.05)}
 .vid-ov{position:absolute;inset:0;background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
 .vid-card:hover .vid-ov{opacity:1}
@@ -421,15 +426,31 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 .vid-dur{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.72);padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700;font-family:'Manrope',sans-serif}
 .vid-info{padding:12px 13px}
 .vid-title{font-size:13px;font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.vid-sub{font-size:10px;font-weight:600;color:var(--on-sv);letter-spacing:.07em;text-transform:uppercase}
 
-/* YouTube modal */
-.yt-modal{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
-.yt-modal.open{display:flex}
-.yt-inner{position:relative;width:100%;max-width:820px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.8),0 0 0 1px rgba(219,144,255,.15)}
-.yt-inner iframe{width:100%;height:100%;border:none;display:block}
-.yt-close{position:absolute;top:-44px;right:0;background:rgba(255,255,255,.08);border:none;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;transition:background .15s}
-.yt-close:hover{background:rgba(219,144,255,.25)}
+/* ── VIDEO MODAL (Cloudinary) ── */
+.vid-modal{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.88);backdrop-filter:blur(14px);
+  align-items:center;justify-content:center;padding:20px
+}
+.vid-modal.open{display:flex}
+.vid-inner{
+  position:relative;width:100%;max-width:840px;aspect-ratio:16/9;
+  border-radius:18px;overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,.8),0 0 0 1px rgba(219,144,255,.15)
+}
+.vid-inner video{
+  width:100%;height:100%;border:none;display:block;
+  background:#000;border-radius:18px
+}
+.vid-close{
+  position:absolute;top:-46px;right:0;
+  background:rgba(255,255,255,.08);border:none;cursor:pointer;
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:20px;transition:background .15s
+}
+.vid-close:hover{background:rgba(219,144,255,.25)}
 
 /* ═══════════════════════════════════════════════════════════
    PLAYER
@@ -442,7 +463,7 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 .prog:hover .prog-fill::after{opacity:1}
 .p-body{display:flex;align-items:center;gap:12px;padding:10px 16px}
 .p-art{width:42px;height:42px;border-radius:10px;overflow:hidden;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,.5);background:var(--surf-top)}
-.p-art img{width:100%;height:100%;object-fit:cover}
+.p-art img{width:100%;height:100%;object-fit:cover;display:block}
 .p-info{flex:1;min-width:0}
 .p-track{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .p-artist{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--on-sv)}
@@ -617,7 +638,7 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
           <div style="width:80px;height:80px;border-radius:14px;overflow:hidden;flex-shrink:0;background:var(--surf-top);box-shadow:0 6px 20px rgba(0,0,0,.55)" id="artist-ep-cover-wrap">
             <img src="assets/images/1.png" id="artist-ep-cover" alt="Out of My Shell"
               style="width:100%;height:100%;object-fit:cover;display:block"
-              onerror="this.parentNode.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:Space Grotesk,sans-serif;font-size:26px;font-weight:900;background:linear-gradient(135deg,rgba(177,46,241,.4),rgba(14,14,14,.9))\'>✦</div>'"
+              onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,rgba(177,46,241,.4),rgba(14,14,14,.9))';this.parentNode.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:Space Grotesk,sans-serif;font-size:26px;font-weight:900;color:rgba(219,144,255,.7)\'>✦</div>'"
             />
           </div>
           <div>
@@ -707,11 +728,11 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
   </div>
 </div>
 
-<!-- ═══════════ YOUTUBE MODAL ════════════════════════════ -->
-<div class="yt-modal" id="yt-modal">
-  <div class="yt-inner">
-    <button class="yt-close" id="yt-close"><span class="ms">close</span></button>
-    <iframe id="yt-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+<!-- ═══════════ VIDEO MODAL (Cloudinary) ══════════════════ -->
+<div class="vid-modal" id="vid-modal">
+  <div class="vid-inner">
+    <button class="vid-close" id="vid-close"><span class="ms">close</span></button>
+    <video id="vid-player" controls playsinline preload="none"></video>
   </div>
 </div>
 
@@ -731,8 +752,6 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
   </button>
 </nav>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
-
 <script>
 /* ════════════════════════════════════════════════════════
    DATA
@@ -746,9 +765,9 @@ const TRACKS = [
   { id:5,  title:'Love is Gone',     dur:'3:44', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157870/06._Brightsin_-_love_is_gone_ProdCrive_Adison_Orge_vkba2g.mp3',                                                img:'assets/images/6.png' },
   { id:6,  title:'To the Top',       dur:'2:37', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157865/07._Brightsin_-_To_the_top_Prod_Young_808_ifahyg.mp3',                                                         img:'assets/images/7.png' },
   { id:7,  title:'Borborygmi',       dur:'2:09', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157871/08._Brightsin_-_borborygmi_ecfnpe.mp3',                                                                         img:'assets/images/8.png' },
-  { id:8, title:'How Many Nights',  dur:'3:18', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157884/09-_Brightsin-How_many_nights_jrfdm7.mp3',                                                                       img:'assets/images/11.png' },
+  { id:8,  title:'How Many Nights',  dur:'3:18', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157884/09-_Brightsin-How_many_nights_jrfdm7.mp3',                                                                       img:'assets/images/11.png' },
   { id:9,  title:'Future Dreams',    dur:'4:14', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157889/10._Brightsin_ft_Tlotliso_Mpeoa_ft_Bruce_ft_King_Composure_-_Future_Dreams_quzfpd.mp3',                         img:'assets/images/9.png' },
-  { id:10,  title:'Uncovered',        dur:'3:14', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157887/11._Brightsin_-_uncovered_zvl7ie.mp3',                                                                          img:'assets/images/10.png' },
+  { id:10, title:'Uncovered',        dur:'3:14', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157887/11._Brightsin_-_uncovered_zvl7ie.mp3',                                                                          img:'assets/images/10.png' },
 ];
 
 // 5 "popular" track IDs shown on home
@@ -760,19 +779,20 @@ const PROJECTS = [
     name: 'Out of My Shell',
     year: 2025,
     type: 'EP',
-    tracks: TRACKS.map(t => t.id), // all 11, in order
+    tracks: TRACKS.map(t => t.id),
     coverImg: 'assets/images/Out.png',
     gradient: 'linear-gradient(135deg,rgba(177,46,241,.45) 0%,rgba(14,14,14,1) 70%)',
     accent: '#db90ff'
   }
 ];
 
+// Cloudinary MP4 videos — img used as thumbnail
 const VIDEOS = [
-  { title:'How many nights (Official Video)', sub:'2.4M views', dur:'03:19', youtubeId:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159691/How_many_nights_dybrsv.mp4', img: TRACKS[0].img },
-  { title:'One of em shots (Live at the Void)',  sub:'1.8M views', dur:'03:05', youtubeId:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159639/02-One_of_em_shots_ohrgpd.mp4', img: TRACKS[1].img },
-  { title:'Nothing still', sub:'3.1M views', dur:'01:50', youtubeId:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159619/04-Nothing_still_suiwzz.mp4', img: TRACKS[2].img },
-  { title:'Guess is goodbye',   sub:'980K views', dur:'01:50',youtubeId:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159597/03-Guess_is_goodbye_fkykjl.mp4', img: TRACKS[3].img },
-  { title:'Intro',   sub:'654K views', dur:'01:30', youtubeId:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159586/01-intro_vylrkz.mp4', img: TRACKS[4].img },
+  { title:'How many nights', dur:'03:19', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159691/How_many_nights_dybrsv.mp4',      img:'assets/images/11.png' },
+  { title:'One of em shots', dur:'03:05', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159639/02-One_of_em_shots_ohrgpd.mp4',  img:'assets/images/2.png'  },
+  { title:'Nothing still', dur:'01:50', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159619/04-Nothing_still_suiwzz.mp4',     img:'assets/images/4.png'  },
+  { title:'Guess is goodbye', dur:'01:50', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159597/03-Guess_is_goodbye_fkykjl.mp4',  img:'assets/images/3.png'  },
+  { title:'Intro', dur:'01:30', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159586/01-intro_vylrkz.mp4', img:'assets/images/1.png'  },
 ];
 
 /* ════════════════════════════════════════════════════════
@@ -780,6 +800,7 @@ const VIDEOS = [
 ════════════════════════════════════════════════════════ */
 const audio = new Audio();
 audio.preload = 'metadata';
+audio.crossOrigin = 'anonymous';
 
 audio.addEventListener('timeupdate', () => {
   if (!audio.duration) return;
@@ -803,38 +824,24 @@ audio.addEventListener('error', () => {
 });
 
 /* ════════════════════════════════════════════════════════
-   ID3 COVER ART
+   COVER IMAGE — generate purple gradient placeholder per track
 ════════════════════════════════════════════════════════ */
-const coverCache = {};
-
-function extractCover(audioUrl, tid) {
-  if (!audioUrl) return;
-  if (coverCache[tid]) { applyCover(tid, coverCache[tid]); return; }
-  try {
-    window.jsmediatags.read(audioUrl, {
-      onSuccess(tag) {
-        const pic = tag.tags.picture;
-        if (!pic) { applyCover(tid, placeholder(tid)); return; }
-        const blob = new Blob([new Uint8Array(pic.data)], { type: pic.format });
-        const url  = URL.createObjectURL(blob);
-        coverCache[tid] = url;
-        TRACKS[tid].img = url;
-        applyCover(tid, url);
-      },
-      onError() { applyCover(tid, placeholder(tid)); }
-    });
-  } catch(e) { applyCover(tid, placeholder(tid)); }
-}
-
 function placeholder(id) {
-  const h = [270,290,260,280,265,275][id % 6];
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='hsl(${h},55%,18%)'/><stop offset='100%' stop-color='hsl(${h+20},35%,7%)'/></linearGradient></defs><rect width='100' height='100' fill='url(%23g)'/><text x='50' y='62' text-anchor='middle' font-size='36' font-family='sans-serif' fill='rgba(219,144,255,.5)'>♪</text></svg>`;
+  const hues = [270,290,260,280,265,275,285,255,295,268,278];
+  const h = hues[id % hues.length];
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='hsl(${h},55%,18%)'/><stop offset='100%' stop-color='hsl(${h+20},35%,7%)'/></linearGradient></defs><rect width='100' height='100' fill='url(%23g)'/><text x='50' y='62' text-anchor='middle' font-size='36' font-family='sans-serif' fill='rgba(219,144,255,.55)'>♪</text></svg>`;
   return 'data:image/svg+xml,' + encodeURIComponent(svg);
 }
 
-function applyCover(tid, url) {
-  document.querySelectorAll(`.t-art img[data-tid="${tid}"]`).forEach(i => i.src = url);
-  if (tid === S.cur) document.getElementById('part').src = url;
+/* Set a placeholder immediately, then replace if the real image loads */
+function setCoverWithFallback(imgEl, src, id) {
+  if (!src) { imgEl.src = placeholder(id); return; }
+  const probe = new Image();
+  probe.onload  = () => { imgEl.src = src; };
+  probe.onerror = () => { imgEl.src = placeholder(id); };
+  probe.src = src;
+  // Show placeholder in the meantime
+  imgEl.src = placeholder(id);
 }
 
 /* ════════════════════════════════════════════════════════
@@ -864,16 +871,13 @@ function mkRow(t, container, pfx, showNum = false) {
   el.className = 'track-row';
   el.id = pfx + t.id;
   el.dataset.id = t.id;
-  const art = t.img || placeholder(t.id);
   const isLiked = S.liked.has(t.id);
-  const numHtml = showNum
-    ? `<span class="t-num">${TRACKS.indexOf(t) + 1}</span>`
-    : '';
+  const numHtml = showNum ? `<span class="t-num">${TRACKS.indexOf(t) + 1}</span>` : '';
 
   el.innerHTML = `
     ${numHtml}
     <div class="t-art">
-      <img src="${art}" data-tid="${t.id}" alt="${t.title}" loading="lazy"/>
+      <img data-tid="${t.id}" alt="${t.title}" loading="lazy"/>
       <div class="t-overlay">
         <span class="ms filled iplay" id="${pfx}ico-${t.id}">play_arrow</span>
       </div>
@@ -885,15 +889,19 @@ function mkRow(t, container, pfx, showNum = false) {
     <div class="t-acts" onclick="event.stopPropagation()">
       <button class="ib heart${isLiked ? ' liked' : ''}" data-like="${t.id}" title="Like"
         onclick="toggleLike(${t.id})">
-        <span class="ms">${isLiked ? 'favorite' : 'favorite_border'}</span>
+        <span class="ms">favorite</span>
       </button>
       <button class="ib dl" title="Download" onclick="downloadTrack(${t.id})">
         <span class="ms">download</span>
       </button>
     </div>`;
+
+  // Set cover with proper fallback
+  const imgEl = el.querySelector(`img[data-tid="${t.id}"]`);
+  setCoverWithFallback(imgEl, t.img, t.id);
+
   el.addEventListener('click', () => selectTrack(t.id));
   container.appendChild(el);
-  if (t.audioSrc) extractCover(t.audioSrc, t.id);
 }
 
 /* ════════════════════════════════════════════════════════
@@ -928,12 +936,23 @@ function buildProjectCards() {
   PROJECTS.forEach((proj, idx) => {
     const card = document.createElement('div');
     card.className = 'project-card';
-    card.innerHTML = `
-      <div class="proj-cover">
-        <img src="${proj.coverImg}" alt="${proj.name}"
-          onerror="this.parentNode.innerHTML='<div class=proj-cover-placeholder style=background:${encodeURIComponent(proj.gradient)}>✦</div>'"
-        />
-      </div>
+
+    const coverImg = document.createElement('img');
+    coverImg.alt = proj.name;
+    coverImg.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block';
+    const coverWrap = document.createElement('div');
+    coverWrap.className = 'proj-cover';
+    coverWrap.appendChild(coverImg);
+
+    // Fallback if image fails
+    coverImg.onerror = () => {
+      coverWrap.innerHTML = `<div class="proj-cover-placeholder" style="background:${proj.gradient}">✦</div>`;
+    };
+    if (proj.coverImg) { coverImg.src = proj.coverImg; }
+    else { coverImg.onerror(); }
+
+    card.appendChild(coverWrap);
+    card.innerHTML += `
       <div class="proj-info">
         <div class="proj-name">${proj.name}</div>
         <div class="proj-meta">${proj.year} · ${proj.tracks.length} Tracks</div>
@@ -953,20 +972,16 @@ function openAlbumView(projIdx) {
   const proj = PROJECTS[projIdx];
   S.albumOpen = true;
 
-  // Hide home, show album
   document.getElementById('music-home').style.display = 'none';
   const av = document.getElementById('album-view');
   av.classList.add('active');
 
-  // Build header
   const hdr = document.getElementById('album-header');
   hdr.setAttribute('data-title', proj.name.toUpperCase());
+
+  const coverImgHtml = `<img src="${proj.coverImg}" alt="${proj.name}" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.parentNode.innerHTML='<div class=album-cover-placeholder style=background:${encodeURIComponent(proj.gradient)}>✦</div>'"/>`;
   hdr.innerHTML = `
-    <div class="album-cover">
-      <img src="${proj.coverImg}" alt="${proj.name}"
-        onerror="this.parentNode.innerHTML='<div class=album-cover-placeholder style=background:${encodeURIComponent(proj.gradient)}>✦</div>'"
-      />
-    </div>
+    <div class="album-cover">${coverImgHtml}</div>
     <div class="album-meta">
       <div class="album-type-tag">${proj.type} · ${proj.year}</div>
       <div class="album-title">${proj.name}</div>
@@ -978,7 +993,6 @@ function openAlbumView(projIdx) {
     </div>
   `;
 
-  // Play all button
   document.getElementById('album-play-all').addEventListener('click', (e) => {
     e.stopPropagation();
     const firstId = proj.tracks[0];
@@ -990,7 +1004,6 @@ function openAlbumView(projIdx) {
     activateRow(firstId);
   });
 
-  // Build tracklist
   const alist = document.getElementById('alist');
   alist.innerHTML = '';
   document.getElementById('album-count').textContent = proj.tracks.length + ' tracks';
@@ -1007,66 +1020,79 @@ function openAlbumView(projIdx) {
 function closeAlbumView() {
   S.albumOpen = false;
   document.getElementById('music-home').style.display = '';
-  const av = document.getElementById('album-view');
-  av.classList.remove('active');
+  document.getElementById('album-view').classList.remove('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 document.getElementById('album-back-btn').addEventListener('click', closeAlbumView);
 
-// Artist page EP card → opens album view
 document.getElementById('artist-ep-card').addEventListener('click', () => {
   switchTab('music');
   setTimeout(() => openAlbumView(0), 120);
 });
 
 /* ════════════════════════════════════════════════════════
-   VIDEOS
+   VIDEOS — Cloudinary MP4
 ════════════════════════════════════════════════════════ */
 function buildVideos() {
-  document.getElementById('vgrid').innerHTML = VIDEOS.map((v,i) => {
-    const thumb = v.youtubeId
-      ? `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`
-      : v.img;
-    return `
-    <div class="vid-card" data-vidx="${i}">
-      <div class="vid-thumb">
-        <img src="${thumb}" alt="${v.title}" loading="lazy"/>
-        <div class="vid-ov"><div class="vid-btn"><span class="ms filled">play_arrow</span></div></div>
-        <span class="vid-dur">${v.dur}</span>
-      </div>
-      <div class="vid-info">
-        <div class="vid-title">${v.title}</div>
-        <div class="vid-sub">${v.sub}</div>
-      </div>
-    </div>`;
-  }).join('');
+  const grid = document.getElementById('vgrid');
+  grid.innerHTML = '';
 
-  document.querySelectorAll('.vid-card').forEach(card => {
-    card.addEventListener('click', () => openVideoModal(VIDEOS[+card.dataset.vidx]));
+  VIDEOS.forEach((v, i) => {
+    const card = document.createElement('div');
+    card.className = 'vid-card';
+    card.dataset.vidx = i;
+
+    // Thumbnail img — use v.img directly (local asset)
+    const img = document.createElement('img');
+    img.alt   = v.title;
+    img.loading = 'lazy';
+    setCoverWithFallback(img, v.img, i);
+
+    const thumb = document.createElement('div');
+    thumb.className = 'vid-thumb';
+    thumb.appendChild(img);
+    thumb.innerHTML += `
+      <div class="vid-ov">
+        <div class="vid-btn"><span class="ms filled">play_arrow</span></div>
+      </div>
+      <span class="vid-dur">${v.dur}</span>
+    `;
+
+    const info = document.createElement('div');
+    info.className = 'vid-info';
+    info.innerHTML = `<div class="vid-title">${v.title}</div>`;
+
+    card.appendChild(thumb);
+    card.appendChild(info);
+    card.addEventListener('click', () => openVideoModal(v));
+    grid.appendChild(card);
   });
 }
 
 /* ════════════════════════════════════════════════════════
-   YOUTUBE MODAL
+   VIDEO MODAL
 ════════════════════════════════════════════════════════ */
 function openVideoModal(v) {
-  if (!v.youtubeId) {
-    alert(`No YouTube ID set for "${v.title}".\nAdd the 11-character video ID to VIDEOS[].youtubeId.`);
-    return;
-  }
-  document.getElementById('yt-iframe').src = `https://www.youtube.com/embed/${v.youtubeId}?autoplay=1&rel=0`;
-  document.getElementById('yt-modal').classList.add('open');
+  const player = document.getElementById('vid-player');
+  player.src   = v.src;
+  player.load();
+  player.play().catch(() => {});
+  document.getElementById('vid-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
+
 function closeVideoModal() {
-  document.getElementById('yt-iframe').src = '';
-  document.getElementById('yt-modal').classList.remove('open');
+  const player = document.getElementById('vid-player');
+  player.pause();
+  player.src = '';
+  document.getElementById('vid-modal').classList.remove('open');
   document.body.style.overflow = '';
 }
-document.getElementById('yt-close').addEventListener('click', closeVideoModal);
-document.getElementById('yt-modal').addEventListener('click', e => {
-  if (e.target === document.getElementById('yt-modal')) closeVideoModal();
+
+document.getElementById('vid-close').addEventListener('click', closeVideoModal);
+document.getElementById('vid-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('vid-modal')) closeVideoModal();
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideoModal(); });
 
@@ -1083,7 +1109,9 @@ function loadTrack(id, play = false) {
   document.getElementById('pfill').style.width = '0%';
   document.getElementById('tel').textContent  = '0:00';
   document.getElementById('ttot').textContent = t.dur;
-  document.getElementById('part').src = t.img || placeholder(id);
+  // Update player art
+  const partEl = document.getElementById('part');
+  setCoverWithFallback(partEl, t.img, id);
   if (play) {
     audio.play().catch(err => {
       titleEl.classList.remove('loading');
@@ -1108,7 +1136,6 @@ function selectTrack(id) {
   activateRow(id);
 }
 
-// Row prefixes used across all lists
 const ALL_PREFIXES = ['tr-', 'sr-', 'al-'];
 
 function activateRow(id) {
@@ -1215,26 +1242,18 @@ document.getElementById('c-rep').addEventListener('click', function(){
 });
 
 /* ════════════════════════════════════════════════════════
-   LIKE — outline → solid fill on click
+   LIKE — solid filled heart on click
 ════════════════════════════════════════════════════════ */
 function toggleLike(id) {
-  const wasLiked = S.liked.has(id);
-  if (wasLiked) {
-    S.liked.delete(id);
-  } else {
-    S.liked.add(id);
-  }
+  if (S.liked.has(id)) { S.liked.delete(id); }
+  else { S.liked.add(id); }
   const nowLiked = S.liked.has(id);
 
   document.querySelectorAll(`[data-like="${id}"]`).forEach(btn => {
+    btn.classList.toggle('liked', nowLiked);
     if (nowLiked) {
-      btn.classList.add('liked');
-      btn.querySelector('.ms').textContent = 'favorite';
       btn.style.transform = 'scale(1.45)';
       setTimeout(() => btn.style.transform = '', 220);
-    } else {
-      btn.classList.remove('liked');
-      btn.querySelector('.ms').textContent = 'favorite_border';
     }
   });
 }
@@ -1292,7 +1311,7 @@ buildPopular();
 buildProjectCards();
 buildVideos();
 document.getElementById('ptitle').textContent = TRACKS[S.cur].title;
-document.getElementById('part').src = TRACKS[S.cur].img || placeholder(S.cur);
+setCoverWithFallback(document.getElementById('part'), TRACKS[S.cur].img, S.cur);
 document.getElementById('ttot').textContent = TRACKS[S.cur].dur;
 </script>
 </body>

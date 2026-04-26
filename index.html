@@ -97,12 +97,12 @@ header{
 }
 .hdr-icon:hover{background:rgba(219,144,255,.12);color:var(--primary)}
 
+/* Back button: hidden by default, shown only in album mode */
 .hdr-back{
   display:none;
-  margin-left:auto;
 }
 body.album-mode .hdr-back{display:flex}
-body.album-mode .tab-nav{margin-left:0}
+/* Hide search icon in album mode */
 body.album-mode #hdr-srch{display:none}
 
 @media(max-width:600px){
@@ -511,6 +511,7 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 .mob-btn.active .ms{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
 .mob-lbl{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
 
+/* Mobile back nav: hidden by default, shown only in album mode */
 .mob-back-nav{display:none !important}
 body.album-mode .mob-back-nav{display:flex !important}
 body.album-mode .mob-search-btn{display:none !important}
@@ -559,6 +560,7 @@ body.album-mode .mob-search-btn{display:none !important}
     <button class="tab-btn"        data-tab="videos">Videos</button>
   </nav>
 
+  <!-- Back button: only visible in album mode via CSS -->
   <button class="hdr-icon hdr-back" id="hdr-back-btn" title="Back">
     <span class="ms">arrow_back</span>
   </button>
@@ -682,7 +684,7 @@ body.album-mode .mob-search-btn{display:none !important}
           <div class="tl-item">
             <span class="tl-year">Apr '26</span>
             <div class="tl-dot"></div>
-            <p class="tl-text"><strong>Uncovered</strong> — EP<br>Four-track project: Headshots, She Wants Her Cash, Lifting &amp; Pain in Me. A statement of growth and range.</p>
+            <p class="tl-text"><strong>Uncovered</strong> — EP<br>Released 16 April 2026. Four-track project: Headshots, She Wants Her Cash, Lifting &amp; Pain in Me. A statement of growth and range.</p>
           </div>
           <div class="tl-item">
             <span class="tl-year">2025</span>
@@ -774,6 +776,7 @@ body.album-mode .mob-search-btn{display:none !important}
   <button class="mob-btn mob-search-btn" data-tab="search">
     <span class="ms">search</span><span class="mob-lbl">Search</span>
   </button>
+  <!-- Mobile back: hidden by default, shown only in album mode -->
   <button class="mob-btn mob-back-nav" id="mob-back-nav">
     <span class="ms">arrow_back</span><span class="mob-lbl">Back</span>
   </button>
@@ -784,12 +787,15 @@ body.album-mode .mob-search-btn{display:none !important}
 
 <script>
 /* ════════════════════════════════════════════════════════
-   DATA
+   DATA — Two separate EP arrays
 ════════════════════════════════════════════════════════ */
-const ALL_COVER = 'assets/images/all.png';
 
-const TRACKS = [
-  // ── Out of My Shell (EP 1) ──
+const SINGLE_COVER = 'assets/images/single.jpeg';
+const OOM_COVER    = 'assets/images/Out.png';
+const ALL_COVER    = 'assets/images/all.png';
+
+/* ── Out of My Shell tracks (ids 0–10) ── */
+const OOMS_TRACKS = [
   { id:0,  title:'Intro',            dur:'1:27', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157545/01._Brightsin_-_Intro_yrr7a0.mp3',                                                                               img: ALL_COVER },
   { id:1,  title:'One of em Shot',   dur:'3:05', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157619/02._Brightsin_-_One_of_em_shot_Prod_trabbey_malloy_cq2hio.mp3',                                                img: ALL_COVER },
   { id:2,  title:'Guess is Goodbye', dur:'1:53', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157843/03._Brightsin_-_Guess_is_Goodbye_Prod._Larkin_Noir_oyot8x.mp3',                                                 img: ALL_COVER },
@@ -801,39 +807,49 @@ const TRACKS = [
   { id:8,  title:'How Many Nights',  dur:'3:18', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157884/09-_Brightsin-How_many_nights_jrfdm7.mp3',                                                                       img: ALL_COVER },
   { id:9,  title:'Future Dreams',    dur:'4:14', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157889/10._Brightsin_ft_Tlotliso_Mpeoa_ft_Bruce_ft_King_Composure_-_Future_Dreams_quzfpd.mp3',                         img: ALL_COVER },
   { id:10, title:'Uncovered',        dur:'3:14', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157887/11._Brightsin_-_uncovered_zvl7ie.mp3',                                                                          img: ALL_COVER },
-  // ── Uncovered (EP 2) ──
-  { id:11, title:'Headshots',        dur:'0:00', audioSrc:'', img: ALL_COVER },
-  { id:12, title:'She Wants Her Cash',dur:'0:00', audioSrc:'', img: ALL_COVER },
-  { id:13, title:'Lifting',          dur:'0:00', audioSrc:'', img: ALL_COVER },
-  { id:14, title:'Pain in Me',       dur:'0:00', audioSrc:'', img: ALL_COVER },
 ];
 
-// Popular IDs shown by default (7 tracks — mix from both EPs)
-const POPULAR_IDS = [11, 8, 2, 12, 6, 13, 5];
+/* ── Uncovered EP tracks — own ids 0–3, single cover ── */
+const UNCOVERED_TRACKS = [
+  { id:0, title:'Headshots',         dur:'0:00', audioSrc:'', img: SINGLE_COVER },
+  { id:1, title:'She Wants Her Cash',dur:'0:00', audioSrc:'', img: SINGLE_COVER },
+  { id:2, title:'Lifting',           dur:'0:00', audioSrc:'', img: SINGLE_COVER },
+  { id:3, title:'Pain in Me',        dur:'0:00', audioSrc:'', img: SINGLE_COVER },
+];
 
-// "See all" pool: all tracks interleaved across both EPs
-const ALL_IDS_MIXED = (() => {
-  const uncoveredIds = [11, 12, 13, 14];
-  const oomsIds = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+/* ── Unified flat lookup used by player (namespace: ooms:id / unc:id) ── */
+// We give each track a unique global key so the player can reference them.
+// Format: { gid, title, dur, audioSrc, img, epKey }
+const GLOBAL_TRACKS = [
+  ...OOMS_TRACKS.map(t => ({ ...t, gid: 'ooms:' + t.id, epKey: 'ooms' })),
+  ...UNCOVERED_TRACKS.map(t => ({ ...t, gid: 'unc:' + t.id, epKey: 'unc' })),
+];
+
+/* ── Popular: mix from both EPs by global id ── */
+const POPULAR_GIDS = ['unc:0', 'ooms:8', 'ooms:2', 'unc:1', 'ooms:6', 'unc:2', 'ooms:5'];
+
+/* ── See-all pool: all tracks interleaved ── */
+const ALL_GIDS_MIXED = (() => {
+  const u = UNCOVERED_TRACKS.map(t => 'unc:' + t.id);
+  const o = OOMS_TRACKS.map(t => 'ooms:' + t.id);
   const mixed = [];
-  const maxLen = Math.max(uncoveredIds.length, oomsIds.length);
+  const maxLen = Math.max(u.length, o.length);
   for (let i = 0; i < maxLen; i++) {
-    if (i < uncoveredIds.length) mixed.push(uncoveredIds[i]);
-    if (i < oomsIds.length) mixed.push(oomsIds[i]);
+    if (i < u.length) mixed.push(u[i]);
+    if (i < o.length) mixed.push(o[i]);
   }
   return mixed;
 })();
 
-/* ── PROJECTS: only 2 — Uncovered EP (newest) + Out of My Shell ── */
+/* ── Projects ── */
 const PROJECTS = [
   {
     id: 'uncovered',
     name: 'Uncovered',
     year: 2026,
-    releaseLabel: 'Apr 2026',
+    releaseLabel: '16 Apr 2026',
     type: 'EP',
-    // Rebirth, One of em Shot, How Many Nights, Borborygmi
-    tracks: [11, 12, 13, 14],
+    trackGids: UNCOVERED_TRACKS.map(t => 'unc:' + t.id),
     coverImg: 'assets/images/single.jpeg',
     gradient: 'linear-gradient(135deg,rgba(140,30,230,.45) 0%,rgba(14,14,14,1) 70%)',
     accent: '#db90ff'
@@ -844,7 +860,7 @@ const PROJECTS = [
     year: 2025,
     releaseLabel: '2025',
     type: 'EP',
-    tracks: TRACKS.map(t => t.id),
+    trackGids: OOMS_TRACKS.map(t => 'ooms:' + t.id),
     coverImg: 'assets/images/Out.png',
     gradient: 'linear-gradient(135deg,rgba(177,46,241,.45) 0%,rgba(14,14,14,1) 70%)',
     accent: '#db90ff'
@@ -858,6 +874,13 @@ const VIDEOS = [
   { title:'Guess is goodbye',dur:'01:50', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159597/03-Guess_is_goodbye_fkykjl.mp4', img:'assets/images/4.png'  },
   { title:'Intro',           dur:'01:30', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159586/01-intro_vylrkz.mp4',            img:'assets/images/2.png'  },
 ];
+
+/* ════════════════════════════════════════════════════════
+   HELPERS — look up track by global id
+════════════════════════════════════════════════════════ */
+function getTrack(gid) {
+  return GLOBAL_TRACKS.find(t => t.gid === gid);
+}
 
 /* ════════════════════════════════════════════════════════
    AUDIO ENGINE
@@ -887,69 +910,71 @@ audio.addEventListener('error', () => {
 /* ════════════════════════════════════════════════════════
    COVER IMAGE HELPERS
 ════════════════════════════════════════════════════════ */
-function placeholder(id) {
+function placeholder(seed) {
   const hues = [270,290,260,280,265,275,285,255,295,268,278];
-  const h = hues[id % hues.length];
+  const idx = typeof seed === 'number' ? seed : seed.charCodeAt(0);
+  const h = hues[idx % hues.length];
   const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='hsl(${h},55%,18%)'/><stop offset='100%' stop-color='hsl(${h+20},35%,7%)'/></linearGradient></defs><rect width='100' height='100' fill='url(%23g)'/><text x='50' y='62' text-anchor='middle' font-size='36' font-family='sans-serif' fill='rgba(219,144,255,.55)'>♪</text></svg>`;
   return 'data:image/svg+xml,' + encodeURIComponent(svg);
 }
 
-function setCoverWithFallback(imgEl, src, id) {
-  if (!src) { imgEl.src = placeholder(id); return; }
-  imgEl.src = placeholder(id);
+function setCoverWithFallback(imgEl, src, seed) {
+  if (!src) { imgEl.src = placeholder(seed); return; }
+  imgEl.src = placeholder(seed);
   const probe = new Image();
   probe.onload  = () => { imgEl.src = src; };
-  probe.onerror = () => { imgEl.src = placeholder(id); };
+  probe.onerror = () => { imgEl.src = placeholder(seed); };
   probe.src = src;
 }
 
 /* ════════════════════════════════════════════════════════
-   STATE
+   STATE — uses global id strings (gid)
 ════════════════════════════════════════════════════════ */
 const S = {
-  cur: 0,
+  curGid: GLOBAL_TRACKS[0].gid,
   playing: false,
   shuffle: false,
   repeat: false,
   liked: new Set(),
   albumOpen: false,
-  queue: [],
+  queue: [],       // array of gid strings
   queuePos: -1,
-  currentAlbumTracks: null
+  currentAlbumGids: null
 };
 
 /* ════════════════════════════════════════════════════════
    QUEUE MANAGEMENT
 ════════════════════════════════════════════════════════ */
-function setPopularQueue(startId) {
-  const ids = showingAll ? ALL_IDS_MIXED : POPULAR_IDS;
-  const idx = ids.indexOf(startId);
-  const ordered = idx >= 0
+let showingAll = false;
+
+function setPopularQueue(startGid) {
+  const ids = showingAll ? ALL_GIDS_MIXED : POPULAR_GIDS;
+  const idx = ids.indexOf(startGid);
+  S.queue = idx >= 0
     ? [...ids.slice(idx), ...ids.slice(0, idx)]
     : [...ids];
-  S.queue = ordered;
   S.queuePos = 0;
 }
 
-function setAlbumQueue(trackIds, startId) {
-  const idx = Math.max(0, trackIds.indexOf(startId));
-  S.queue = [...trackIds.slice(idx), ...trackIds.slice(0, idx)];
+function setAlbumQueue(gids, startGid) {
+  const idx = Math.max(0, gids.indexOf(startGid));
+  S.queue = [...gids.slice(idx), ...gids.slice(0, idx)];
   S.queuePos = 0;
 }
 
-function setDefaultQueue(startId) {
-  const allIds = TRACKS.map(t => t.id);
-  const idx = Math.max(0, allIds.indexOf(startId));
-  S.queue = [...allIds.slice(idx), ...allIds.slice(0, idx)];
+function setDefaultQueue(startGid) {
+  const allGids = GLOBAL_TRACKS.map(t => t.gid);
+  const idx = Math.max(0, allGids.indexOf(startGid));
+  S.queue = [...allGids.slice(idx), ...allGids.slice(0, idx)];
   S.queuePos = 0;
 }
 
 /* ════════════════════════════════════════════════════════
    DOWNLOAD — AUDIO
 ════════════════════════════════════════════════════════ */
-function downloadTrack(id) {
-  const t = TRACKS[id];
-  if (!t.audioSrc) return;
+function downloadTrack(gid) {
+  const t = getTrack(gid);
+  if (!t || !t.audioSrc) return;
   const dlUrl = t.audioSrc.replace('/video/upload/', '/video/upload/fl_attachment/');
   triggerDownload(dlUrl, `Brightsin - ${t.title}.mp3`);
   showToast(`⬇ Downloading: ${t.title}`);
@@ -964,12 +989,8 @@ function downloadVideo(v) {
 
 function triggerDownload(url, filename) {
   const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  a.style.display = 'none';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  a.href = url; a.download = filename; a.style.display = 'none';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 
 function showToast(msg) {
@@ -980,22 +1001,25 @@ function showToast(msg) {
 }
 
 /* ════════════════════════════════════════════════════════
-   BUILD TRACK ROW
+   BUILD TRACK ROW — prefix is like 'tr-', 'al-', 'sr-'
+   trackNum: display number (1-based), null = no number
 ════════════════════════════════════════════════════════ */
-function mkRow(t, container, pfx, showNum = false, source = 'default') {
+function mkRow(t, container, pfx, trackNum, source) {
   const el = document.createElement('div');
   el.className = 'track-row';
-  el.id = pfx + t.id;
-  el.dataset.id = t.id;
-  const isLiked = S.liked.has(t.id);
-  const numHtml = showNum ? `<span class="t-num">${TRACKS.indexOf(t) + 1}</span>` : '';
+  el.id = pfx + t.gid;
+  el.dataset.gid = t.gid;
+  const isLiked = S.liked.has(t.gid);
+  const numHtml = (trackNum !== null && trackNum !== undefined)
+    ? `<span class="t-num">${trackNum}</span>`
+    : '';
 
   el.innerHTML = `
     ${numHtml}
     <div class="t-art">
-      <img data-tid="${t.id}" alt="${t.title}" loading="lazy"/>
+      <img data-gid="${t.gid}" alt="${t.title}" loading="lazy"/>
       <div class="t-overlay">
-        <span class="ms filled iplay" id="${pfx}ico-${t.id}">play_arrow</span>
+        <span class="ms filled iplay" id="${pfx}ico-${t.gid}">play_arrow</span>
       </div>
     </div>
     <div class="t-info">
@@ -1003,37 +1027,37 @@ function mkRow(t, container, pfx, showNum = false, source = 'default') {
       <div class="t-meta">Brightsin • ${t.dur}</div>
     </div>
     <div class="t-acts" onclick="event.stopPropagation()">
-      <button class="ib heart${isLiked ? ' liked' : ''}" data-like="${t.id}" title="Like"
-        onclick="toggleLike(${t.id})">
+      <button class="ib heart${isLiked ? ' liked' : ''}" data-like="${t.gid}" title="Like"
+        onclick="toggleLike('${t.gid}')">
         <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
       </button>
-      <button class="ib dl" title="Download" onclick="downloadTrack(${t.id})">
+      <button class="ib dl" title="Download" onclick="downloadTrack('${t.gid}')">
         <span class="ms">download</span>
       </button>
     </div>`;
 
-  const imgEl = el.querySelector(`img[data-tid="${t.id}"]`);
-  setCoverWithFallback(imgEl, t.img, t.id);
-  el.addEventListener('click', () => selectTrack(t.id, source));
+  const imgEl = el.querySelector(`img[data-gid="${t.gid}"]`);
+  setCoverWithFallback(imgEl, t.img, t.gid);
+  el.addEventListener('click', () => selectTrack(t.gid, source));
   container.appendChild(el);
 }
 
 /* ════════════════════════════════════════════════════════
    BUILD MUSIC HOME
 ════════════════════════════════════════════════════════ */
-let showingAll = false;
-
 function buildPopular() {
   const list = document.getElementById('tlist');
   list.innerHTML = '';
-  const ids = showingAll ? ALL_IDS_MIXED : POPULAR_IDS;
-  ids.forEach((id, i) => {
-    mkRow(TRACKS[id], list, 'tr-', false, 'popular');
+  const gids = showingAll ? ALL_GIDS_MIXED : POPULAR_GIDS;
+  gids.forEach((gid, i) => {
+    const t = getTrack(gid);
+    if (!t) return;
+    mkRow(t, list, 'tr-', null, 'popular');
     const row = list.lastElementChild;
     row.style.cssText = 'opacity:0;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease';
     setTimeout(() => row.style.cssText = '', 60 + i * 50);
   });
-  if (S.playing) activateRow(S.cur); else if (audio.src) activateRow(S.cur);
+  if (S.playing || audio.src) activateRow(S.curGid);
 }
 
 document.getElementById('show-all-link').addEventListener('click', () => {
@@ -1069,7 +1093,7 @@ function buildProjectCards() {
     info.className = 'proj-info';
     info.innerHTML = `
       <div class="proj-name">${proj.name}</div>
-      <div class="proj-meta">${proj.releaseLabel} · ${proj.tracks.length} ${proj.tracks.length === 1 ? 'Track' : 'Tracks'}</div>
+      <div class="proj-meta">${proj.releaseLabel} · ${proj.trackGids.length} ${proj.trackGids.length === 1 ? 'Track' : 'Tracks'}</div>
       <span class="proj-type">${proj.type}</span>
     `;
     card.appendChild(info);
@@ -1090,12 +1114,10 @@ function buildProjectCards() {
 function buildArtistProjects() {
   const container = document.getElementById('artist-projects-list');
   container.innerHTML = '';
-
   PROJECTS.forEach((proj, idx) => {
     const card = document.createElement('div');
     card.className = 'bio-card artist-proj-card';
     card.style.marginBottom = '12px';
-
     card.innerHTML = `
       <div class="bio-tag">
         <span class="ms" style="font-size:14px">album</span>
@@ -1109,7 +1131,7 @@ function buildArtistProjects() {
         </div>
         <div>
           <div style="font-size:17px;font-weight:900;letter-spacing:-.02em;margin-bottom:4px">${proj.name}</div>
-          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--on-sv)">${proj.tracks.length} ${proj.tracks.length === 1 ? 'Track' : 'Tracks'} · ${proj.releaseLabel}</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--on-sv)">${proj.trackGids.length} ${proj.trackGids.length === 1 ? 'Track' : 'Tracks'} · ${proj.releaseLabel}</div>
           <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
             <span class="chip" style="font-size:9px">${proj.type}</span>
             <span class="chip" style="font-size:9px">Rap</span>
@@ -1138,17 +1160,16 @@ function openAlbumView(projIdx) {
   currentAlbumProjIdx = projIdx;
   const proj = PROJECTS[projIdx];
   S.albumOpen = true;
-  S.currentAlbumTracks = proj.tracks;
+  S.currentAlbumGids = proj.trackGids;
 
   document.getElementById('music-home').style.display = 'none';
   document.getElementById('album-view').classList.add('active');
   document.body.classList.add('album-mode');
 
   const hdr = document.getElementById('album-header');
-  const coverSrc = proj.coverImg || '';
   hdr.innerHTML = `
     <div class="album-cover">
-      <img src="${coverSrc}" alt="${proj.name}"
+      <img src="${proj.coverImg || ''}" alt="${proj.name}"
         style="width:100%;height:100%;object-fit:cover;display:block"
         onerror="this.outerHTML='<div class=album-cover-placeholder style=background:${encodeURIComponent(proj.gradient)}>✦</div>'"/>
     </div>
@@ -1160,40 +1181,43 @@ function openAlbumView(projIdx) {
           <span class="ms">play_arrow</span>Play All
         </button>
       </div>
-      <div class="album-sub">Brightsin · ${proj.tracks.length} ${proj.tracks.length === 1 ? 'track' : 'tracks'}</div>
+      <div class="album-sub">Brightsin · ${proj.trackGids.length} ${proj.trackGids.length === 1 ? 'track' : 'tracks'}</div>
     </div>
   `;
 
   document.getElementById('album-play-all').addEventListener('click', (e) => {
     e.stopPropagation();
-    const firstId = proj.tracks[0];
-    deactivateRow(S.cur);
-    S.cur = firstId;
+    const firstGid = proj.trackGids[0];
+    deactivateRow(S.curGid);
+    S.curGid = firstGid;
     S.playing = true;
-    setAlbumQueue(proj.tracks, firstId);
-    loadTrack(firstId, true);
+    setAlbumQueue(proj.trackGids, firstGid);
+    loadTrack(firstGid, true);
     updatePlayBtn();
-    activateRow(firstId);
+    activateRow(firstGid);
   });
 
   const alist = document.getElementById('alist');
   alist.innerHTML = '';
-  document.getElementById('album-count').textContent = proj.tracks.length + (proj.tracks.length === 1 ? ' track' : ' tracks');
+  document.getElementById('album-count').textContent =
+    proj.trackGids.length + (proj.trackGids.length === 1 ? ' track' : ' tracks');
 
-  proj.tracks.forEach((id, i) => {
-    mkRow(TRACKS[id], alist, 'al-', true, 'album');
+  proj.trackGids.forEach((gid, i) => {
+    const t = getTrack(gid);
+    if (!t) return;
+    mkRow(t, alist, 'al-', i + 1, 'album');
     const row = alist.lastElementChild;
     row.style.cssText = 'opacity:0;transform:translateY(8px);transition:opacity .28s ease,transform .28s ease';
     setTimeout(() => row.style.cssText = '', 40 + i * 40);
   });
 
-  if (S.playing || audio.src) activateRow(S.cur);
+  if (S.playing || audio.src) activateRow(S.curGid);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function closeAlbumView() {
   S.albumOpen = false;
-  S.currentAlbumTracks = null;
+  S.currentAlbumGids = null;
   document.getElementById('music-home').style.display = '';
   document.getElementById('album-view').classList.remove('active');
   document.body.classList.remove('album-mode');
@@ -1212,7 +1236,6 @@ function buildVideos() {
   VIDEOS.forEach((v, i) => {
     const card = document.createElement('div');
     card.className = 'vid-card';
-
     const thumb = document.createElement('div');
     thumb.className = 'vid-thumb';
     thumb.innerHTML = `
@@ -1224,7 +1247,6 @@ function buildVideos() {
     `;
     const imgEl = thumb.querySelector('img');
     setCoverWithFallback(imgEl, v.img, i);
-
     const info = document.createElement('div');
     info.className = 'vid-info';
     info.innerHTML = `
@@ -1233,7 +1255,6 @@ function buildVideos() {
         <span class="ms">download</span>
       </button>
     `;
-
     card.appendChild(thumb);
     card.appendChild(info);
     card.addEventListener('click', () => openVideoModal(v));
@@ -1249,17 +1270,14 @@ let _currentModalVideo = null;
 function openVideoModal(v) {
   _currentModalVideo = v;
   const player = document.getElementById('vid-player');
-  player.src = v.src;
-  player.load();
-  player.play().catch(() => {});
+  player.src = v.src; player.load(); player.play().catch(() => {});
   document.getElementById('vid-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function closeVideoModal() {
   const player = document.getElementById('vid-player');
-  player.pause();
-  player.src = '';
+  player.pause(); player.src = '';
   _currentModalVideo = null;
   document.getElementById('vid-modal').classList.remove('open');
   document.body.style.overflow = '';
@@ -1277,8 +1295,9 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideoMo
 /* ════════════════════════════════════════════════════════
    PLAYER LOGIC
 ════════════════════════════════════════════════════════ */
-function loadTrack(id, play = false) {
-  const t = TRACKS[id];
+function loadTrack(gid, play = false) {
+  const t = getTrack(gid);
+  if (!t) return;
   audio.src = t.audioSrc || '';
   audio.load();
   const titleEl = document.getElementById('ptitle');
@@ -1287,7 +1306,7 @@ function loadTrack(id, play = false) {
   document.getElementById('pfill').style.width = '0%';
   document.getElementById('tel').textContent  = '0:00';
   document.getElementById('ttot').textContent = t.dur;
-  setCoverWithFallback(document.getElementById('part'), t.img, id);
+  setCoverWithFallback(document.getElementById('part'), t.img, gid);
   if (play) {
     audio.play().catch(() => {
       titleEl.classList.remove('loading');
@@ -1297,64 +1316,64 @@ function loadTrack(id, play = false) {
   }
 }
 
-function selectTrack(id, source) {
-  const same = S.cur === id;
-  deactivateRow(S.cur);
-  S.cur = id;
+function selectTrack(gid, source) {
+  const same = S.curGid === gid;
+  deactivateRow(S.curGid);
+  S.curGid = gid;
   if (!same) {
     if (source === 'popular') {
-      setPopularQueue(id);
+      setPopularQueue(gid);
     } else if (source === 'album') {
-      const tracks = S.currentAlbumTracks || TRACKS.map(t => t.id);
-      setAlbumQueue(tracks, id);
+      const gids = S.currentAlbumGids || GLOBAL_TRACKS.map(t => t.gid);
+      setAlbumQueue(gids, gid);
     } else {
-      setDefaultQueue(id);
+      setDefaultQueue(gid);
     }
     S.playing = true;
-    loadTrack(id, true);
+    loadTrack(gid, true);
   } else {
     togglePlay();
     return;
   }
   updatePlayBtn();
-  activateRow(id);
+  activateRow(gid);
 }
 
 const ALL_PREFIXES = ['tr-', 'sr-', 'al-'];
 
-function activateRow(id) {
+function activateRow(gid) {
   ALL_PREFIXES.forEach(p => {
-    const row = document.getElementById(p + id);
+    const row = document.getElementById(p + gid);
     if (!row) return;
     row.classList.add('playing');
   });
-  if (S.playing) showEQ(id); else showPauseIcon(id);
+  if (S.playing) showEQ(gid); else showPauseIcon(gid);
 }
 
-function deactivateRow(id) {
+function deactivateRow(gid) {
   ALL_PREFIXES.forEach(p => {
-    const row = document.getElementById(p + id);
+    const row = document.getElementById(p + gid);
     if (!row) return;
     row.classList.remove('playing');
   });
-  showPlayIcon(id);
+  showPlayIcon(gid);
 }
 
-function showEQ(id) {
+function showEQ(gid) {
   ALL_PREFIXES.forEach(p => {
-    const ov = document.querySelector(`#${p}${id} .t-overlay`);
+    const ov = document.querySelector(`#${CSS.escape(p + gid)} .t-overlay`);
     if (ov) ov.innerHTML = '<div class="eq"><b></b><b></b><b></b><b></b></div>';
   });
 }
-function showPlayIcon(id) {
+function showPlayIcon(gid) {
   ALL_PREFIXES.forEach(p => {
-    const ov = document.querySelector(`#${p}${id} .t-overlay`);
+    const ov = document.querySelector(`#${CSS.escape(p + gid)} .t-overlay`);
     if (ov) ov.innerHTML = `<span class="ms filled iplay">play_arrow</span>`;
   });
 }
-function showPauseIcon(id) {
+function showPauseIcon(gid) {
   ALL_PREFIXES.forEach(p => {
-    const ov = document.querySelector(`#${p}${id} .t-overlay`);
+    const ov = document.querySelector(`#${CSS.escape(p + gid)} .t-overlay`);
     if (ov) ov.innerHTML = `<span class="ms filled iplay">pause</span>`;
   });
 }
@@ -1362,19 +1381,15 @@ function showPauseIcon(id) {
 function togglePlay() {
   if (audio.src) {
     if (S.playing) {
-      audio.pause();
-      S.playing = false;
-      showPauseIcon(S.cur);
+      audio.pause(); S.playing = false; showPauseIcon(S.curGid);
     } else {
-      audio.play().catch(() => {});
-      S.playing = true;
-      showEQ(S.cur);
+      audio.play().catch(() => {}); S.playing = true; showEQ(S.curGid);
     }
   } else {
     S.playing = true;
-    setDefaultQueue(S.cur);
-    loadTrack(S.cur, true);
-    activateRow(S.cur);
+    setDefaultQueue(S.curGid);
+    loadTrack(S.curGid, true);
+    activateRow(S.curGid);
   }
   updatePlayBtn();
 }
@@ -1383,43 +1398,49 @@ function updatePlayBtn() {
   document.getElementById('picon').textContent = S.playing ? 'pause' : 'play_arrow';
 }
 
-audio.addEventListener('play',  () => { S.playing = true;  updatePlayBtn(); showEQ(S.cur); });
-audio.addEventListener('pause', () => { S.playing = false; updatePlayBtn(); showPauseIcon(S.cur); });
+audio.addEventListener('play',  () => { S.playing = true;  updatePlayBtn(); showEQ(S.curGid); });
+audio.addEventListener('pause', () => { S.playing = false; updatePlayBtn(); showPauseIcon(S.curGid); });
 
 function prevTrack() {
   if (audio.currentTime > 3) { audio.currentTime = 0; return; }
-  deactivateRow(S.cur);
+  deactivateRow(S.curGid);
   if (S.queue.length > 0) {
     S.queuePos = (S.queuePos - 1 + S.queue.length) % S.queue.length;
-    S.cur = S.queue[S.queuePos];
+    S.curGid = S.queue[S.queuePos];
   } else {
-    S.cur = (S.cur - 1 + TRACKS.length) % TRACKS.length;
+    const allGids = GLOBAL_TRACKS.map(t => t.gid);
+    const idx = allGids.indexOf(S.curGid);
+    S.curGid = allGids[(idx - 1 + allGids.length) % allGids.length];
   }
   S.playing = true;
-  loadTrack(S.cur, true);
+  loadTrack(S.curGid, true);
   updatePlayBtn();
-  activateRow(S.cur);
+  activateRow(S.curGid);
 }
 
 function nextTrack(forcePlay = false) {
-  deactivateRow(S.cur);
+  deactivateRow(S.curGid);
   if (S.queue.length > 0) {
     if (S.shuffle) {
       S.queuePos = Math.floor(Math.random() * S.queue.length);
     } else {
       S.queuePos = (S.queuePos + 1) % S.queue.length;
     }
-    S.cur = S.queue[S.queuePos];
-  } else if (S.shuffle) {
-    S.cur = Math.floor(Math.random() * TRACKS.length);
+    S.curGid = S.queue[S.queuePos];
   } else {
-    S.cur = (S.cur + 1) % TRACKS.length;
+    const allGids = GLOBAL_TRACKS.map(t => t.gid);
+    const idx = allGids.indexOf(S.curGid);
+    if (S.shuffle) {
+      S.curGid = allGids[Math.floor(Math.random() * allGids.length)];
+    } else {
+      S.curGid = allGids[(idx + 1) % allGids.length];
+    }
   }
   const shouldPlay = S.playing || forcePlay;
   if (shouldPlay) S.playing = true;
-  loadTrack(S.cur, shouldPlay);
+  loadTrack(S.curGid, shouldPlay);
   updatePlayBtn();
-  activateRow(S.cur);
+  activateRow(S.curGid);
 }
 
 document.getElementById('prog').addEventListener('click', e => {
@@ -1443,12 +1464,11 @@ document.getElementById('c-rep').addEventListener('click', function(){
 /* ════════════════════════════════════════════════════════
    LIKE
 ════════════════════════════════════════════════════════ */
-function toggleLike(id) {
-  if (S.liked.has(id)) S.liked.delete(id);
-  else S.liked.add(id);
-  const nowLiked = S.liked.has(id);
-
-  document.querySelectorAll(`[data-like="${id}"]`).forEach(btn => {
+function toggleLike(gid) {
+  if (S.liked.has(gid)) S.liked.delete(gid);
+  else S.liked.add(gid);
+  const nowLiked = S.liked.has(gid);
+  document.querySelectorAll(`[data-like="${gid}"]`).forEach(btn => {
     btn.classList.toggle('liked', nowLiked);
     const icon = btn.querySelector('i');
     if (icon) icon.className = nowLiked ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
@@ -1469,7 +1489,7 @@ document.getElementById('srch').addEventListener('input', function() {
   const noRes = document.getElementById('no-res');
   slist.innerHTML = ''; noRes.style.display = 'none'; lbl.style.display = 'none';
   if (!q) return;
-  const hits = TRACKS.filter(t => t.title.toLowerCase().includes(q));
+  const hits = GLOBAL_TRACKS.filter(t => t.title.toLowerCase().includes(q));
   lbl.style.display = 'block';
   lbl.textContent = hits.length ? `${hits.length} result${hits.length !== 1 ? 's' : ''} for "${q}"` : '';
   if (!hits.length) {
@@ -1477,7 +1497,7 @@ document.getElementById('srch').addEventListener('input', function() {
     noRes.style.display = 'block';
     return;
   }
-  hits.forEach(t => mkRow(t, slist, 'sr-', false, 'default'));
+  hits.forEach(t => mkRow(t, slist, 'sr-', null, 'default'));
 });
 
 /* ════════════════════════════════════════════════════════
@@ -1511,7 +1531,6 @@ function applyPhoto(url) {
   artistAvatarImg.style.display = 'block';
   const letter = document.querySelector('.artist-avatar .avatar-letter');
   if (letter) letter.style.display = 'none';
-
   hdrAvatarImg.src = url;
   hdrAvatarImg.style.display = 'block';
   const hdrLetter = document.querySelector('.hdr-avatar-letter');
@@ -1523,17 +1542,9 @@ avatarUpload.addEventListener('change', function() {
   applyPhoto(URL.createObjectURL(this.files[0]));
 });
 
-document.getElementById('artist-avatar-btn').addEventListener('click', () => {
-  avatarUpload.click();
-});
-
-document.getElementById('hdr-avatar-btn').addEventListener('click', () => {
-  switchTab('artist');
-});
-
-document.getElementById('mob-profile-nav').addEventListener('click', () => {
-  switchTab('artist');
-});
+document.getElementById('artist-avatar-btn').addEventListener('click', () => avatarUpload.click());
+document.getElementById('hdr-avatar-btn').addEventListener('click', () => switchTab('artist'));
+document.getElementById('mob-profile-nav').addEventListener('click', () => switchTab('artist'));
 
 /* ════════════════════════════════════════════════════════
    HELPERS
@@ -1551,9 +1562,11 @@ buildPopular();
 buildProjectCards();
 buildVideos();
 buildArtistProjects();
-document.getElementById('ptitle').textContent = TRACKS[S.cur].title;
-setCoverWithFallback(document.getElementById('part'), TRACKS[S.cur].img, S.cur);
-document.getElementById('ttot').textContent = TRACKS[S.cur].dur;
+
+const firstTrack = getTrack(S.curGid);
+document.getElementById('ptitle').textContent = firstTrack.title;
+setCoverWithFallback(document.getElementById('part'), firstTrack.img, S.curGid);
+document.getElementById('ttot').textContent = firstTrack.dur;
 
 applyPhoto('assets/images/single.jpeg');
 </script>

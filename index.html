@@ -622,11 +622,10 @@ body.album-mode .mob-search-btn{display:none !important}
 
       <div class="artist-hero-card">
         <div class="artist-hero-top">
-          <div class="artist-avatar" id="artist-avatar-btn" title="Tap to change photo">
+          <div class="artist-avatar" id="artist-avatar-btn">
             <img id="artist-avatar-img" alt="Brightsin"/>
             <span class="avatar-letter">B</span>
           </div>
-          <input type="file" id="avatar-upload" accept="image/*"/>
           <div class="artist-id">
             <h2>Brightsin</h2>
             <p>Rap · Hip-Hop · Mpumalanga, SA</p>
@@ -1537,12 +1536,8 @@ function applyPhoto(url) {
   if (hdrLetter) hdrLetter.style.display = 'none';
 }
 
-avatarUpload.addEventListener('change', function() {
-  if (!this.files[0]) return;
-  applyPhoto(URL.createObjectURL(this.files[0]));
-});
 
-document.getElementById('artist-avatar-btn').addEventListener('click', () => avatarUpload.click());
+document.getElementById('artist-avatar-btn').addEventListener('click', () => {});
 document.getElementById('hdr-avatar-btn').addEventListener('click', () => switchTab('artist'));
 document.getElementById('mob-profile-nav').addEventListener('click', () => switchTab('artist'));
 

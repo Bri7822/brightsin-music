@@ -653,9 +653,9 @@ body.album-mode .mob-search-btn{display:none !important}
           About the Artist
         </div>
         <p class="bio-body">
-          Brightsin is a rapper and music artist from <strong style="color:#fff">Nkomazi, Mpumalanga</strong> — a small town that shaped his voice before the world had a chance to hear it. Music was always in him; even as a youngin he always knew that one day he would make music. That calling became reality in <strong style="color:#fff">2017</strong>, when he officially started making music and channelled everything he had into the craft.
+          Brightsin is a rapper and music artist from <strong style="color:#fff">Nkomazi, Mpumalanga</strong> — a small town that shaped his voice before the world had a chance to hear it. Music was always in him from a young age, but growing up where he did, chasing a dream like that felt dangerous. Where he's from, it's rare to believe someone can actually make it — so he kept it to himself, afraid people would laugh. That fear was real, but it never won.
           <br><br>
-          Driven by a hunger to grow beyond music alone, Brightsin enrolled at the <strong style="color:#fff">Tshwane University of Technology (TUT)</strong> in <strong style="color:#fff">2019</strong>, pursuing a qualification in <strong style="color:#fff">Information Technology</strong>. He balanced studio sessions with lectures, refusing to let either slip. In <strong style="color:#fff">October 2024</strong> he graduated — walking off stage with a degree in one hand and a debut EP in the works with the other.
+          That calling became reality in <strong style="color:#fff">2017</strong>, when he officially started making music and channelled everything he had into the craft. Driven by a hunger to grow beyond music alone, Brightsin enrolled at the <strong style="color:#fff">Tshwane University of Technology (TUT)</strong> in <strong style="color:#fff">2019</strong>, pursuing a qualification in <strong style="color:#fff">Information Technology</strong>. He balanced studio sessions with lectures, refusing to let either slip. In <strong style="color:#fff">October 2024</strong> he graduated — walking off stage with a degree in one hand and a debut EP in the works with the other.
           <br><br>
           His debut EP <em>Out of My Shell</em> (2025) marked the formal introduction of Brightsin to the world. His follow-up EP <em>Uncovered</em> (2026) pushes further — four tracks that showcase evolution, range, and an artist settling firmly into his own sound.
         </p>
@@ -682,7 +682,7 @@ body.album-mode .mob-search-btn{display:none !important}
           <div class="tl-item">
             <span class="tl-year">Apr '26</span>
             <div class="tl-dot"></div>
-            <p class="tl-text"><strong>Uncovered</strong> — EP<br>Four-track project featuring Rebirth, One of em Shot, How Many Nights &amp; Borborygmi. A statement of growth and range.</p>
+            <p class="tl-text"><strong>Uncovered</strong> — EP<br>Four-track project: Headshots, She Wants Her Cash, Lifting &amp; Pain in Me. A statement of growth and range.</p>
           </div>
           <div class="tl-item">
             <span class="tl-year">2025</span>
@@ -789,6 +789,7 @@ body.album-mode .mob-search-btn{display:none !important}
 const ALL_COVER = 'assets/images/all.png';
 
 const TRACKS = [
+  // ── Out of My Shell (EP 1) ──
   { id:0,  title:'Intro',            dur:'1:27', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157545/01._Brightsin_-_Intro_yrr7a0.mp3',                                                                               img: ALL_COVER },
   { id:1,  title:'One of em Shot',   dur:'3:05', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157619/02._Brightsin_-_One_of_em_shot_Prod_trabbey_malloy_cq2hio.mp3',                                                img: ALL_COVER },
   { id:2,  title:'Guess is Goodbye', dur:'1:53', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157843/03._Brightsin_-_Guess_is_Goodbye_Prod._Larkin_Noir_oyot8x.mp3',                                                 img: ALL_COVER },
@@ -800,20 +801,20 @@ const TRACKS = [
   { id:8,  title:'How Many Nights',  dur:'3:18', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157884/09-_Brightsin-How_many_nights_jrfdm7.mp3',                                                                       img: ALL_COVER },
   { id:9,  title:'Future Dreams',    dur:'4:14', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157889/10._Brightsin_ft_Tlotliso_Mpeoa_ft_Bruce_ft_King_Composure_-_Future_Dreams_quzfpd.mp3',                         img: ALL_COVER },
   { id:10, title:'Uncovered',        dur:'3:14', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157887/11._Brightsin_-_uncovered_zvl7ie.mp3',                                                                          img: ALL_COVER },
+  // ── Uncovered (EP 2) ──
+  { id:11, title:'Headshots',        dur:'0:00', audioSrc:'', img: ALL_COVER },
+  { id:12, title:'She Wants Her Cash',dur:'0:00', audioSrc:'', img: ALL_COVER },
+  { id:13, title:'Lifting',          dur:'0:00', audioSrc:'', img: ALL_COVER },
+  { id:14, title:'Pain in Me',       dur:'0:00', audioSrc:'', img: ALL_COVER },
 ];
 
-// Popular IDs shown by default (7 tracks)
-const POPULAR_IDS = [8, 2, 4, 1, 6, 5, 7];
+// Popular IDs shown by default (7 tracks — mix from both EPs)
+const POPULAR_IDS = [11, 8, 2, 12, 6, 13, 5];
 
-// "See all" pool: all tracks from both EPs mixed (not ordered per project)
-// Uncovered EP tracks: 4 (Rebirth), 1 (One of em Shot), 8 (How Many Nights), 7 (Borborygmi)
-// Out of My Shell tracks: 0,1,2,3,4,5,6,7,8,9,10
-// We take the full catalog and shuffle/interleave — built at runtime
+// "See all" pool: all tracks interleaved across both EPs
 const ALL_IDS_MIXED = (() => {
-  // All unique track IDs across both projects, interleaved not block-ordered
-  // Strategy: zip the two project lists together so they alternate
-  const uncoveredIds = [4, 1, 8, 7];
-  const oomsIds = [0, 2, 3, 5, 6, 9, 10]; // remaining OOMS tracks not in Uncovered
+  const uncoveredIds = [11, 12, 13, 14];
+  const oomsIds = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const mixed = [];
   const maxLen = Math.max(uncoveredIds.length, oomsIds.length);
   for (let i = 0; i < maxLen; i++) {
@@ -832,7 +833,7 @@ const PROJECTS = [
     releaseLabel: 'Apr 2026',
     type: 'EP',
     // Rebirth, One of em Shot, How Many Nights, Borborygmi
-    tracks: [4, 1, 8, 7],
+    tracks: [11, 12, 13, 14],
     coverImg: 'assets/images/single.jpeg',
     gradient: 'linear-gradient(135deg,rgba(140,30,230,.45) 0%,rgba(14,14,14,1) 70%)',
     accent: '#db90ff'

@@ -68,7 +68,6 @@ header{
   border-radius:99px;padding:4px;gap:2px;margin-left:auto
 }
 
-/* ── Header profile / avatar circle — RIGHTMOST ── */
 .hdr-avatar{
   width:36px;height:36px;border-radius:50%;
   background:linear-gradient(135deg,var(--primary-dim),rgba(219,144,255,.3));
@@ -98,7 +97,6 @@ header{
 }
 .hdr-icon:hover{background:rgba(219,144,255,.12);color:var(--primary)}
 
-/* Back button — hidden by default, shown in album-mode */
 .hdr-back{
   display:none;
   margin-left:auto;
@@ -249,7 +247,6 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 .album-view{display:none}
 .album-view.active{display:block;animation:fup .3s ease}
 
-/* Album header */
 .album-header{
   display:flex;align-items:center;gap:18px;
   padding:18px;
@@ -302,7 +299,6 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 ═══════════════════════════════════════════════════════════ */
 .artist-page{padding-top:10px}
 
-/* Combined banner + stats card */
 .artist-hero-card{
   padding:20px;border-radius:20px;
   background:var(--surf-low);border:1px solid rgba(255,255,255,.06);
@@ -341,7 +337,6 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 .artist-id h2{font-size:22px;font-weight:900;letter-spacing:-.02em}
 .artist-id p{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--on-sv);margin-top:3px}
 
-/* Stats inline inside hero card */
 .artist-stats-row{
   display:flex;gap:0;position:relative;z-index:1
 }
@@ -381,7 +376,6 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
   color:var(--primary)
 }
 
-/* Timeline */
 .timeline{margin-top:4px}
 .tl-item{display:flex;gap:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .tl-item:last-child{border-bottom:none}
@@ -446,7 +440,6 @@ main{padding-top:74px;padding-bottom:120px;max-width:800px;margin:0 auto;padding
 }
 .vid-dl-btn:hover{background:rgba(219,144,255,.2);color:var(--primary)}
 
-/* VIDEO MODAL */
 .vid-modal{
   display:none;position:fixed;inset:0;z-index:500;
   background:rgba(0,0,0,.88);backdrop-filter:blur(14px);
@@ -561,23 +554,19 @@ body.album-mode .mob-search-btn{display:none !important}
 <header>
   <a class="logo" href="#">Brightsin</a>
 
-  <!-- Desktop tab navigation -->
   <nav class="tab-nav">
     <button class="tab-btn active" data-tab="music">Music</button>
     <button class="tab-btn"        data-tab="videos">Videos</button>
   </nav>
 
-  <!-- Back button — visible only in album-mode -->
   <button class="hdr-icon hdr-back" id="hdr-back-btn" title="Back">
     <span class="ms">arrow_back</span>
   </button>
 
-  <!-- Search (desktop) -->
   <button class="hdr-icon" id="hdr-srch" title="Search">
     <span class="ms">search</span>
   </button>
 
-  <!-- Profile / avatar circle — RIGHTMOST -->
   <div class="hdr-avatar" id="hdr-avatar-btn" title="Artist profile">
     <img id="hdr-avatar-img" alt="Brightsin"/>
     <span class="hdr-avatar-letter">B</span>
@@ -606,7 +595,6 @@ body.album-mode .mob-search-btn{display:none !important}
       </div>
     </div>
 
-    <!-- Album View — no inline back button; use header/mobile nav back -->
     <div class="album-view" id="album-view">
       <div class="album-header" id="album-header"></div>
       <div class="sec-hdr" style="margin-top:4px;margin-bottom:12px">
@@ -630,7 +618,6 @@ body.album-mode .mob-search-btn{display:none !important}
   <div class="tab-content" id="tab-artist">
     <div class="artist-page">
 
-      <!-- Combined hero card: avatar + info + stats -->
       <div class="artist-hero-card">
         <div class="artist-hero-top">
           <div class="artist-avatar" id="artist-avatar-btn" title="Tap to change photo">
@@ -649,7 +636,7 @@ body.album-mode .mob-search-btn{display:none !important}
             <div class="stat-lbl">Started</div>
           </div>
           <div class="stat-item">
-            <div class="stat-val">4</div>
+            <div class="stat-val">2</div>
             <div class="stat-lbl">Releases</div>
           </div>
           <div class="stat-item">
@@ -670,7 +657,7 @@ body.album-mode .mob-search-btn{display:none !important}
           <br><br>
           Driven by a hunger to grow beyond music alone, Brightsin enrolled at the <strong style="color:#fff">Tshwane University of Technology (TUT)</strong> in <strong style="color:#fff">2019</strong>, pursuing a qualification in <strong style="color:#fff">Information Technology</strong>. He balanced studio sessions with lectures, refusing to let either slip. In <strong style="color:#fff">October 2024</strong> he graduated — walking off stage with a degree in one hand and a debut EP in the works with the other.
           <br><br>
-          His debut EP <em>Out of My Shell</em> (2025) marks the formal introduction of Brightsin to the world — a project built over years of lived experience, self-discovery, and grind.
+          His debut EP <em>Out of My Shell</em> (2025) marked the formal introduction of Brightsin to the world. His follow-up EP <em>Uncovered</em> (2026) pushes further — four tracks that showcase evolution, range, and an artist settling firmly into his own sound.
         </p>
         <div class="genres">
           <span class="chip">Rap</span>
@@ -686,7 +673,7 @@ body.album-mode .mob-search-btn{display:none !important}
       </div>
       <div id="artist-projects-list"></div>
 
-      <!-- Timeline — latest to oldest -->
+      <!-- Timeline -->
       <div class="sec-hdr" style="margin-bottom:10px;margin-top:24px">
         <h2 class="sec-title">Timeline</h2>
       </div>
@@ -695,22 +682,22 @@ body.album-mode .mob-search-btn{display:none !important}
           <div class="tl-item">
             <span class="tl-year">Apr '26</span>
             <div class="tl-dot"></div>
-            <p class="tl-text"><strong>Rebirth</strong> — Single<br>Third single, dropped 16 April 2026. A statement of evolution and forward motion.</p>
-          </div>
-          <div class="tl-item">
-            <span class="tl-year">Feb '26</span>
-            <div class="tl-dot"></div>
-            <p class="tl-text"><strong>One of em Shot</strong> — Single<br>Second single released 1 February 2026.</p>
-          </div>
-          <div class="tl-item">
-            <span class="tl-year">Jan '26</span>
-            <div class="tl-dot"></div>
-            <p class="tl-text"><strong>How Many Nights</strong> — Single<br>First standalone release of 2026, dropped 19 January.</p>
+            <p class="tl-text"><strong>Uncovered</strong> — EP<br>Four-track project featuring Rebirth, One of em Shot, How Many Nights &amp; Borborygmi. A statement of growth and range.</p>
           </div>
           <div class="tl-item">
             <span class="tl-year">2025</span>
             <div class="tl-dot"></div>
             <p class="tl-text"><strong>Out of My Shell</strong> — Debut EP<br>11-track project marking Brightsin's official introduction. Raw, honest, and entirely self-made.</p>
+          </div>
+          <div class="tl-item">
+            <span class="tl-year">2019</span>
+            <div class="tl-dot"></div>
+            <p class="tl-text">Enrolled at <strong>TUT</strong> to study Information Technology while continuing to make music.</p>
+          </div>
+          <div class="tl-item">
+            <span class="tl-year">2017</span>
+            <div class="tl-dot"></div>
+            <p class="tl-text">Officially started making music out of <strong>Nkomazi, Mpumalanga</strong>.</p>
           </div>
         </div>
       </div>
@@ -797,7 +784,7 @@ body.album-mode .mob-search-btn{display:none !important}
 
 <script>
 /* ════════════════════════════════════════════════════════
-   DATA — all tracks use assets/images/all.png as cover
+   DATA
 ════════════════════════════════════════════════════════ */
 const ALL_COVER = 'assets/images/all.png';
 
@@ -815,39 +802,37 @@ const TRACKS = [
   { id:10, title:'Uncovered',        dur:'3:14', audioSrc:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777157887/11._Brightsin_-_uncovered_zvl7ie.mp3',                                                                          img: ALL_COVER },
 ];
 
+// Popular IDs shown by default (7 tracks)
 const POPULAR_IDS = [8, 2, 4, 1, 6, 5, 7];
 
-/* Projects: newest → oldest. out.png for Out of My Shell, single.png covers used per-single */
+// "See all" pool: all tracks from both EPs mixed (not ordered per project)
+// Uncovered EP tracks: 4 (Rebirth), 1 (One of em Shot), 8 (How Many Nights), 7 (Borborygmi)
+// Out of My Shell tracks: 0,1,2,3,4,5,6,7,8,9,10
+// We take the full catalog and shuffle/interleave — built at runtime
+const ALL_IDS_MIXED = (() => {
+  // All unique track IDs across both projects, interleaved not block-ordered
+  // Strategy: zip the two project lists together so they alternate
+  const uncoveredIds = [4, 1, 8, 7];
+  const oomsIds = [0, 2, 3, 5, 6, 9, 10]; // remaining OOMS tracks not in Uncovered
+  const mixed = [];
+  const maxLen = Math.max(uncoveredIds.length, oomsIds.length);
+  for (let i = 0; i < maxLen; i++) {
+    if (i < uncoveredIds.length) mixed.push(uncoveredIds[i]);
+    if (i < oomsIds.length) mixed.push(oomsIds[i]);
+  }
+  return mixed;
+})();
+
+/* ── PROJECTS: only 2 — Uncovered EP (newest) + Out of My Shell ── */
 const PROJECTS = [
   {
-    id: 's3',
-    name: 'Rebirth',
-    year: '16 Apr 2026',
-    releaseLabel: '16 Apr 2026',
-    type: 'Single',
-    tracks: [4],
-    coverImg: 'assets/images/single.jpeg',
-    gradient: 'linear-gradient(135deg,rgba(140,30,230,.45) 0%,rgba(14,14,14,1) 70%)',
-    accent: '#db90ff'
-  },
-  {
-    id: 's2',
-    name: 'One of em Shot',
-    year: '1 Feb 2026',
-    releaseLabel: '1 Feb 2026',
-    type: 'Single',
-    tracks: [1],
-    coverImg: 'assets/images/single.jpeg',
-    gradient: 'linear-gradient(135deg,rgba(140,30,230,.45) 0%,rgba(14,14,14,1) 70%)',
-    accent: '#db90ff'
-  },
-  {
-    id: 's1',
-    name: 'How Many Nights',
-    year: '19 Jan 2026',
-    releaseLabel: '19 Jan 2026',
-    type: 'Single',
-    tracks: [8],
+    id: 'uncovered',
+    name: 'Uncovered',
+    year: 2026,
+    releaseLabel: 'Apr 2026',
+    type: 'EP',
+    // Rebirth, One of em Shot, How Many Nights, Borborygmi
+    tracks: [4, 1, 8, 7],
     coverImg: 'assets/images/single.jpeg',
     gradient: 'linear-gradient(135deg,rgba(140,30,230,.45) 0%,rgba(14,14,14,1) 70%)',
     accent: '#db90ff'
@@ -865,7 +850,6 @@ const PROJECTS = [
   }
 ];
 
-/* Videos use the related song cover for each video */
 const VIDEOS = [
   { title:'How many nights', dur:'03:19', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159691/How_many_nights_dybrsv.mp4',     img:'assets/images/12.png' },
   { title:'One of em shots', dur:'03:05', src:'https://res.cloudinary.com/dh3zvc1rl/video/upload/v1777159639/02-One_of_em_shots_ohrgpd.mp4', img:'assets/images/3.png'  },
@@ -937,12 +921,12 @@ const S = {
    QUEUE MANAGEMENT
 ════════════════════════════════════════════════════════ */
 function setPopularQueue(startId) {
-  const idx = POPULAR_IDS.indexOf(startId);
+  const ids = showingAll ? ALL_IDS_MIXED : POPULAR_IDS;
+  const idx = ids.indexOf(startId);
   const ordered = idx >= 0
-    ? [...POPULAR_IDS.slice(idx), ...POPULAR_IDS.slice(0, idx)]
-    : [...POPULAR_IDS];
-  const epIds = PROJECTS[PROJECTS.length - 1].tracks.filter(id => !POPULAR_IDS.includes(id));
-  S.queue = [...ordered, ...epIds];
+    ? [...ids.slice(idx), ...ids.slice(0, idx)]
+    : [...ids];
+  S.queue = ordered;
   S.queuePos = 0;
 }
 
@@ -970,9 +954,6 @@ function downloadTrack(id) {
   showToast(`⬇ Downloading: ${t.title}`);
 }
 
-/* ════════════════════════════════════════════════════════
-   DOWNLOAD — VIDEO
-════════════════════════════════════════════════════════ */
 function downloadVideo(v) {
   if (!v || !v.src) return;
   const dlUrl = v.src.replace('/video/upload/', '/video/upload/fl_attachment/');
@@ -1044,7 +1025,7 @@ let showingAll = false;
 function buildPopular() {
   const list = document.getElementById('tlist');
   list.innerHTML = '';
-  const ids = showingAll ? TRACKS.map(t => t.id) : POPULAR_IDS;
+  const ids = showingAll ? ALL_IDS_MIXED : POPULAR_IDS;
   ids.forEach((id, i) => {
     mkRow(TRACKS[id], list, 'tr-', false, 'popular');
     const row = list.lastElementChild;
@@ -1136,7 +1117,7 @@ function buildArtistProjects() {
       </div>
       <div class="proj-go">
         <span class="ms filled" style="font-size:16px">play_circle</span>
-        View ${proj.tracks.length === 1 ? 'Track' : 'All Songs'}
+        View All Songs
       </div>
     `;
     card.addEventListener('click', () => {
@@ -1525,13 +1506,11 @@ const artistAvatarImg = document.getElementById('artist-avatar-img');
 const hdrAvatarImg    = document.getElementById('hdr-avatar-img');
 
 function applyPhoto(url) {
-  // Artist page avatar
   artistAvatarImg.src = url;
   artistAvatarImg.style.display = 'block';
   const letter = document.querySelector('.artist-avatar .avatar-letter');
   if (letter) letter.style.display = 'none';
 
-  // Header avatar circle
   hdrAvatarImg.src = url;
   hdrAvatarImg.style.display = 'block';
   const hdrLetter = document.querySelector('.hdr-avatar-letter');
@@ -1543,17 +1522,14 @@ avatarUpload.addEventListener('change', function() {
   applyPhoto(URL.createObjectURL(this.files[0]));
 });
 
-// Artist page avatar click — open file picker
 document.getElementById('artist-avatar-btn').addEventListener('click', () => {
   avatarUpload.click();
 });
 
-// Header avatar circle — navigate to artist tab
 document.getElementById('hdr-avatar-btn').addEventListener('click', () => {
   switchTab('artist');
 });
 
-// Mobile nav artist button — navigate to artist tab (standard nav behaviour)
 document.getElementById('mob-profile-nav').addEventListener('click', () => {
   switchTab('artist');
 });
@@ -1578,7 +1554,6 @@ document.getElementById('ptitle').textContent = TRACKS[S.cur].title;
 setCoverWithFallback(document.getElementById('part'), TRACKS[S.cur].img, S.cur);
 document.getElementById('ttot').textContent = TRACKS[S.cur].dur;
 
-// Load default avatar photo from single.png
 applyPhoto('assets/images/single.jpeg');
 </script>
 </body>
